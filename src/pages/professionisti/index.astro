@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { TITOLARE } from '../../data/site';
+---
+<Base title="Professionisti per successioni e case ereditate" description="Avvocati, notai, commercialisti e geometri esperti di successioni e case ereditate, verificati, città per città.">
+  <div class="wrap read prose">
+    <Breadcrumbs items={[{ name: 'Professionisti', href: '/professionisti/' }]} />
+    <h1>Professionisti per la casa ereditata</h1>
+    <p>Stiamo selezionando, città per città, professionisti esperti di successioni e immobili ereditati.</p>
+    <table>
+      <thead><tr><th>Professionista</th><th>Quando serve</th></tr></thead>
+      <tbody>
+        <tr><td>Notaio</td><td>Accettazione, rinuncia, beneficio d'inventario, pubblicazione del testamento, rogito</td></tr>
+        <tr><td>Commercialista o CAF</td><td>Dichiarazione di successione e calcolo delle imposte</td></tr>
+        <tr><td>Avvocato</td><td>Eredi in disaccordo, divisione, lesione di legittima, impugnazione del testamento</td></tr>
+        <tr><td>Geometra o architetto</td><td>Conformità catastale e urbanistica, sanatorie, APE</td></tr>
+      </tbody>
+    </table>
+    <h2>Sei un professionista?</h2>
+    <p>L'inserimento nella directory è gratuito e riservato a professionisti iscritti all'albo con esperienza in successioni. Scrivici a <a href={`mailto:${TITOLARE.emailContatti}?subject=Directory professionisti`}>{TITOLARE.emailContatti}</a> indicando città, albo e specializzazione.</p>
+  </div>
+</Base>

@@ -1,0 +1,21 @@
+---
+import { CONSENT_TEXT } from '../scripts/lead';
+import { TITOLARE } from '../data/site';
+
+interface Props {
+  marketingRequired?: boolean;
+}
+const { marketingRequired = false } = Astro.props;
+---
+<div class="field">
+  <label class="check">
+    <input type="checkbox" name="consent_privacy" required />
+    <!-- Il testo deve restare identico a CONSENT_TEXT.privacy, che viene salvato con il lead -->
+    <span>Ho letto l'<a href="/privacy/" target="_blank">informativa privacy</a> e chiedo di essere ricontattato per la richiesta inviata. (obbligatorio)</span>
+  </label>
+  <label class="check">
+    <input type="checkbox" name="consent_marketing" required={marketingRequired} />
+    <span>{CONSENT_TEXT.marketing}{marketingRequired ? ' (necessario per ricevere i promemoria)' : ' (facoltativo)'}</span>
+  </label>
+  <p class="hint">Titolare del trattamento: {TITOLARE.ragioneSociale}, società attiva nell'intermediazione immobiliare. I dati non vengono ceduti a terzi.</p>
+</div>

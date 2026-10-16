@@ -1,0 +1,108 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBox from '../components/CtaBox.astro';
+import { SITE, areaById, guideUrl } from '../data/site';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guide');
+  return guides.map((entry) => ({
+    params: { path: guideUrl(entry.data.area, entry.data.slug).replace(/^\/|\/$/g, '') },
+    props: { entry, siblings: guides.filter((g) => g.data.area === entry.data.area) },
+  }));
+}
+
+const { entry, siblings } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const area = areaById(d.area);
+const url = guideUrl(d.area, d.slug);
+const updated = d.updated.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+const children = siblings.filter((g) => !g.data.pillar).sort((a, b) => a.data.order - b.data.order);
+const pillar = siblings.find((g) => g.data.pillar);
+
+const crumbs = [{ name: 'Guide', href: '/casa-ereditata/' }];
+if (!d.pillar) crumbs.push({ name: area.title, href: area.path });
+crumbs.push({ name: d.pillar ? area.title : d.title, href: url });
+
+const articleLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.description,
+  dateModified: d.updated.toISOString(),
+  mainEntityOfPage: new URL(url, SITE.url).toString(),
+  inLanguage: 'it-IT',
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  author: { '@type': 'Organization', name: `Redazione ${SITE.name}`, url: `${SITE.url}/chi-siamo/` },
+};
+if (d.reviewer) {
+  articleLd.reviewedBy = { '@type': 'Person', name: d.reviewer.name, jobTitle: d.reviewer.role, url: d.reviewer.url };
+}
+const jsonLd: object[] = [articleLd];
+if (d.faq.length) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+}
+---
+<Base title={d.title} description={d.description} jsonLd={jsonLd} ogType="article">
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <div class="layout-article">
+      <article class="prose">
+        <h1>{d.title}</h1>
+        <p class="meta">
+          Aggiornato il {updated} · Redazione {SITE.name} ·
+          {d.reviewer
+            ? <span>Revisione di {d.reviewer.name}, {d.reviewer.role}</span>
+            : <span class="pending">Revisione professionale in corso</span>}
+        </p>
+        <Content />
+
+        {d.faq.length > 0 && (
+          <section>
+            <h2>Domande frequenti</h2>
+            {d.faq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </section>
+        )}
+
+        {d.pillar && children.length > 0 && (
+          <section>
+            <h2>Approfondimenti: {area.title.toLowerCase()}</h2>
+            <div class="grid">
+              {children.map((c) => (
+                <a class="card" href={guideUrl(c.data.area, c.data.slug)}>
+                  <h3>{c.data.title}</h3>
+                  <p>{c.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {!d.pillar && pillar && (
+          <p>Fa parte della guida <a href={area.path}>{pillar.data.title}</a>.</p>
+        )}
+
+        <p class="disclaimer">
+          Le informazioni di questa pagina sono di carattere generale e aggiornate alla data indicata. Non sostituiscono
+          il parere di un avvocato, notaio o commercialista sul tuo caso specifico. Hai trovato un errore?
+          Scrivici dalla pagina <a href="/chi-siamo/">Chi siamo</a>.
+        </p>
+      </article>
+      <aside class="aside" aria-label="Strumenti utili">
+        <CtaBox variant="valutazione" />
+        <CtaBox variant={d.area === 'tasse' ? 'scadenzario' : 'imposte'} />
+      </aside>
+    </div>
+  </div>
+</Base>

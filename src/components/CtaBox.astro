@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant?: 'valutazione' | 'scadenzario' | 'imposte';
+}
+const { variant = 'valutazione' } = Astro.props;
+---
+{variant === 'valutazione' && (
+  <div class="cta-box">
+    <h3>Quanto vale la casa che hai ereditato?</h3>
+    <p>Una stima gratuita, anche se la successione non è ancora conclusa o gli eredi non hanno ancora deciso.</p>
+    <a class="btn" href="/valuta-casa-ereditata/">Richiedi la valutazione</a>
+  </div>
+)}
+{variant === 'scadenzario' && (
+  <div class="card">
+    <h3>Le tue scadenze</h3>
+    <p>Inserisci la data del decesso e ottieni tutte le scadenze della successione, in ordine.</p>
+    <p style="margin-top:12px"><a class="btn btn-ghost btn-small" href="/strumenti/scadenzario-successione/">Apri lo scadenzario</a></p>
+  </div>
+)}
+{variant === 'imposte' && (
+  <div class="card">
+    <h3>Quanto si paga?</h3>
+    <p>Stima imposta di successione, ipotecaria e catastale sulla casa ereditata.</p>
+    <p style="margin-top:12px"><a class="btn btn-ghost btn-small" href="/strumenti/calcolatore-imposte-successione/">Calcola le imposte</a></p>
+  </div>
+)}

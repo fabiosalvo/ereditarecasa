@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+<Base title="Metodo editoriale" description="Come scriviamo, verifichiamo e aggiorniamo le guide di EreditareCasa.">
+  <div class="wrap read prose">
+    <Breadcrumbs items={[{ name: 'Chi siamo', href: '/chi-siamo/' }, { name: 'Metodo editoriale', href: '/metodo-editoriale/' }]} />
+    <h1>Metodo editoriale</h1>
+    <ol>
+      <li><strong>Fonti primarie.</strong> Ogni guida si basa su norme (Codice civile, Testo unico sulle successioni, Testo unico delle imposte sui redditi) e su documenti ufficiali dell'Agenzia delle Entrate.</li>
+      <li><strong>Revisione professionale.</strong> Le guide sono riviste da un professionista indicato con nome e qualifica. Finché la revisione non è completata, la pagina lo segnala.</li>
+      <li><strong>Data di aggiornamento.</strong> Ogni pagina indica quando è stata aggiornata. Dopo ogni novità normativa rivediamo le guide interessate.</li>
+      <li><strong>Esempi concreti.</strong> Preferiamo tabelle ed esempi numerici a spiegazioni generiche.</li>
+      <li><strong>Correzioni.</strong> Se trovi un errore, scrivici: correggiamo e aggiorniamo la data.</li>
+    </ol>
+    <p>Le guide forniscono informazioni generali e non sostituiscono la consulenza di un professionista sul caso specifico.</p>
+  </div>
+</Base>

@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE, TITOLARE } from '../data/site';
+import { CONSENT_VERSION } from '../scripts/lead';
+---
+<Base title="Informativa privacy" description={`Informativa sul trattamento dei dati personali di ${SITE.name}.`}>
+  <div class="wrap read prose">
+    <Breadcrumbs items={[{ name: 'Privacy', href: '/privacy/' }]} />
+    <h1>Informativa privacy</h1>
+    <p>Informativa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 ("GDPR"). Versione del {CONSENT_VERSION}.</p>
+    <blockquote><p>Bozza da far validare a un consulente privacy prima della pubblicazione.</p></blockquote>
+
+    <h2>Titolare del trattamento</h2>
+    <p>{TITOLARE.ragioneSociale}, con sede in {TITOLARE.sede}, P.IVA {TITOLARE.piva}, società attiva nell'intermediazione immobiliare, che gestisce il sito {SITE.domain}. Contatto privacy: <a href={`mailto:${TITOLARE.emailPrivacy}`}>{TITOLARE.emailPrivacy}</a>.</p>
+
+    <h2>Dati trattati, finalità e basi giuridiche</h2>
+    <table>
+      <thead><tr><th>Finalità</th><th>Dati</th><th>Base giuridica</th><th>Conservazione</th></tr></thead>
+      <tbody>
+        <tr><td>Rispondere alla richiesta di valutazione e ricontattarti</td><td>Nome, telefono, email, dati dell'immobile e della successione indicati nel modulo</td><td>Misure precontrattuali su tua richiesta (art. 6.1.b)</td><td>24 mesi dall'ultimo contatto</td></tr>
+        <tr><td>Invio di guide, promemoria sulle scadenze e proposte relative alla vendita della casa</td><td>Email, data del decesso indicata nello scadenzario, preferenze</td><td>Consenso (art. 6.1.a), revocabile in ogni momento</td><td>Fino alla revoca del consenso</td></tr>
+        <tr><td>Adempimenti di legge e difesa in giudizio</td><td>Dati necessari</td><td>Obbligo legale e legittimo interesse (art. 6.1.c e f)</td><td>Per i termini di legge</td></tr>
+        <tr><td>Funzionamento e sicurezza del sito</td><td>Dati tecnici di navigazione (log del server)</td><td>Legittimo interesse (art. 6.1.f)</td><td>Fino a 30 giorni</td></tr>
+      </tbody>
+    </table>
+    <p>Il conferimento dei dati di contatto è necessario per ricevere la valutazione; il consenso alle comunicazioni è facoltativo, salvo che per lo scadenzario via email, che consiste proprio nell'invio dei promemoria.</p>
+
+    <h2>Destinatari</h2>
+    <p>I dati sono trattati dal personale autorizzato del titolare e da fornitori che operano come responsabili del trattamento (hosting, CRM, invio email). I dati non sono venduti né ceduti a terzi per loro finalità. Eventuali trasferimenti fuori dallo Spazio economico europeo avvengono con le garanzie previste dagli artt. 44 e seguenti del GDPR.</p>
+
+    <h2>I tuoi diritti</h2>
+    <p>Puoi chiedere accesso, rettifica, cancellazione, limitazione, portabilità e opporti al trattamento (artt. 15–22 GDPR), oltre a revocare il consenso in ogni momento, scrivendo a {TITOLARE.emailPrivacy}. Puoi proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" rel="noopener">garanteprivacy.it</a>).</p>
+
+    <h2>Cookie</h2>
+    <p>Vedi la <a href="/cookie/">cookie policy</a>.</p>
+  </div>
+</Base>

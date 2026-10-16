@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import { AREAS, SITE } from '../data/site';
+---
+<Base title={`${SITE.name}: hai ereditato una casa? Cosa fare, passo per passo`} description={SITE.description}>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Guida alla casa ereditata</p>
+      <h1>Hai ereditato una casa?<br />Ti diciamo cosa fare, passo per passo.</h1>
+      <p class="lead">Successione, tasse, eredi da mettere d'accordo, vendita: tutto quello che serve, spiegato in modo semplice e con le scadenze giuste.</p>
+      <p><a class="btn" href="#percorso">Trova il tuo punto di partenza</a></p>
+    </section>
+
+    <section id="percorso" aria-labelledby="percorso-title">
+      <h2 id="percorso-title">Da dove partire: 3 domande</h2>
+      <form class="wizard" id="wizard">
+        <fieldset>
+          <legend>1. A che punto è la successione?</legend>
+          <div class="choices">
+            <label><input type="radio" name="stato" value="no" /><span>Non ancora iniziata</span></label>
+            <label><input type="radio" name="stato" value="corso" /><span>In corso</span></label>
+            <label><input type="radio" name="stato" value="fatta" /><span>Dichiarazione presentata</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>2. Gli eredi sono d'accordo su cosa fare della casa?</legend>
+          <div class="choices">
+            <label><input type="radio" name="accordo" value="solo" /><span>Sono l'unico erede</span></label>
+            <label><input type="radio" name="accordo" value="si" /><span>Sì</span></label>
+            <label><input type="radio" name="accordo" value="no" /><span>No</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>3. Cosa vorresti fare?</legend>
+          <div class="choices">
+            <label><input type="radio" name="obiettivo" value="vendere" /><span>Vendere</span></label>
+            <label><input type="radio" name="obiettivo" value="capire" /><span>Valutare le opzioni</span></label>
+            <label><input type="radio" name="obiettivo" value="tenere" /><span>Tenerla o affittarla</span></label>
+          </div>
+        </fieldset>
+        <div class="result" id="wizard-result" hidden aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section aria-labelledby="aree-title">
+      <h2 id="aree-title">Le guide</h2>
+      <div class="grid">
+        {AREAS.map((a) => (
+          <a class="card" href={a.path}>
+            <h3>{a.title}</h3>
+            <p>{a.short}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="strumenti-title">
+      <h2 id="strumenti-title">Strumenti gratuiti</h2>
+      <div class="grid">
+        <a class="card" href="/strumenti/scadenzario-successione/">
+          <h3>Scadenzario della successione</h3>
+          <p>Dalla data del decesso, tutte le scadenze in ordine.</p>
+        </a>
+        <a class="card" href="/strumenti/calcolatore-imposte-successione/">
+          <h3>Calcolatore imposte</h3>
+          <p>Imposta di successione, ipotecaria e catastale sulla casa.</p>
+        </a>
+        <a class="card" href="/valuta-casa-ereditata/">
+          <h3>Valutazione della casa</h3>
+          <p>Quanto vale oggi la casa ereditata, gratis e senza impegno.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="read" aria-labelledby="metodo-title">
+      <h2 id="metodo-title">Perché fidarsi</h2>
+      <p>Ogni guida indica la data di aggiornamento e le norme di riferimento, ed è sottoposta alla revisione di professionisti del settore. Scopri il nostro <a href="/metodo-editoriale/">metodo editoriale</a>.</p>
+    </section>
+  </div>
+
+  <script>
+    const LINKS = {
+      successione: { href: '/casa-ereditata/successione/', label: 'Come fare la dichiarazione di successione' },
+      scadenze: { href: '/strumenti/scadenzario-successione/', label: 'Le tue scadenze' },
+      disaccordo: { href: '/eredi-in-disaccordo/', label: 'Un erede non vuole vendere: cosa fare' },
+      vendere: { href: '/casa-ereditata/vendere/', label: 'Come vendere una casa ereditata' },
+      decidere: { href: '/casa-ereditata/decidere/', label: 'Vendere, affittare o tenere?' },
+      valuta: { href: '/valuta-casa-ereditata/', label: 'Richiedi una valutazione gratuita' },
+      tasse: { href: '/casa-ereditata/tasse/', label: 'Le tasse sulla casa ereditata' },
+    } as const;
+    type Key = keyof typeof LINKS;
+
+    const form = document.getElementById('wizard') as HTMLFormElement;
+    const out = document.getElementById('wizard-result') as HTMLDivElement;
+
+    form.addEventListener('change', () => {
+      const data = new FormData(form);
+      const stato = data.get('stato');
+      const accordo = data.get('accordo');
+      const obiettivo = data.get('obiettivo');
+      if (!stato || !accordo || !obiettivo) return;
+
+      const steps: Key[] = [];
+      if (stato !== 'fatta') steps.push('successione', 'scadenze');
+      if (accordo === 'no') steps.push('disaccordo');
+      if (obiettivo === 'vendere') steps.push('vendere', 'valuta');
+      else if (obiettivo === 'capire') steps.push('decidere', 'valuta');
+      else steps.push('decidere', 'tasse');
+
+      out.replaceChildren();
+      const h = document.createElement('p');
+      h.innerHTML = '<strong>Il tuo percorso consigliato:</strong>';
+      const ol = document.createElement('ol');
+      for (const key of steps) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = LINKS[key].href;
+        a.textContent = LINKS[key].label;
+        li.append(a);
+        ol.append(li);
+      }
+      out.append(h, ol);
+      out.hidden = false;
+    });
+  </script>
+</Base>

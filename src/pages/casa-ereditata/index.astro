@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { AREAS, guideUrl } from '../../data/site';
+
+const guides = await getCollection('guide');
+---
+<Base title="Casa ereditata: tutte le guide" description="Tutte le guide sulla casa ereditata: successione, tasse, accettazione, eredi in disaccordo, vendita e situazioni particolari.">
+  <div class="wrap">
+    <Breadcrumbs items={[{ name: 'Guide', href: '/casa-ereditata/' }]} />
+    <h1>Casa ereditata: tutte le guide</h1>
+    <p class="read">Le guide sono organizzate per argomento. Se non sai da dove partire, usa il <a href="/#percorso">percorso guidato</a> in home.</p>
+    {AREAS.map((a) => {
+      const list = guides.filter((g) => g.data.area === a.id).sort((x, y) => Number(y.data.pillar) - Number(x.data.pillar) || x.data.order - y.data.order);
+      return (
+        <section>
+          <h2><a href={a.path}>{a.title}</a></h2>
+          <p>{a.short}</p>
+          <ul>
+            {list.map((g) => <li><a href={guideUrl(g.data.area, g.data.slug)}>{g.data.title}</a></li>)}
+          </ul>
+        </section>
+      );
+    })}
+  </div>
+</Base>

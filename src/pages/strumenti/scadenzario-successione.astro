@@ -1,0 +1,131 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ConsentFields from '../../components/ConsentFields.astro';
+---
+<Base title="Scadenzario della successione: tutte le date" description="Inserisci la data del decesso e scopri tutte le scadenze della successione con una casa: inventario, dichiarazione, imposte, IMU. Gratis, con promemoria via email.">
+  <div class="wrap read">
+    <Breadcrumbs items={[{ name: 'Strumenti', href: '/strumenti/' }, { name: 'Scadenzario', href: '/strumenti/scadenzario-successione/' }]} />
+    <h1>Scadenzario della successione</h1>
+    <p>Inserisci la data del decesso: calcoliamo le scadenze principali quando nell'eredità c'è una casa.</p>
+
+    <form class="form no-print" id="dates">
+      <div class="row">
+        <div class="field">
+          <label for="decesso">Data del decesso</label>
+          <input id="decesso" name="decesso" type="date" required />
+        </div>
+        <div class="field">
+          <span class="label">Vivi o hai il possesso della casa?</span>
+          <label class="check"><input type="checkbox" name="possesso" /> <span>Sì, sono nel possesso dei beni</span></label>
+        </div>
+      </div>
+      <p><button class="btn" type="submit">Calcola le scadenze</button></p>
+    </form>
+
+    <div class="out" id="out" hidden>
+      <ol class="timeline" id="timeline"></ol>
+      <p class="hint">Scadenze indicative calcolate sulle regole generali. Se una scadenza cade di sabato o festivo, slitta al primo giorno lavorativo successivo. Verifica il tuo caso con un professionista.</p>
+      <p class="no-print"><button class="btn btn-ghost btn-small" type="button" onclick="window.print()">Stampa</button></p>
+
+      <form class="form no-print" id="remind" novalidate>
+        <h2>Ricevi i promemoria via email</h2>
+        <p>Ti scriviamo prima di ogni scadenza, con cosa preparare.</p>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <input type="hidden" name="decesso" />
+        <ConsentFields marketingRequired />
+        <p class="form-error" role="alert" data-error></p>
+        <button class="btn" type="submit">Attiva i promemoria</button>
+      </form>
+    </div>
+
+    <section class="prose">
+      <h2>Le regole dietro alle date</h2>
+      <ul>
+        <li><strong>3 mesi</strong>: chi è nel possesso dei beni e vuole accettare con beneficio d'inventario deve fare l'inventario entro tre mesi dal decesso.</li>
+        <li><strong>12 mesi</strong>: termine per la dichiarazione di successione, obbligatoria se c'è una casa. Si pagano subito ipotecaria, catastale e tributi minori.</li>
+        <li><strong>90 giorni dopo</strong>: dal 2025 l'imposta di successione è autoliquidata e si versa entro 90 giorni dal termine di presentazione della dichiarazione.</li>
+        <li><strong>IMU</strong>: acconto il 16 giugno e saldo il 16 dicembre, dalla data del decesso.</li>
+        <li><strong>10 anni</strong>: si prescrive il diritto di accettare l'eredità.</li>
+      </ul>
+      <p>Approfondisci nella guida sulla <a href="/casa-ereditata/successione/">dichiarazione di successione</a>.</p>
+    </section>
+  </div>
+
+  <script>
+    import { formToObject, submitLead } from '../../scripts/lead';
+
+    const fmt = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+    const addMonths = (d: Date, m: number) => {
+      const r = new Date(d);
+      r.setMonth(r.getMonth() + m);
+      return r;
+    };
+    const addDays = (d: Date, n: number) => new Date(d.getTime() + n * 86_400_000);
+
+    const form = document.getElementById('dates') as HTMLFormElement;
+    const out = document.getElementById('out') as HTMLDivElement;
+    const list = document.getElementById('timeline') as HTMLOListElement;
+    const remind = document.getElementById('remind') as HTMLFormElement;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const value = String(f.get('decesso') || '');
+      if (!value) return;
+      const d = new Date(`${value}T12:00:00`);
+      const dichiarazione = addMonths(d, 12);
+      const items: [Date, string, string][] = [];
+      if (f.get('possesso')) {
+        items.push([addMonths(d, 3), 'Inventario', "Ultimo giorno per l'inventario se vuoi accettare con beneficio d'inventario."]);
+      }
+      // Prime due rate IMU successive al decesso
+      for (let y = d.getFullYear(), n = 0; n < 2; y++) {
+        for (const [m, label] of [[5, 'Acconto IMU'], [11, 'Saldo IMU']] as const) {
+          const due = new Date(y, m, 16, 12);
+          if (due > d && n < 2) {
+            items.push([due, label, 'Per la tua quota, se la casa non è la tua abitazione principale.']);
+            n++;
+          }
+        }
+      }
+      items.push([dichiarazione, 'Dichiarazione di successione', 'Presentazione con volture catastali; pagamento di ipotecaria, catastale e tributi minori.']);
+      items.push([addDays(dichiarazione, 90), 'Imposta di successione', 'Versamento in autoliquidazione, se dovuta (o prima rata).']);
+      items.push([addMonths(d, 120), "Prescrizione dell'accettazione", "Termine ultimo per accettare l'eredità."]);
+      items.sort((a, b) => a[0].getTime() - b[0].getTime());
+
+      list.replaceChildren(
+        ...items.map(([date, title, text]) => {
+          const li = document.createElement('li');
+          const s = document.createElement('strong');
+          s.textContent = `${fmt.format(date)} · ${title}`;
+          li.append(s, document.createTextNode(text));
+          return li;
+        }),
+      );
+      (remind.elements.namedItem('decesso') as HTMLInputElement).value = value;
+      out.hidden = false;
+    });
+
+    remind.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const error = remind.querySelector<HTMLElement>('[data-error]')!;
+      const button = remind.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      if (!remind.checkValidity()) {
+        error.textContent = 'Inserisci la tua email e accetta i consensi richiesti.';
+        return;
+      }
+      button.disabled = true;
+      try {
+        await submitLead('scadenzario', formToObject(remind));
+        remind.replaceChildren(Object.assign(document.createElement('p'), { textContent: 'Fatto: riceverai i promemoria prima di ogni scadenza.' }));
+      } catch {
+        error.textContent = 'Invio non riuscito. Riprova tra poco.';
+        button.disabled = false;
+      }
+    });
+  </script>
+</Base>

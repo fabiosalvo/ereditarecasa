@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+<Base title="Strumenti gratuiti per la casa ereditata" description="Calcolatore delle imposte di successione, scadenzario della successione e valutazione gratuita della casa ereditata.">
+  <div class="wrap">
+    <Breadcrumbs items={[{ name: 'Strumenti', href: '/strumenti/' }]} />
+    <h1>Strumenti gratuiti</h1>
+    <div class="grid">
+      <a class="card" href="/strumenti/scadenzario-successione/">
+        <h3>Scadenzario della successione</h3>
+        <p>Dalla data del decesso, tutte le scadenze in ordine, con promemoria via email.</p>
+      </a>
+      <a class="card" href="/strumenti/calcolatore-imposte-successione/">
+        <h3>Calcolatore delle imposte</h3>
+        <p>Imposta di successione, ipotecaria e catastale sulla casa ereditata.</p>
+      </a>
+      <a class="card" href="/valuta-casa-ereditata/">
+        <h3>Valutazione della casa</h3>
+        <p>Quanto vale oggi la casa ereditata, gratis e senza impegno.</p>
+      </a>
+    </div>
+  </div>
+</Base>

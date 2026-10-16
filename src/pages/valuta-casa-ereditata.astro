@@ -1,0 +1,198 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConsentFields from '../components/ConsentFields.astro';
+import { TITOLARE } from '../data/site';
+---
+<Base title="Valutazione gratuita della casa ereditata" description="Scopri quanto vale la casa che hai ereditato: valutazione gratuita e senza impegno, anche se la successione non è conclusa o gli eredi non hanno ancora deciso.">
+  <div class="wrap read">
+    <Breadcrumbs items={[{ name: 'Valutazione', href: '/valuta-casa-ereditata/' }]} />
+    <h1>Quanto vale la casa che hai ereditato?</h1>
+    <p>Rispondi a poche domande: un consulente esperto di immobili ereditati ti ricontatta con una stima gratuita e senza impegno. Va bene anche se la successione non è ancora conclusa o gli eredi non hanno deciso.</p>
+    <p class="notice">La valutazione è fornita da {TITOLARE.ragioneSociale}, agenzia immobiliare che gestisce EreditareCasa.it. Puoi usare la stima come vuoi: non c'è alcun obbligo di affidarci la vendita.</p>
+
+    <form class="form" id="valutazione" novalidate>
+      <p class="steps-indicator" aria-live="polite">Passo <span data-current>1</span> di 3</p>
+
+      <div class="step" data-step="1">
+        <h2>La casa</h2>
+        <div class="row">
+          <div class="field">
+            <label for="comune">Comune</label>
+            <input id="comune" name="comune" type="text" autocomplete="address-level2" required />
+          </div>
+          <div class="field">
+            <label for="indirizzo">Indirizzo <span class="hint">(facoltativo)</span></label>
+            <input id="indirizzo" name="indirizzo" type="text" autocomplete="street-address" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="tipologia">Tipo di immobile</label>
+            <select id="tipologia" name="tipologia" required>
+              <option value="">Seleziona</option>
+              <option>Appartamento</option>
+              <option>Casa indipendente o villa</option>
+              <option>Rustico o casale</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="mq">Superficie (m²)</label>
+            <input id="mq" name="mq" type="number" min="10" max="5000" inputmode="numeric" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="occupazione">Stato attuale</label>
+          <select id="occupazione" name="occupazione" required>
+            <option value="">Seleziona</option>
+            <option>Libera</option>
+            <option>Abitata da un erede o dal coniuge</option>
+            <option>Affittata</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="step" data-step="2" hidden>
+        <h2>La successione e gli eredi</h2>
+        <div class="field">
+          <label for="successione">A che punto è la successione?</label>
+          <select id="successione" name="successione" required>
+            <option value="">Seleziona</option>
+            <option>Non ancora iniziata</option>
+            <option>In corso</option>
+            <option>Dichiarazione presentata</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="eredi">Quanti eredi?</label>
+            <select id="eredi" name="eredi" required>
+              <option value="">Seleziona</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4 o più</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="accordo">Gli eredi sono d'accordo sulla vendita?</label>
+            <select id="accordo" name="accordo" required>
+              <option value="">Seleziona</option>
+              <option>Sì</option>
+              <option>Non ancora deciso</option>
+              <option>No</option>
+              <option>Sono l'unico erede</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="obiettivo">Cosa vorresti fare?</label>
+            <select id="obiettivo" name="obiettivo" required>
+              <option value="">Seleziona</option>
+              <option>Vendere</option>
+              <option>Capire quanto vale prima di decidere</option>
+              <option>Affittare</option>
+              <option>Liquidare gli altri eredi</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tempi">Entro quando?</label>
+            <select id="tempi" name="tempi" required>
+              <option value="">Seleziona</option>
+              <option>Entro 3 mesi</option>
+              <option>Entro 6 mesi</option>
+              <option>Entro un anno</option>
+              <option>Non lo so ancora</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" data-step="3" hidden>
+        <h2>Come ricontattarti</h2>
+        <div class="field">
+          <label for="nome">Nome e cognome</label>
+          <input id="nome" name="nome" type="text" autocomplete="name" required />
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="telefono">Telefono</label>
+            <input id="telefono" name="telefono" type="tel" autocomplete="tel" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="note">Note <span class="hint">(facoltativo)</span></label>
+          <textarea id="note" name="note" rows="3"></textarea>
+        </div>
+        <ConsentFields />
+      </div>
+
+      <p class="form-error" role="alert" data-error></p>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-prev hidden>Indietro</button>
+        <button type="button" class="btn" data-next>Avanti</button>
+        <button type="submit" class="btn" data-submit hidden>Richiedi la valutazione</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    import { formToObject, submitLead } from '../scripts/lead';
+
+    const form = document.getElementById('valutazione') as HTMLFormElement;
+    const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
+    const prev = form.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const current = form.querySelector<HTMLElement>('[data-current]')!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    let i = 0;
+
+    function show(n: number) {
+      i = n;
+      steps.forEach((s, idx) => (s.hidden = idx !== n));
+      prev.hidden = n === 0;
+      next.hidden = n === steps.length - 1;
+      submit.hidden = n !== steps.length - 1;
+      current.textContent = String(n + 1);
+      error.textContent = '';
+    }
+
+    function valid(step: HTMLElement) {
+      const fields = Array.from(step.querySelectorAll<HTMLInputElement>('input, select, textarea'));
+      const bad = fields.find((f) => !f.checkValidity());
+      if (bad) {
+        error.textContent = 'Completa i campi richiesti per continuare.';
+        bad.focus();
+        return false;
+      }
+      return true;
+    }
+
+    next.addEventListener('click', () => valid(steps[i]) && show(i + 1));
+    prev.addEventListener('click', () => show(i - 1));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!valid(steps[i])) return;
+      // Invio con il tasto Invio nei passi intermedi: avanza invece di inviare
+      if (i < steps.length - 1) return show(i + 1);
+      submit.disabled = true;
+      submit.textContent = 'Invio in corso…';
+      try {
+        await submitLead('valutazione', formToObject(form));
+        location.href = '/grazie/';
+      } catch {
+        error.textContent = 'Invio non riuscito. Riprova tra poco o scrivici a info@ereditarecasa.it.';
+        submit.disabled = false;
+        submit.textContent = 'Richiedi la valutazione';
+      }
+    });
+  </script>
+</Base>

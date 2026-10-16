@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBox from '../../components/CtaBox.astro';
+---
+<Base title="Calcolatore imposte di successione sulla casa" description="Calcola gratis imposta di successione, ipotecaria e catastale sulla casa ereditata: valore catastale, franchigie per parentela e agevolazione prima casa.">
+  <div class="wrap">
+    <Breadcrumbs items={[{ name: 'Strumenti', href: '/strumenti/' }, { name: 'Calcolatore imposte', href: '/strumenti/calcolatore-imposte-successione/' }]} />
+    <div class="layout-article">
+      <div>
+        <h1>Calcolatore delle imposte sulla casa ereditata</h1>
+        <p>Stima imposta di successione, ipotecaria e catastale partendo dalla rendita catastale, che trovi nella visura catastale dell'immobile.</p>
+
+        <form class="form" id="calc">
+          <div class="row">
+            <div class="field">
+              <label for="rendita">Rendita catastale (€)</label>
+              <input id="rendita" name="rendita" type="number" min="0" step="0.01" inputmode="decimal" required />
+              <p class="hint">Se le unità sono più di una (casa e box), sommale solo se hanno lo stesso coefficiente.</p>
+            </div>
+            <div class="field">
+              <label for="categoria">Categoria catastale</label>
+              <select id="categoria" name="categoria">
+                <option value="120">Abitazione o pertinenza (A, escluso A/10; C/2, C/6, C/7)</option>
+                <option value="60">Ufficio (A/10)</option>
+                <option value="40.8">Negozio (C/1)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="quota">La tua quota della casa (%)</label>
+              <input id="quota" name="quota" type="number" min="1" max="100" value="100" inputmode="decimal" required />
+            </div>
+            <div class="field">
+              <label for="parentela">Il tuo rapporto con il defunto</label>
+              <select id="parentela" name="parentela">
+                <option value="retta">Coniuge, figlio, genitore, nipote in linea retta</option>
+                <option value="fratelli">Fratello o sorella</option>
+                <option value="parenti">Altro parente fino al 4° grado o affine</option>
+                <option value="altri">Nessuna parentela</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="altri">Valore degli altri beni che erediti (€)</label>
+            <input id="altri" name="altri" type="number" min="0" value="0" inputmode="decimal" />
+            <p class="hint">Conti, titoli, altri immobili: contano per la franchigia, che vale sul totale ereditato.</p>
+          </div>
+          <label class="check"><input type="checkbox" name="primaCasa" /> <span>Almeno un erede chiede l'agevolazione prima casa</span></label>
+          <label class="check"><input type="checkbox" name="disabile" /> <span>Sono una persona con disabilità grave (L. 104/1992)</span></label>
+          <p><button class="btn" type="submit">Calcola</button></p>
+        </form>
+
+        <div class="out" id="out" hidden aria-live="polite">
+          <p>Valore catastale dell'intera casa: <strong data-o="valore"></strong></p>
+          <p>Imposta di successione a tuo carico (su tutti i beni che erediti):</p>
+          <p class="big" data-o="successione"></p>
+          <p>Imposte ipotecaria e catastale sull'intera casa (si pagano una volta, divise tra gli eredi): <strong data-o="ipocat"></strong></p>
+          <p class="hint">Stima indicativa: esclude bollo, tasse ipotecarie, tributi speciali e passività deducibili. Le regole possono cambiare: verifica il tuo caso con un professionista.</p>
+        </div>
+
+        <section class="prose read">
+          <h2>Come si calcola</h2>
+          <p>Il valore catastale è pari alla rendita catastale rivalutata del 5% e moltiplicata per il coefficiente della categoria. Su questo valore si applicano le imposte ipotecaria (2%) e catastale (1%), con un minimo di 200 € ciascuna, oppure 200 € fisse ciascuna con l'agevolazione prima casa.</p>
+          <p>L'imposta di successione si applica alla parte dell'eredità di ciascun erede che supera la franchigia: 1 milione per coniuge e parenti in linea retta (4%), 100.000 € per fratelli e sorelle (6%), nessuna franchigia per gli altri parenti (6%) e per gli estranei (8%). Approfondisci nella guida sulle <a href="/casa-ereditata/tasse/">tasse sulla casa ereditata</a>.</p>
+        </section>
+      </div>
+      <aside class="aside">
+        <CtaBox variant="valutazione" />
+        <CtaBox variant="scadenzario" />
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const RULES = {
+      retta: { franchigia: 1_000_000, aliquota: 0.04 },
+      fratelli: { franchigia: 100_000, aliquota: 0.06 },
+      parenti: { franchigia: 0, aliquota: 0.06 },
+      altri: { franchigia: 0, aliquota: 0.08 },
+    } as const;
+    const eur = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+    const form = document.getElementById('calc') as HTMLFormElement;
+    const out = document.getElementById('out') as HTMLDivElement;
+    const set = (k: string, v: string) => (out.querySelector(`[data-o="${k}"]`)!.textContent = v);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const rendita = Number(f.get('rendita')) || 0;
+      const coef = Number(f.get('categoria'));
+      const quota = Math.min(100, Math.max(0, Number(f.get('quota')) || 0)) / 100;
+      const altri = Number(f.get('altri')) || 0;
+      const rule = RULES[f.get('parentela') as keyof typeof RULES];
+      const franchigia = f.get('disabile') ? 1_500_000 : rule.franchigia;
+
+      const valore = rendita * 1.05 * coef;
+      const imponibile = Math.max(0, valore * quota + altri - franchigia);
+      const successione = imponibile * rule.aliquota;
+      const ipocat = f.get('primaCasa') ? 400 : Math.max(200, valore * 0.02) + Math.max(200, valore * 0.01);
+
+      set('valore', eur.format(valore));
+      set('successione', successione === 0 ? '0 € (sotto la franchigia)' : eur.format(successione));
+      set('ipocat', eur.format(ipocat));
+      out.hidden = false;
+    });
+  </script>
+</Base>

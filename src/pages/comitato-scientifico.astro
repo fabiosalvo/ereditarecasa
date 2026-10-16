@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { TITOLARE } from '../data/site';
+---
+<Base title="Comitato scientifico" description="I professionisti che rivedono le guide di EreditareCasa.">
+  <div class="wrap read prose">
+    <Breadcrumbs items={[{ name: 'Chi siamo', href: '/chi-siamo/' }, { name: 'Comitato scientifico', href: '/comitato-scientifico/' }]} />
+    <h1>Comitato scientifico</h1>
+    <p>Il comitato riunisce avvocati, notai e commercialisti che rivedono periodicamente le guide. Per ciascuno indicheremo qualifica, ordine professionale di iscrizione e le pagine revisionate.</p>
+    <p>Il comitato è in formazione. Sei un professionista esperto di successioni e vuoi collaborare? Scrivici a <a href={`mailto:${TITOLARE.emailContatti}`}>{TITOLARE.emailContatti}</a>.</p>
+  </div>
+</Base>
