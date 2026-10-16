@@ -5,6 +5,12 @@ area: tasse
 slug: imu
 order: 20
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Legge 160/2019, art. 1, commi 738 e seguenti: IMU (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2019-12-27;160"
+  - title: "Codice civile, art. 540 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art540"
 faq:
   - q: "Da quando si paga l'IMU sulla casa ereditata?"
     a: "Dalla data del decesso. Il mese del decesso si conteggia secondo le regole ordinarie dell'IMU sui mesi di possesso."

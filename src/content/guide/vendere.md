@@ -4,6 +4,18 @@ description: "Cosa serve per vendere una casa ereditata: successione, accettazio
 area: vendere
 pillar: true
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Codice civile, art. 476 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art476"
+  - title: "Codice civile, art. 732 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art732"
+  - title: "Codice civile, art. 2648 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2648"
+  - title: "TUIR, D.P.R. 917/1986, art. 67 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art67"
+  - title: "Agenzia delle Entrate, chi deve presentare la dichiarazione di successione"
+    url: "https://www.agenziaentrate.gov.it/portale/schede/dichiarazioni/dichiarazione-di-successione/chi-deve-presentare-la-dichiarazione-di-successione"
 faq:
   - q: "Si può vendere una casa ereditata prima di aver fatto la successione?"
     a: "Si può firmare un preliminare, ma per il rogito il notaio chiede che la dichiarazione di successione sia stata presentata e che l'accettazione dell'eredità risulti trascritta nei registri immobiliari. In pratica la dichiarazione va presentata prima del rogito."

@@ -4,6 +4,22 @@ description: "Accettazione espressa, tacita o con beneficio d'inventario, oppure
 area: accettare-rinunciare
 pillar: true
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Codice civile, art. 476 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art476"
+  - title: "Codice civile, art. 480 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art480"
+  - title: "Codice civile, art. 481 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art481"
+  - title: "Codice civile, art. 484 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art484"
+  - title: "Codice civile, art. 485 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art485"
+  - title: "Codice civile, art. 519 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art519"
+  - title: "Codice civile, art. 2648 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art2648"
 faq:
   - q: "Se rinuncio all'eredità perdo la casa?"
     a: "Sì. La rinuncia riguarda tutta l'eredità, non solo i debiti: non si può tenere la casa e rinunciare al resto. La quota passa agli altri chiamati secondo la legge o il testamento."
@@ -23,7 +39,7 @@ Si diventa proprietari della casa ereditata solo **accettando l'eredità**. La s
 
 ## Accettazione espressa e tacita
 
-L'accettazione può essere **espressa**, con una dichiarazione in un atto pubblico o scrittura privata, oppure **tacita**, quando l'erede compie un atto che presuppone la volontà di accettare: per esempio **vendere o affittare la casa**. La sola presentazione della dichiarazione di successione, invece, non comporta accettazione.
+L'accettazione può essere **espressa**, con una dichiarazione in un atto pubblico o scrittura privata, oppure **tacita**, quando l'erede compie un atto che presuppone la volontà di accettare: per esempio **vendere o affittare la casa**. La sola presentazione della dichiarazione di successione, secondo l'orientamento prevalente, non comporta accettazione. Più incerta è la **voltura catastale**, che la dichiarazione telematica chiede in automatico salvo rinuncia espressa: alcune sentenze l'hanno considerata accettazione tacita. Se stai valutando la rinuncia o il beneficio d'inventario, decidi prima di presentare la dichiarazione.
 
 Per vendere la casa l'accettazione deve risultare **trascritta nei registri immobiliari**: spesso il notaio trascrive l'accettazione tacita al momento del rogito.
 

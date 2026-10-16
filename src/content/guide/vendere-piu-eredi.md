@@ -5,6 +5,16 @@ area: vendere
 slug: con-piu-eredi
 order: 10
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Codice civile, art. 540 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art540"
+  - title: "Codice civile, art. 581 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art581"
+  - title: "Codice civile, art. 582 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art582"
+  - title: "Codice civile, art. 732 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art732"
 faq:
   - q: "Come si divide il ricavato della vendita tra gli eredi?"
     a: "In proporzione alle quote di ciascuno, risultanti dal testamento o, in assenza, dalle regole della successione legittima. Gli eredi possono accordarsi diversamente, per esempio per compensare spese sostenute da uno solo."

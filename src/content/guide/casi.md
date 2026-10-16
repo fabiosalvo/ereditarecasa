@@ -4,6 +4,10 @@ description: "Cosa fare se la casa ereditata ha un mutuo, è affittata o occupat
 area: casi
 pillar: true
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Codice civile, art. 540 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art540"
 faq:
   - q: "Il mutuo del defunto passa agli eredi?"
     a: "Sì, il debito passa agli eredi che accettano, in proporzione alle quote. Se il mutuo era coperto da una polizza assicurativa per il caso di morte, il debito residuo può essere estinto dall'assicurazione."

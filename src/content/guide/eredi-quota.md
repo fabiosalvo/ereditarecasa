@@ -5,6 +5,10 @@ area: eredi-in-disaccordo
 slug: vendere-quota
 order: 10
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Codice civile, art. 732 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art732"
 faq:
   - q: "Devo chiedere il permesso agli altri eredi per vendere la mia quota?"
     a: "Non serve il loro consenso, ma prima di vendere a un estraneo devi offrire la quota agli altri coeredi alle stesse condizioni. Se non lo fai, possono riscattarla dall'acquirente."

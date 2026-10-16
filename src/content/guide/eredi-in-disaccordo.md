@@ -4,6 +4,16 @@ description: "Fratelli o coeredi non d'accordo sulla casa ereditata: le soluzion
 area: eredi-in-disaccordo
 pillar: true
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Codice civile, art. 713 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art713"
+  - title: "Codice civile, art. 720 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art720"
+  - title: "Codice civile, art. 732 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art732"
+  - title: "D.Lgs. 28/2010, art. 5: mediazione obbligatoria (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2010-03-04;28~art5"
 faq:
   - q: "Un erede può bloccare per sempre la vendita?"
     a: "No. Ogni coerede può in qualsiasi momento chiedere la divisione. Se la casa non è divisibile, il giudice può assegnarla a un erede con conguaglio in denaro agli altri o disporne la vendita."

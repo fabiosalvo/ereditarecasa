@@ -4,6 +4,10 @@ description: "Pro e contro di vendere, affittare o tenere la casa ereditata: cos
 area: decidere
 pillar: true
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "Legge 160/2019, art. 1, commi 738 e seguenti: IMU (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2019-12-27;160"
 faq:
   - q: "Quanto costa tenere una casa ereditata vuota?"
     a: "Ogni anno IMU, eventuali spese condominiali, utenze minime, assicurazione e manutenzione. Su un appartamento medio possono servire alcune migliaia di euro l'anno, senza alcuna entrata."

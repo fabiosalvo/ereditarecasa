@@ -5,6 +5,10 @@ area: tasse
 slug: plusvalenza
 order: 10
 updated: 2026-10-16
+verified: 2026-10-16
+fonti:
+  - title: "TUIR, D.P.R. 917/1986, art. 67 (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art67"
 faq:
   - q: "Se vendo la casa ereditata dopo un anno pago la plusvalenza?"
     a: "Di norma no. La regola dei cinque anni sulla plusvalenza riguarda gli immobili acquistati a titolo oneroso, mentre la casa ricevuta in successione non è un acquisto a titolo oneroso."
@@ -30,7 +34,7 @@ Il Testo unico delle imposte sui redditi (art. 67) tassa come "reddito diverso" 
 - Eventuale perdita dell'**agevolazione prima casa** chiesta in successione, se vendi entro cinque anni senza riacquistare entro un anno. Verifica il tuo caso con il notaio.
 - Spese per conformità, APE ed eventuale provvigione d'agenzia.
 
-> Il quadro normativo cambia: verifica sempre la data di aggiornamento di questa pagina e chiedi conferma al tuo commercialista o notaio prima della vendita.
+> Dal 1° gennaio 2027 l'art. 67 del TUIR è sostituito dal nuovo testo unico delle imposte sui redditi (D.Lgs. 117/2026): aggiorneremo il riferimento appena verificata la nuova norma. Il quadro normativo cambia: verifica sempre la data di aggiornamento di questa pagina e chiedi conferma al tuo commercialista o notaio prima della vendita.
 
 <div class="next-step">
   <h2>Cosa fare adesso</h2>

@@ -57,12 +57,12 @@ import CtaBox from '../../components/CtaBox.astro';
           <p>Imposta di successione a tuo carico (su tutti i beni che erediti):</p>
           <p class="big" data-o="successione"></p>
           <p>Imposte ipotecaria e catastale sull'intera casa (si pagano una volta, divise tra gli eredi): <strong data-o="ipocat"></strong></p>
-          <p class="hint">Stima indicativa: esclude bollo, tasse ipotecarie, tributi speciali e passività deducibili. Le regole possono cambiare: verifica il tuo caso con un professionista.</p>
+          <p class="hint">Stima indicativa: esclude imposta di bollo (85 €), tassa per i servizi ipotecari e catastali e passività deducibili. Le regole possono cambiare: verifica il tuo caso con un professionista.</p>
         </div>
 
         <section class="prose read">
           <h2>Come si calcola</h2>
-          <p>Il valore catastale è pari alla rendita catastale rivalutata del 5% e moltiplicata per il coefficiente della categoria. Su questo valore si applicano le imposte ipotecaria (2%) e catastale (1%), con un minimo di 200 € ciascuna, oppure 200 € fisse ciascuna con l'agevolazione prima casa.</p>
+          <p>Il valore catastale è pari alla rendita catastale rivalutata del 5% e moltiplicata per il coefficiente della categoria: 110 per la casa con agevolazione prima casa, 120 per le altre abitazioni e le pertinenze, 60 per gli uffici, 40,8 per i negozi. Su questo valore si applicano le imposte ipotecaria (2%) e catastale (1%), con un minimo di 200 € ciascuna, oppure 200 € fisse ciascuna con l'agevolazione prima casa.</p>
           <p>L'imposta di successione si applica alla parte dell'eredità di ciascun erede che supera la franchigia: 1 milione per coniuge e parenti in linea retta (4%), 100.000 € per fratelli e sorelle (6%), nessuna franchigia per gli altri parenti (6%) e per gli estranei (8%). Approfondisci nella guida sulle <a href="/casa-ereditata/tasse/">tasse sulla casa ereditata</a>.</p>
         </section>
       </div>
@@ -90,7 +90,8 @@ import CtaBox from '../../components/CtaBox.astro';
       e.preventDefault();
       const f = new FormData(form);
       const rendita = Number(f.get('rendita')) || 0;
-      const coef = Number(f.get('categoria'));
+      // Con l'agevolazione prima casa l'abitazione si valuta con il coefficiente 110 invece di 120
+      const coef = f.get('primaCasa') && Number(f.get('categoria')) === 120 ? 110 : Number(f.get('categoria'));
       const quota = Math.min(100, Math.max(0, Number(f.get('quota')) || 0)) / 100;
       const altri = Number(f.get('altri')) || 0;
       const rule = RULES[f.get('parentela') as keyof typeof RULES];
