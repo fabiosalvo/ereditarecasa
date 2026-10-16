@@ -8,7 +8,7 @@ import { SITE, TITOLARE } from '../data/site';
     <Breadcrumbs items={[{ name: 'Note legali', href: '/note-legali/' }]} />
     <h1>Note legali</h1>
     <h2>Gestore del sito</h2>
-    <p>{SITE.domain} è gestito da {TITOLARE.ragioneSociale}, sede legale {TITOLARE.sede}, P.IVA {TITOLARE.piva}, REA {TITOLARE.rea}. Contatti: <a href={`mailto:${TITOLARE.emailContatti}`}>{TITOLARE.emailContatti}</a>.</p>
+    <p>{SITE.domain} è gestito da {TITOLARE.ragioneSociale}, sede legale {TITOLARE.sede}, P.IVA {TITOLARE.piva}, {TITOLARE.registroImprese}{TITOLARE.rea && `, REA ${TITOLARE.rea}`}. Contatti: <a href={`mailto:${TITOLARE.emailContatti}`}>{TITOLARE.emailContatti}</a>.</p>
     <h2>Natura dei contenuti</h2>
     <p>Le guide e gli strumenti hanno scopo informativo generale e sono aggiornati alla data indicata su ciascuna pagina. Non costituiscono consulenza legale, notarile o fiscale. I risultati dei calcolatori sono stime indicative. Per decisioni sul tuo caso rivolgiti a un professionista abilitato.</p>
     <h2>Servizi commerciali</h2>

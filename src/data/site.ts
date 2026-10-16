@@ -8,12 +8,14 @@ export const SITE = {
 };
 
 // Dati del titolare e prestatore del servizio (D.Lgs. 70/2003 art. 7, GDPR art. 13).
-// TODO: completare con i dati societari reali di Gromia prima della pubblicazione.
 export const TITOLARE = {
-  ragioneSociale: '[RAGIONE SOCIALE GROMIA]',
-  sede: '[INDIRIZZO SEDE LEGALE]',
-  piva: '[P.IVA]',
-  rea: '[REA]',
+  ragioneSociale: 'Gromia S.r.l.',
+  sede: 'Via Segantini 26, 20143 Milano',
+  piva: 'IT08726630968',
+  // Numero di iscrizione al Registro delle Imprese (per le società coincide con il codice fiscale)
+  registroImprese: 'Registro delle Imprese di Milano Monza Brianza Lodi n. 08726630968',
+  // TODO: numero REA (es. MI-1234567), dalla visura camerale
+  rea: '',
   emailPrivacy: 'privacy@ereditarecasa.it',
   emailContatti: 'info@ereditarecasa.it',
 };

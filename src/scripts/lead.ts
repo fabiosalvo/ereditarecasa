@@ -13,6 +13,9 @@ export const CONSENT_TEXT = {
 export type LeadType = 'valutazione' | 'scadenzario' | 'professionista';
 
 export async function submitLead(type: LeadType, fields: Record<string, unknown>): Promise<void> {
+  // Campo trappola invisibile: lo compilano solo i bot
+  if (fields.website) return;
+  delete fields.website;
   const endpoint = import.meta.env.PUBLIC_LEAD_ENDPOINT;
   if (!endpoint) {
     throw new Error('PUBLIC_LEAD_ENDPOINT non configurato');
@@ -33,12 +36,16 @@ export async function submitLead(type: LeadType, fields: Record<string, unknown>
       utm: Object.fromEntries([...params].filter(([k]) => k.startsWith('utm_'))),
     },
   };
+  // text/plain evita la richiesta preliminare CORS, che Google Apps Script non gestisce;
+  // il corpo resta JSON e lo script lo legge da e.postData.contents.
   const res = await fetch(endpoint, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error(`Invio non riuscito (${res.status})`);
+  const body = await res.json().catch(() => null);
+  if (body && body.ok === false) throw new Error(body.error || 'Invio rifiutato');
 }
 
 // Valori del form come oggetto; le checkbox diventano booleani.

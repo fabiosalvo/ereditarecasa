@@ -1,0 +1,100 @@
+/**
+ * Riceve i lead di EreditareCasa.it e li scrive nel Google Sheet a cui è collegato lo script.
+ * Un foglio per tipo di lead (valutazione, scadenzario, professionista), creato al primo invio.
+ * Per le valutazioni invia anche un'email di avviso, per richiamare entro 2 ore.
+ */
+
+// Indirizzi che ricevono l'avviso a ogni nuova richiesta di valutazione (separati da virgola)
+const NOTIFY_EMAIL = 'fabio@gromia.com';
+
+const COLUMNS = {
+  valutazione: [
+    'ricevuto', 'nome', 'telefono', 'email', 'comune', 'indirizzo', 'tipologia', 'mq', 'occupazione',
+    'successione', 'eredi', 'accordo', 'obiettivo', 'tempi', 'note', 'priorita',
+    'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm', 'stato',
+  ],
+  scadenzario: [
+    'ricevuto', 'email', 'decesso', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
+    'pagina', 'referrer', 'utm',
+  ],
+  professionista: ['ricevuto', 'nome', 'email', 'telefono', 'citta', 'professione', 'note', 'pagina'],
+};
+
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+    const type = data.type;
+    if (!COLUMNS[type]) return reply({ ok: false, error: 'Tipo non valido' });
+
+    const f = data.fields || {};
+    const c = data.consent || {};
+    const s = data.source || {};
+    const row = Object.assign({}, f, {
+      ricevuto: new Date(),
+      consenso_privacy: c.privacy || '',
+      consenso_marketing: c.marketing || '',
+      versione_consensi: c.version || '',
+      pagina: s.page || '',
+      referrer: s.referrer || '',
+      utm: s.utm ? JSON.stringify(s.utm) : '',
+      priorita: type === 'valutazione' ? priority(f) : '',
+      stato: 'Nuovo',
+    });
+
+    const sheet = getSheet(type);
+    sheet.appendRow(COLUMNS[type].map((col) => clean(row[col])));
+
+    if (type === 'valutazione' && NOTIFY_EMAIL) notify(row);
+    return reply({ ok: true });
+  } catch (err) {
+    return reply({ ok: false, error: String(err) });
+  }
+}
+
+// Stessa logica del blueprint: caldo se vuole vendere a breve, tiepido se c'è una successione o un conflitto in corso.
+function priority(f) {
+  const vende = f.obiettivo === 'Vendere' || f.obiettivo === 'Liquidare gli altri eredi';
+  if (vende && (f.tempi === 'Entro 3 mesi' || f.tempi === 'Entro 6 mesi')) return 'Caldo';
+  if (f.successione === 'In corso' || f.accordo === 'No' || vende) return 'Tiepido';
+  return 'Freddo';
+}
+
+function notify(row) {
+  const subject = `[EreditareCasa] ${row.priorita}: ${row.nome || 'nuova valutazione'} – ${row.comune || ''}`;
+  const body = [
+    `Priorità: ${row.priorita}`,
+    `Nome: ${row.nome}`,
+    `Telefono: ${row.telefono}`,
+    `Email: ${row.email}`,
+    `Immobile: ${row.tipologia}, ${row.mq} m², ${row.comune} ${row.indirizzo || ''}`,
+    `Stato: ${row.occupazione}`,
+    `Successione: ${row.successione} · Eredi: ${row.eredi} · Accordo: ${row.accordo}`,
+    `Obiettivo: ${row.obiettivo} · Tempi: ${row.tempi}`,
+    `Note: ${row.note || '-'}`,
+  ].join('\n');
+  MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+}
+
+function getSheet(type) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(type);
+  if (!sheet) {
+    sheet = ss.insertSheet(type);
+    sheet.appendRow(COLUMNS[type]);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+// Evita che un valore inviato dal form venga interpretato come formula dal foglio
+function clean(v) {
+  if (v === undefined || v === null) return '';
+  if (typeof v === 'boolean') return v ? 'Sì' : 'No';
+  if (v instanceof Date) return v;
+  const s = String(v).slice(0, 2000);
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
+}
+
+function reply(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
