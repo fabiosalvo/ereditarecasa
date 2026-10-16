@@ -16,6 +16,9 @@ const guide = defineCollection({
     reviewer: z
       .object({ name: z.string(), role: z.string(), url: z.string().optional() })
       .optional(),
+    // Data dell'ultima verifica dei contenuti sulle fonti normative ufficiali
+    verified: z.coerce.date().optional(),
+    fonti: z.array(z.object({ title: z.string(), url: z.string().url() })).default([]),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
   }),
 });

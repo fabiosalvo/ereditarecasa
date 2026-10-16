@@ -18,7 +18,8 @@ const { Content } = await render(entry);
 const d = entry.data;
 const area = areaById(d.area);
 const url = guideUrl(d.area, d.slug);
-const updated = d.updated.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmtDate = (x: Date) => x.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+const updated = fmtDate(d.updated);
 const children = siblings.filter((g) => !g.data.pillar).sort((a, b) => a.data.order - b.data.order);
 const pillar = siblings.find((g) => g.data.pillar);
 
@@ -37,6 +38,7 @@ const articleLd: Record<string, unknown> = {
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
   author: { '@type': 'Organization', name: `Redazione ${SITE.name}`, url: `${SITE.url}/chi-siamo/` },
 };
+if (d.fonti.length) articleLd.citation = d.fonti.map((f) => f.url);
 if (d.reviewer) {
   articleLd.reviewedBy = { '@type': 'Person', name: d.reviewer.name, jobTitle: d.reviewer.role, url: d.reviewer.url };
 }
@@ -59,7 +61,9 @@ if (d.faq.length) {
           Aggiornato il {updated} · Redazione {SITE.name} ·
           {d.reviewer
             ? <span>Revisione di {d.reviewer.name}, {d.reviewer.role}</span>
-            : <span class="pending">Revisione professionale in corso</span>}
+            : d.verified
+              ? <span>Verificato sulle fonti normative il {fmtDate(d.verified)}</span>
+              : <span class="pending">Revisione professionale in corso</span>}
         </p>
         <Content />
 
@@ -72,6 +76,15 @@ if (d.faq.length) {
                 <p>{f.a}</p>
               </details>
             ))}
+          </section>
+        )}
+
+        {d.fonti.length > 0 && (
+          <section class="fonti">
+            <h2>Fonti</h2>
+            <ul>
+              {d.fonti.map((f) => <li><a href={f.url} rel="noopener" target="_blank">{f.title}</a></li>)}
+            </ul>
           </section>
         )}
 
