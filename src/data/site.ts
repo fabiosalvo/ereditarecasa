@@ -14,8 +14,7 @@ export const TITOLARE = {
   piva: 'IT08726630968',
   // Numero di iscrizione al Registro delle Imprese (per le società coincide con il codice fiscale)
   registroImprese: 'Registro delle Imprese di Milano Monza Brianza Lodi n. 08726630968',
-  // TODO: numero REA (es. MI-1234567), dalla visura camerale
-  rea: '',
+  rea: 'MI-2044727',
   emailPrivacy: 'privacy@ereditarecasa.it',
   emailContatti: 'info@ereditarecasa.it',
 };

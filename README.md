@@ -46,7 +46,7 @@ Senza `reviewer` la pagina mostra "Revisione professionale in corso".
 
 ## Prima della pubblicazione
 
-1. **Dati di Gromia** in `src/data/site.ts` (`TITOLARE`): compilati; manca il numero REA.
+1. **Dati di Gromia** in `src/data/site.ts` (`TITOLARE`): compilati.
 2. **Validazione legale** dell'informativa privacy (`src/pages/privacy.astro`) e dei testi dei consensi (`src/scripts/lead.ts`, `src/components/ConsentFields.astro`, da tenere allineati).
 3. **Revisione delle guide** da parte di un professionista, con compilazione di `reviewer`.
 4. **Lead su Google Sheet**: segui [integrations/google-sheet/README.md](integrations/google-sheet/README.md) e imposta `PUBLIC_LEAD_ENDPOINT` con l'URL della web app. Il payload contiene `type`, `fields`, `consent` (testo e versione) e `source` (pagina, referrer, UTM), inviato come JSON con `Content-Type: text/plain`.
