@@ -4,5 +4,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.ereditarecasa.it',
   trailingSlash: 'always',
-  integrations: [sitemap({ filter: (page) => !page.includes('/grazie/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/grazie/') && !page.includes('/stampa/') })],
 });

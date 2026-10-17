@@ -25,6 +25,9 @@ export const FOTO_CHIAVI: Foto = {
 };
 
 export const FOTO_AREA: Record<AreaId, Foto> = {
+  'primi-passi': { src: chiavi, alt: 'Un mazzo di chiavi di casa appoggiato su un tavolo di legno' }, // 1643804926339
+  'gestire-la-casa': { src: decidere, alt: 'Abbaini con balconi e tetti in coppi di un palazzo italiano' }, // 1668749603181
+  'testamento-legittima': { src: successione, alt: 'Una scrivania antica con documenti e strumenti per scrivere' }, // 1766802106922
   vendere: { src: vendere, alt: 'Una mano porge le chiavi di casa davanti alla porta di ingresso' }, // 1741156386380
   tasse: { src: tasse, alt: 'Calcolatrice e penna appoggiate su fogli di calcolo' }, // 1648201637025
   successione: { src: successione, alt: 'Una scrivania antica con documenti e strumenti per scrivere' }, // 1766802106922

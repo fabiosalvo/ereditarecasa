@@ -1,0 +1,32 @@
+---
+import ValutazioneForm from './ValutazioneForm.astro';
+import { TITOLARE } from '../data/site';
+---
+<dialog class="modal" id="modal-valutazione" aria-labelledby="modal-valutazione-title">
+  <div class="modal-head">
+    <h2 id="modal-valutazione-title">Quanto vale la casa che hai ereditato?</h2>
+    <button type="button" class="modal-close" data-close aria-label="Chiudi">×</button>
+  </div>
+  <p class="modal-intro">Stima gratuita e senza impegno, anche se la successione non è conclusa o gli eredi non hanno ancora deciso.</p>
+  <p class="notice">La valutazione è fornita da {TITOLARE.ragioneSociale}, agenzia immobiliare che gestisce EreditareCasa.it. Nessun obbligo di affidarci la vendita.</p>
+  <ValutazioneForm idPrefix="modale" />
+</dialog>
+
+<script>
+  // Ogni link alla pagina di valutazione apre la modale; senza JavaScript il link porta alla pagina
+  const dialog = document.getElementById('modal-valutazione') as HTMLDialogElement | null;
+  if (dialog && typeof dialog.showModal === 'function') {
+    document.addEventListener('click', (e) => {
+      const link = (e.target as Element).closest?.('a[href="/valuta-casa-ereditata/"]');
+      if (!link) return;
+      e.preventDefault();
+      dialog.showModal();
+      dialog.querySelector<HTMLInputElement>('input, select')?.focus();
+    });
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    // Clic sullo sfondo chiude la modale
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+</script>

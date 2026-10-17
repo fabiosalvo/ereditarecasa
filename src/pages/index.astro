@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
-import { AREAS, SITE } from '../data/site';
+import { AREAS, SITE, PDF_COMPLETO } from '../data/site';
+import GuidaDownload from '../components/GuidaDownload.astro';
 import { FOTO_AREA, FOTO_HERO } from '../data/foto';
 ---
 <Base title={`${SITE.name}: hai ereditato una casa? Cosa fare, passo per passo`} description={SITE.description}>
@@ -68,6 +69,20 @@ import { FOTO_AREA, FOTO_HERO } from '../data/foto';
           </a>
         ))}
       </div>
+    </section>
+
+    <section class="lead-magnet" aria-labelledby="ebook-title">
+      <div>
+        <p class="eyebrow">Guida gratuita in PDF</p>
+        <h2 id="ebook-title">Tutto quello che serve sapere sulla casa ereditata, in un unico documento</h2>
+        <p>Successione, tasse, accettazione, eredi in disaccordo, vendita e gestione della casa: tutte le nostre guide raccolte in un PDF da stampare, conservare e condividere con gli altri eredi.</p>
+        <ul class="check-list">
+          <li>Scadenze e documenti in ordine</li>
+          <li>Esempi di calcolo delle imposte</li>
+          <li>Errori da evitare e checklist operative</li>
+        </ul>
+      </div>
+      <GuidaDownload pdf={PDF_COMPLETO} guida="guida-completa" idPrefix="home" titolo="Scarica la guida completa" testo="Inserisci la tua email: il download parte subito." />
     </section>
 
     <section aria-labelledby="strumenti-title">

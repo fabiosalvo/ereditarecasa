@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /grazie/
+Disallow: /stampa/
+Disallow: /pdf/
+Disallow: /pdf-manifest.json
 
 Sitemap: https://www.ereditarecasa.it/sitemap-index.xml

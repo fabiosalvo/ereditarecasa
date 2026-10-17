@@ -210,3 +210,57 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); bor
   .hero-bg::before { background: linear-gradient(0deg, var(--bg) 0%, rgba(250, 249, 245, 0) 50%); }
   .hero-inner { padding-top: 0; padding-bottom: 32px; margin-top: -24px; }
 }
+
+/* Modale di valutazione */
+.modal { border: 0; border-radius: 18px; padding: 24px; width: min(640px, calc(100vw - 24px)); max-height: calc(100vh - 32px); background: var(--bg); color: var(--ink); box-shadow: 0 30px 80px -20px rgba(20, 20, 19, .45); }
+.modal::backdrop { background: rgba(20, 20, 19, .55); }
+.modal-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.modal-head h2 { margin: 0; font-size: 1.45rem; }
+.modal-close { border: 0; background: var(--soft); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; color: var(--ink); flex: none; }
+.modal-intro { color: var(--muted); margin: 8px 0 12px; }
+.modal .form { padding: 16px; margin-top: 12px; }
+@media (max-width: 600px) { .modal { padding: 16px; } }
+
+/* Download guida in PDF */
+.download-box { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.download-box h3 { margin-top: 0; }
+.download-box p { font-size: .98rem; }
+.download-ok { font-weight: 600; }
+
+/* Stampa e PDF */
+.print-only { display: none; }
+@media print {
+  @page { size: A4; }
+  body { background: #fff; font-size: 10.5pt; line-height: 1.5; }
+  .site-header, .site-footer, .aside, .no-print, .modal, .breadcrumbs, .article-photo, .next-step, .skip { display: none !important; }
+  .layout-article { display: block; }
+  .print-only { display: block; }
+  .wrap { max-width: none; padding: 0; }
+  a { color: var(--ink); text-decoration: underline; }
+  h1 { font-size: 22pt; }
+  h2 { font-size: 15pt; break-after: avoid; }
+  h3 { font-size: 12pt; break-after: avoid; }
+  table, blockquote, details { break-inside: avoid; }
+  .prose table { display: table; font-size: 9pt; }
+  details { border: 0; padding: 4px 0; }
+  details > p { display: block; }
+  details summary::marker { content: ''; }
+  .chapter { break-before: page; }
+  .cover { break-after: page; min-height: 240mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover h1 { font-size: 34pt; }
+  .toc { break-after: page; }
+  .toc a { text-decoration: none; }
+  .fonti-print { font-size: 8.5pt; word-break: break-all; }
+}
+
+/* Lead magnet in home */
+.lead-magnet { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 32px; }
+.lead-magnet h2 { margin-top: 0; }
+.check-list { list-style: none; padding: 0; }
+.check-list li { padding-left: 28px; position: relative; margin-bottom: 6px; }
+.check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--brand); font-weight: 700; }
+@media (max-width: 860px) { .lead-magnet { grid-template-columns: 1fr; padding: 20px; } }
+
+/* L'attributo hidden vince sempre sugli stili di visualizzazione (es. .btn) */
+[hidden] { display: none !important; }
+.form .step h2 { margin-top: .4em; }

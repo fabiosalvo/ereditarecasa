@@ -1,0 +1,56 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { AREAS, SITE } from '../../data/site';
+
+// Versione da stampare di tutte le guide, usata per il PDF "guida completa"
+const guides = await getCollection('guide');
+const order = new Map(AREAS.map((a, i) => [a.id, i]));
+const sorted = guides.sort(
+  (a, b) =>
+    (order.get(a.data.area) ?? 99) - (order.get(b.data.area) ?? 99) ||
+    Number(b.data.pillar) - Number(a.data.pillar) ||
+    a.data.order - b.data.order,
+);
+const rendered = await Promise.all(sorted.map(async (g) => ({ g, Content: (await render(g)).Content })));
+const oggi = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base noModal noindex title="Guida completa alla casa ereditata" description="Versione stampabile di tutte le guide di EreditareCasa.">
+  <div class="wrap read print-book">
+    <section class="cover">
+      <p class="eyebrow">{SITE.name}</p>
+      <h1>Guida completa alla casa ereditata</h1>
+      <p class="lead">Successione, tasse, eredi, vendita e gestione della casa: tutto quello che serve, in ordine.</p>
+      <p class="meta">Edizione del {oggi} · {SITE.domain}</p>
+    </section>
+
+    <section class="toc">
+      <h2>Indice</h2>
+      {AREAS.map((a) => {
+        const list = rendered.filter(({ g }) => g.data.area === a.id);
+        return list.length > 0 && (
+          <div>
+            <h3>{a.title}</h3>
+            <ol>{list.map(({ g }) => <li><a href={`#${g.id}`}>{g.data.title}</a></li>)}</ol>
+          </div>
+        );
+      })}
+    </section>
+
+    {rendered.map(({ g, Content }) => (
+      <article class="prose chapter" id={g.id}>
+        <p class="eyebrow">{AREAS.find((a) => a.id === g.data.area)?.title}</p>
+        <h1>{g.data.title}</h1>
+        <Content />
+        {g.data.fonti.length > 0 && (
+          <>
+            <h3>Fonti</h3>
+            <ul class="fonti-print">{g.data.fonti.map((f) => <li>{f.title}: {f.url}</li>)}</ul>
+          </>
+        )}
+      </article>
+    ))}
+
+    <p class="disclaimer">Informazioni di carattere generale, aggiornate alla data di edizione. Non sostituiscono il parere di un avvocato, notaio o commercialista sul caso specifico.</p>
+  </div>
+</Base>

@@ -1,6 +1,6 @@
 # Lead su Google Sheet
 
-I form del sito inviano i lead a una web app Google Apps Script, che li scrive in un Google Sheet: un foglio per tipo (`valutazione`, `scadenzario`, `professionista`) e un'email di avviso per ogni richiesta di valutazione, con priorità Caldo, Tiepido o Freddo.
+I form del sito inviano i lead a una web app Google Apps Script, che li scrive in un Google Sheet: un foglio per tipo (`valutazione`, `scadenzario`, `guida` per i download dei PDF, `professionista`) e un'email di avviso per ogni richiesta di valutazione, con priorità Caldo, Tiepido o Freddo.
 
 ## Configurazione (10 minuti)
 

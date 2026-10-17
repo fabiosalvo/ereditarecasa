@@ -1,0 +1,63 @@
+---
+import ConsentFields from './ConsentFields.astro';
+
+interface Props {
+  // URL del PDF pubblicato in /pdf/
+  pdf: string;
+  // Identificativo della guida, salvato con il contatto
+  guida: string;
+  titolo?: string;
+  testo?: string;
+  idPrefix?: string;
+}
+const {
+  pdf,
+  guida,
+  titolo = 'Scarica questa guida in PDF',
+  testo = 'Ricevi la versione stampabile da conservare o condividere con gli altri eredi.',
+  idPrefix = 'dl',
+} = Astro.props;
+---
+<div class="download-box">
+  <h3>{titolo}</h3>
+  <p>{testo}</p>
+  <form class="download-form" data-download-form data-pdf={pdf} data-guida={guida} novalidate>
+    <div class="field">
+      <label for={`${idPrefix}-email`}>La tua email</label>
+      <input id={`${idPrefix}-email`} name="email" type="email" autocomplete="email" required />
+    </div>
+    <ConsentFields />
+    <p class="form-error" role="alert" data-error></p>
+    <button class="btn" type="submit">Scarica il PDF</button>
+  </form>
+  <p class="download-ok" data-ok hidden>
+    Grazie! Il download è partito. Se non si avvia, <a data-link href={pdf} download>scarica il PDF da qui</a>.
+  </p>
+</div>
+
+<script>
+  import { formToObject, submitLead } from '../scripts/lead';
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-download-form]')) {
+    const box = form.parentElement!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        error.textContent = 'Inserisci la tua email e accetta l\'informativa privacy.';
+        return;
+      }
+      button.disabled = true;
+      try {
+        await submitLead('guida', { ...formToObject(form), guida: form.dataset.guida });
+        form.hidden = true;
+        box.querySelector<HTMLElement>('[data-ok]')!.hidden = false;
+        box.querySelector<HTMLAnchorElement>('[data-link]')!.click();
+      } catch {
+        error.textContent = 'Invio non riuscito. Riprova tra poco.';
+        button.disabled = false;
+      }
+    });
+  }
+</script>

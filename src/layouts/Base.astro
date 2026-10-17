@@ -5,17 +5,20 @@ import '@fontsource/jetbrains-mono/400.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ValutazioneModal from '../components/ValutazioneModal.astro';
 import { SITE } from '../data/site';
 
 interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  // Disattiva la modale di valutazione (pagina dedicata, pagine di stampa)
+  noModal?: boolean;
   jsonLd?: object[];
   ogType?: 'website' | 'article';
 }
 
-const { title, description, noindex = false, jsonLd = [], ogType = 'website' } = Astro.props;
+const { title, description, noindex = false, noModal = false, jsonLd = [], ogType = 'website' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
 const orgLd = {
@@ -53,5 +56,6 @@ const orgLd = {
       <slot />
     </main>
     <Footer />
+    {!noModal && <ValutazioneModal />}
   </body>
 </html>

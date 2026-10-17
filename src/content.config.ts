@@ -7,7 +7,7 @@ const guide = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().max(170),
-    area: z.enum(['vendere', 'tasse', 'successione', 'eredi-in-disaccordo', 'accettare-rinunciare', 'casi', 'decidere']),
+    area: z.enum(['primi-passi', 'gestire-la-casa', 'vendere', 'tasse', 'successione', 'eredi-in-disaccordo', 'accettare-rinunciare', 'testamento-legittima', 'casi', 'decidere']),
     // Slug relativo all'area; vuoto per la pagina pilastro dell'area
     slug: z.string().default(''),
     pillar: z.boolean().default(false),

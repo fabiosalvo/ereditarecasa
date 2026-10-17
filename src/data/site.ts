@@ -20,6 +20,9 @@ export const TITOLARE = {
 };
 
 export type AreaId =
+  | 'primi-passi'
+  | 'gestire-la-casa'
+  | 'testamento-legittima'
   | 'vendere'
   | 'tasse'
   | 'successione'
@@ -29,11 +32,14 @@ export type AreaId =
   | 'decidere';
 
 export const AREAS: { id: AreaId; path: string; title: string; short: string }[] = [
+  { id: 'primi-passi', path: '/casa-ereditata/primi-passi/', title: 'Primi passi', short: 'Cosa fare nelle prime settimane: chiavi, documenti, conti, errori da evitare.' },
+  { id: 'gestire-la-casa', path: '/casa-ereditata/gestire-la-casa/', title: 'Gestire la casa', short: 'Utenze, condominio, assicurazione e manutenzione della casa vuota.' },
   { id: 'vendere', path: '/casa-ereditata/vendere/', title: 'Vendere casa ereditata', short: 'Passaggi, documenti, tempi e costi della vendita.' },
   { id: 'tasse', path: '/casa-ereditata/tasse/', title: 'Tasse sulla casa ereditata', short: 'Imposta di successione, ipotecaria, catastale, IMU, plusvalenza.' },
   { id: 'successione', path: '/casa-ereditata/successione/', title: 'Successione con immobili', short: 'Dichiarazione, volture e scadenze quando c’è una casa.' },
   { id: 'eredi-in-disaccordo', path: '/eredi-in-disaccordo/', title: 'Eredi in disaccordo', short: 'Quando un erede non vuole vendere: quote, divisione, mediazione.' },
   { id: 'accettare-rinunciare', path: '/casa-ereditata/accettare-rinunciare/', title: 'Accettare o rinunciare', short: 'Accettazione, beneficio d’inventario e rinuncia all’eredità.' },
+  { id: 'testamento-legittima', path: '/casa-ereditata/testamento-e-legittima/', title: 'Testamento e legittima', short: 'Quote di legge, testamento, donazioni e azione di riduzione.' },
   { id: 'casi', path: '/casa-ereditata/casi/', title: 'Situazioni particolari', short: 'Casa con mutuo, occupata, non conforme, usufrutto del coniuge.' },
   { id: 'decidere', path: '/casa-ereditata/decidere/', title: 'Vendere, affittare o tenere', short: 'Costi, rendimenti e pro e contro di ogni scelta.' },
 ];
@@ -48,3 +54,8 @@ export const NAV = [
   { href: '/eredi-in-disaccordo/', label: 'Eredi in disaccordo' },
   { href: '/professionisti/', label: 'Professionisti' },
 ];
+
+// PDF scaricabili, generati da scripts/genera-pdf.mjs in public/pdf/
+export const pdfName = (area: AreaId, slug: string) => `${area}${slug ? `-${slug}` : ''}.pdf`;
+export const pdfUrl = (area: AreaId, slug: string) => `/pdf/${pdfName(area, slug)}`;
+export const PDF_COMPLETO = '/pdf/guida-completa-casa-ereditata.pdf';

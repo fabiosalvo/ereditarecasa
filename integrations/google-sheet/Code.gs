@@ -18,6 +18,10 @@ const COLUMNS = {
     'pagina', 'referrer', 'utm',
   ],
   professionista: ['ricevuto', 'nome', 'email', 'telefono', 'citta', 'professione', 'note', 'pagina'],
+  guida: [
+    'ricevuto', 'email', 'guida', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
+    'pagina', 'referrer', 'utm',
+  ],
 };
 
 function doPost(e) {
