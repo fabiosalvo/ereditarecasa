@@ -102,6 +102,16 @@ Tempi e costi della divisione giudiziale e indennità di mediazione sono descrit
 | D.4 | Dati non indicati: costi di curatore e CTU, contributo unificato, IVA sulle indennità di mediazione, durata della giacenza, superficie lorda o netta nelle schede OMI. | C |
 | D.5 | Valori OMI degli esempi in €/m²: ipotetici e dichiarati come tali. | C |
 
+## 7-quater. Blog
+
+| # | Punto | Articolo | Priorità |
+|---|---|---|---|
+| B.1 | Successioni a cavallo 2026-2027: il D.Lgs. 123/2025 (in vigore dal 1/1/2027 dopo il rinvio del D.L. 200/2025) non ha una norma transitoria per chi muore nel 2026 e dichiara nel 2027. | testi-unici-2027-successioni | B |
+| B.2 | Dove si trova, nel testo unico, l'agevolazione prima casa per ipotecaria e catastale (probabilmente nella tariffa allegata). Titolo ufficiale del D.Lgs. 141/2026. | testi-unici-2027-successioni | C |
+| B.3 | L. 182/2025: data esatta di fine del regime transitorio (metà giugno 2026); sorte delle opposizioni trascritte prima della riforma con morte del donante dopo il 18/12/2025. | casa-donata-legge-182-2025 | A |
+| B.4 | Tassazione dei canoni non pagati dall'inquilino moroso (l'art. 26 TUIR risulta abrogato dal D.Lgs. 117/2026); agevolazioni IMU sul canone concordato. | affittare-casa-ereditata-conviene | B |
+| B.5 | Vivere nella casa come "possesso" ai fini dell'art. 485 c.c.; incasso dei canoni come accettazione tacita. | fratelli-casa-ereditata-errori, affittare | B |
+
 ## 8. Fonti da aprire da un browser
 
 Normattiva non è raggiungibile dall'ambiente di lavoro automatico. Questi articoli sono stati controllati solo in modo indiretto, tramite le guide già verificate e Brocardi:
