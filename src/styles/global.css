@@ -713,3 +713,5 @@ input:focus, select:focus, textarea:focus { border-color: var(--black); box-shad
 h3, .h-s, .card h3, .cta-box h3, .download-box h3 { font-family: var(--headline); font-weight: 800; letter-spacing: -.015em; }
 .logo { font-family: var(--headline); font-weight: 800; letter-spacing: -.04em; }
 .logo b { font-weight: 800; }
+/* tutti i pulsanti con lo stesso angolo, anche sulle fasce scure */
+.btn, .cta .btn, .cta .btn.btn-ghost, .cta-box .btn, .btn--pill { border-radius: var(--r); }
