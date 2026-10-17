@@ -1,11 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 ---
 <Base title="Metodo editoriale" description="Come scriviamo, verifichiamo e aggiorniamo le guide di EreditareCasa.">
+  <PageHead title="Metodo editoriale" crumbs={[{ name: 'Chi siamo', href: '/chi-siamo/' }, { name: 'Metodo editoriale', href: '/metodo-editoriale/' }]} />
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Chi siamo', href: '/chi-siamo/' }, { name: 'Metodo editoriale', href: '/metodo-editoriale/' }]} />
-    <h1>Metodo editoriale</h1>
     <ol>
       <li><strong>Fonti primarie.</strong> Ogni guida si basa su norme (Codice civile, Testo unico sulle successioni, Testo unico delle imposte sui redditi) e su documenti ufficiali dell'Agenzia delle Entrate.</li>
       <li><strong>Verifica sulle fonti.</strong> Ogni affermazione su imposte, termini e diritti è controllata sul testo delle norme e sulle istruzioni dell'Agenzia delle Entrate; la pagina indica la data della verifica e le fonti usate.</li>

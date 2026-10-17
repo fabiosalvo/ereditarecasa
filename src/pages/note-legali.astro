@@ -1,12 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 import { SITE, TITOLARE } from '../data/site';
 ---
 <Base title="Note legali" description="Informazioni legali sul sito EreditareCasa.">
+  <PageHead title="Note legali" crumbs={[{ name: 'Note legali', href: '/note-legali/' }]} />
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Note legali', href: '/note-legali/' }]} />
-    <h1>Note legali</h1>
     <h2>Gestore del sito</h2>
     <p>{SITE.domain} è gestito da {TITOLARE.ragioneSociale}, sede legale {TITOLARE.sede}, P.IVA {TITOLARE.piva}, {TITOLARE.registroImprese}{TITOLARE.rea && `, REA ${TITOLARE.rea}`}. Contatti: <a href={`mailto:${TITOLARE.emailContatti}`}>{TITOLARE.emailContatti}</a>.</p>
     <h2>Natura dei contenuti</h2>

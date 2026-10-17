@@ -1,0 +1,23 @@
+---
+/** Banda finale su fondo mattone con l'invito alla valutazione gratuita. */
+interface Props {
+  eyebrow?: string;
+  title?: string;
+}
+const { eyebrow = 'Valutazione gratuita', title = 'Quanto vale oggi la casa che hai ereditato?' } = Astro.props;
+---
+<section class="sec sec--ink">
+  <div class="wrap cta">
+    <div>
+      <span class="eyebrow" style="margin:0">{eyebrow}</span>
+      <h2 class="h-l">{title}</h2>
+      <p class="lede">
+        Una stima gratuita e senza impegno, anche se la successione non è conclusa o gli eredi non hanno ancora deciso cosa fare. Ti serve per parlarne in famiglia con un numero in mano.
+      </p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="/valuta-casa-ereditata/">Valuta la casa</a>
+      <a class="btn btn-ghost" href="/casa-ereditata/decidere/">Vendere, affittare o tenere?</a>
+    </div>
+  </div>
+</section>

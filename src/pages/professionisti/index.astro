@@ -1,13 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PageHead from '../../components/PageHead.astro';
 import { TITOLARE } from '../../data/site';
 ---
 <Base title="Professionisti per successioni e case ereditate" description="Avvocati, notai, commercialisti e geometri esperti di successioni e case ereditate, verificati, città per città.">
+  <PageHead title="Professionisti per la casa ereditata" crumbs={[{ name: 'Professionisti', href: '/professionisti/' }]}>
+    Stiamo selezionando, città per città, professionisti esperti di successioni e immobili ereditati.
+  </PageHead>
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Professionisti', href: '/professionisti/' }]} />
-    <h1>Professionisti per la casa ereditata</h1>
-    <p>Stiamo selezionando, città per città, professionisti esperti di successioni e immobili ereditati.</p>
     <table>
       <thead><tr><th>Professionista</th><th>Quando serve</th></tr></thead>
       <tbody>

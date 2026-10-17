@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 import { GLOSSARIO } from '../data/glossario';
 
 const sorted = [...GLOSSARIO].sort((a, b) => a.term.localeCompare(b.term, 'it'));
@@ -12,9 +13,8 @@ const ld = {
 };
 ---
 <Base title="Glossario della casa ereditata" description="I termini della successione spiegati in modo semplice: de cuius, voltura, legittima, comunione ereditaria, beneficio d'inventario e altri." jsonLd={[ld]}>
+  <PageHead title="Glossario della casa ereditata" crumbs={[{ name: 'Glossario', href: '/glossario/' }]} />
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Glossario', href: '/glossario/' }]} />
-    <h1>Glossario della casa ereditata</h1>
     <dl>
       {sorted.map((t) => (
         <>

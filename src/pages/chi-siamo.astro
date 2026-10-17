@@ -1,13 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 import { SITE, TITOLARE } from '../data/site';
 ---
 <Base title="Chi siamo" description={`Chi c'è dietro ${SITE.name}: redazione, revisori e modello di servizio.`}>
+  <PageHead title="Chi siamo" crumbs={[{ name: 'Chi siamo', href: '/chi-siamo/' }]}>
+    {SITE.name} nasce per aiutare chi ha ereditato una casa a capire cosa fare, in quale ordine e con quali costi, senza dover mettere insieme informazioni sparse e spesso contraddittorie.
+  </PageHead>
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Chi siamo', href: '/chi-siamo/' }]} />
-    <h1>Chi siamo</h1>
-    <p>{SITE.name} nasce per aiutare chi ha ereditato una casa a capire cosa fare, in quale ordine e con quali costi, senza dover mettere insieme informazioni sparse e spesso contraddittorie.</p>
     <h2>La redazione e i revisori</h2>
     <p>Le guide sono scritte dalla redazione e verificate sulle fonti normative ufficiali, citate in ogni pagina. Stiamo avviando la revisione da parte di professionisti del settore (avvocati, notai, commercialisti), che saranno indicati con nome e qualifica sulle pagine revisionate: il nostro <a href="/comitato-scientifico/">comitato scientifico</a> è in formazione.</p>
     <h2>Come ci sosteniamo</h2>

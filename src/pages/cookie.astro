@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 ---
 <Base title="Cookie policy" description="Uso dei cookie sul sito EreditareCasa.">
+  <PageHead title="Cookie policy" crumbs={[{ name: 'Cookie', href: '/cookie/' }]}>
+    Questo sito non utilizza cookie di profilazione né cookie di statistica di terze parti. Se in futuro verranno introdotti strumenti di misurazione o pubblicità che richiedono il consenso, questa pagina sarà aggiornata e ti verrà chiesto il consenso tramite un banner prima di installarli.
+  </PageHead>
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Cookie', href: '/cookie/' }]} />
-    <h1>Cookie policy</h1>
-    <p>Questo sito non utilizza cookie di profilazione né cookie di statistica di terze parti. Se in futuro verranno introdotti strumenti di misurazione o pubblicità che richiedono il consenso, questa pagina sarà aggiornata e ti verrà chiesto il consenso tramite un banner prima di installarli.</p>
   </div>
 </Base>

@@ -1,44 +1,48 @@
 ---
+/** Footer su fondo mattone: guide, strumenti, chi siamo e dati legali del titolare. */
+import Logo from './Logo.astro';
 import { AREAS, SITE, TITOLARE } from '../data/site';
 const year = new Date().getFullYear();
 ---
-<footer class="site-footer">
-  <div class="wrap footer-grid">
-    <div>
-      <p class="brand-foot">Ereditare<strong>Casa</strong></p>
-      <p>{SITE.tagline}. Informazioni generali, non consulenza legale o fiscale: per il tuo caso rivolgiti a un professionista.</p>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__in">
+      <div style="display:grid;gap:14px;align-content:start">
+        <Logo />
+        <p style="max-width:38ch;margin:0">{SITE.tagline}. Informazioni generali, non consulenza legale o fiscale: per il tuo caso rivolgiti a un professionista.</p>
+      </div>
+      <div>
+        <h4>Guide</h4>
+        <ul>
+          {AREAS.map((a) => <li><a href={a.path}>{a.title}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>Strumenti</h4>
+        <ul>
+          <li><a href="/percorso/">Il tuo percorso</a></li>
+          <li><a href="/strumenti/calcolatore-imposte-successione/">Calcolatore imposte</a></li>
+          <li><a href="/strumenti/scadenzario-successione/">Scadenzario successione</a></li>
+          <li><a href="/modelli-lettere/">Modelli di lettera</a></li>
+          <li><a href="/valuta-casa-ereditata/">Valutazione della casa</a></li>
+          <li><a href="/osservatorio/">Osservatorio dati</a></li>
+          <li><a href="/glossario/">Glossario</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Chi siamo</h4>
+        <ul>
+          <li><a href="/chi-siamo/">Chi siamo</a></li>
+          <li><a href="/metodo-editoriale/">Metodo editoriale</a></li>
+          <li><a href="/professionisti/">Professionisti</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/cookie/">Cookie</a></li>
+          <li><a href="/note-legali/">Note legali</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <p class="foot-title">Guide</p>
-      <ul>
-        {AREAS.map((a) => <li><a href={a.path}>{a.title}</a></li>)}
-      </ul>
+    <div class="foot__legal">
+      <span>© {year} {SITE.name} è un servizio di {TITOLARE.ragioneSociale} · {TITOLARE.sede} · P.IVA {TITOLARE.piva} · REA {TITOLARE.rea}</span>
     </div>
-    <div>
-      <p class="foot-title">Strumenti</p>
-      <ul>
-        <li><a href="/strumenti/calcolatore-imposte-successione/">Calcolatore imposte</a></li>
-        <li><a href="/strumenti/scadenzario-successione/">Scadenzario successione</a></li>
-        <li><a href="/modelli-lettere/">Modelli di lettera</a></li>
-        <li><a href="/valuta-casa-ereditata/">Valutazione della casa</a></li>
-        <li><a href="/glossario/">Glossario</a></li>
-        <li><a href="/osservatorio/">Osservatorio dati</a></li>
-        <li><a href="/percorso/">Il tuo percorso</a></li>
-      </ul>
-    </div>
-    <div>
-      <p class="foot-title">Chi siamo</p>
-      <ul>
-        <li><a href="/chi-siamo/">Chi siamo</a></li>
-        <li><a href="/metodo-editoriale/">Metodo editoriale</a></li>
-        <li><a href="/professionisti/">Professionisti</a></li>
-        <li><a href="/privacy/">Privacy</a></li>
-        <li><a href="/cookie/">Cookie</a></li>
-        <li><a href="/note-legali/">Note legali</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="wrap legal-line">
-    © {year} {SITE.name} è un servizio di {TITOLARE.ragioneSociale} · {TITOLARE.sede} · P.IVA {TITOLARE.piva} · REA {TITOLARE.rea}
   </div>
 </footer>

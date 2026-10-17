@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 import GuidaDownload from '../components/GuidaDownload.astro';
 import { MODELLI } from '../data/modelli';
 import { PDF_COMPLETO } from '../data/site';
@@ -23,15 +24,12 @@ const jsonLd = {
 };
 ---
 <Base title={title} description={description} jsonLd={[jsonLd]}>
-  <div class="wrap">
-    <Breadcrumbs items={[{ name: 'Strumenti', href: '/strumenti/' }, { name: 'Modelli di lettera', href: '/modelli-lettere/' }]} />
-    <p class="eyebrow">Kit gratuito · {MODELLI.length} modelli</p>
-    <h1>Modelli di lettera per la casa ereditata</h1>
-    <p class="lead">
-      Dopo un decesso bisogna scrivere a molte persone: la banca, i fornitori di luce e gas, l'amministratore,
+  <PageHead title="Modelli di lettera per la casa ereditata" crumbs={[{ name: 'Strumenti', href: '/strumenti/' }, { name: 'Modelli di lettera', href: '/modelli-lettere/' }]} eyebrow={`Kit gratuito · {MODELLI.length} modelli`}>
+    Dopo un decesso bisogna scrivere a molte persone: la banca, i fornitori di luce e gas, l'amministratore,
       l'inquilino, i fratelli. Qui trovi le lettere già impostate. Compili i campi tra
       {" "}<strong>[parentesi quadre]</strong>, copi e invii.
-    </p>
+  </PageHead>
+  <div class="wrap">
     <div class="callout">
       <strong>Prima di inviare.</strong> Alcuni gesti valgono come accettazione dell'eredità: incassare i canoni,
       vendere la propria quota, a volte anche pagare spese con i soldi del defunto. Ogni modello ha un riquadro

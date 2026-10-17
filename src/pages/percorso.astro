@@ -1,14 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 import ConsentFields from '../components/ConsentFields.astro';
 ---
 <Base title="Il tuo percorso: cosa fare con la casa ereditata, in ordine" description="Rispondi a 8 domande e ottieni la tua checklist personale con scadenze calcolate, rischi da evitare e le guide giuste per ogni passo.">
+  <PageHead title="Ho ereditato una casa: cosa devo fare, in ordine?" crumbs={[{ name: 'Il tuo percorso', href: '/percorso/' }]} eyebrow="Percorso personalizzato">
+    Rispondi a 8 domande. Ti prepariamo una checklist con le scadenze calcolate sulla tua situazione, i rischi da evitare e la guida giusta per ogni passo. Non serve registrarsi e puoi saltare le domande a cui non sai rispondere.
+  </PageHead>
   <div class="wrap read">
-    <Breadcrumbs items={[{ name: 'Il tuo percorso', href: '/percorso/' }]} />
-    <p class="eyebrow">Percorso personalizzato</p>
-    <h1>Ho ereditato una casa: cosa devo fare, in ordine?</h1>
-    <p class="lead">Rispondi a 8 domande. Ti prepariamo una checklist con le scadenze calcolate sulla tua situazione, i rischi da evitare e la guida giusta per ogni passo. Non serve registrarsi e puoi saltare le domande a cui non sai rispondere.</p>
 
     <form class="form percorso-form no-print" id="percorso">
       <div class="field">

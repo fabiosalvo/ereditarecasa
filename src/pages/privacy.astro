@@ -1,14 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageHead from '../components/PageHead.astro';
 import { SITE, TITOLARE } from '../data/site';
 import { CONSENT_VERSION } from '../scripts/lead';
 ---
 <Base title="Informativa privacy" description={`Informativa sul trattamento dei dati personali di ${SITE.name}.`}>
+  <PageHead title="Informativa privacy" crumbs={[{ name: 'Privacy', href: '/privacy/' }]}>
+    Informativa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 ("GDPR"). Versione del {CONSENT_VERSION}.
+  </PageHead>
   <div class="wrap read prose">
-    <Breadcrumbs items={[{ name: 'Privacy', href: '/privacy/' }]} />
-    <h1>Informativa privacy</h1>
-    <p>Informativa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 ("GDPR"). Versione del {CONSENT_VERSION}.</p>
     <blockquote><p>Bozza da far validare a un consulente privacy prima della pubblicazione.</p></blockquote>
 
     <h2>Titolare del trattamento</h2>

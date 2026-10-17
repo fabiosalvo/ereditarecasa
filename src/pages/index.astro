@@ -4,29 +4,58 @@ import { Image } from 'astro:assets';
 import { AREAS, SITE, PDF_COMPLETO } from '../data/site';
 import GuidaDownload from '../components/GuidaDownload.astro';
 import { FOTO_AREA, FOTO_HERO } from '../data/foto';
+import CtaBand from '../components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+
+const GUIDE_N = (await getCollection('guide')).length;
+const TOOLS = [
+  { href: '/percorso/', title: 'Il tuo percorso', text: 'Otto domande e ottieni la checklist personalizzata con le tue scadenze.' },
+  { href: '/strumenti/calcolatore-imposte-successione/', title: 'Calcolatore imposte', text: 'Imposta di successione, ipotecaria e catastale sulla casa.' },
+  { href: '/strumenti/scadenzario-successione/', title: 'Scadenzario della successione', text: 'Dalla data del decesso, tutte le scadenze in ordine.' },
+  { href: '/modelli-lettere/', title: 'Modelli di lettera', text: '12 lettere pronte per banca, utenze, condominio, inquilino e coeredi.' },
+  { href: '/osservatorio/', title: 'Osservatorio dati', text: "Successioni e case ereditate in Italia, confronto con l'Europa." },
+  { href: '/glossario/', title: 'Glossario', text: 'Le parole della successione spiegate in modo semplice.' },
+];
 ---
 <Base title={`${SITE.name}: hai ereditato una casa? Cosa fare, passo per passo`} description={SITE.description}>
-  <section class="hero-full">
-    <div class="hero-bg">
+  <section class="hero">
+    <div class="hero__bg">
       <Image src={FOTO_HERO.src} alt={FOTO_HERO.alt} widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 860px) 100vw, 70vw" loading="eager" fetchpriority="high" />
     </div>
-    <div class="wrap hero-inner">
-      <div class="hero-text">
-        <p class="eyebrow">Guida alla casa ereditata</p>
-        <h1>Hai ereditato una casa?<br />Ti diciamo cosa fare, passo per passo.</h1>
-        <p class="lead">Successione, tasse, eredi da mettere d'accordo, vendita: tutto quello che serve, spiegato in modo semplice e con le scadenze giuste.</p>
-        <p class="hero-actions">
-          <a class="btn" href="/percorso/">Crea il tuo percorso personale</a>
+    <div class="wrap hero__in">
+      <div class="hero__tx">
+        <span class="eyebrow">Guida alla casa ereditata</span>
+        <h1 class="h-xl">Hai ereditato una casa? Ti diciamo cosa fare.</h1>
+        <p class="lede">Successione, tasse, eredi da mettere d'accordo, vendita: tutto quello che serve, spiegato in modo semplice e con le scadenze giuste.</p>
+        <div class="actions">
+          <a class="btn" href="/percorso/">Crea il tuo percorso</a>
           <a class="btn btn-ghost" href="/valuta-casa-ereditata/">Valuta la casa</a>
-        </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="wrap">
+  <section class="sec">
+    <div class="wrap">
+      <div class="facts">
+        <div><b class="num">505.000</b><span>successioni ogni anno in Italia, quasi tutte con una casa</span></div>
+        <div><b class="num">11%</b><span>delle successioni paga l'imposta: per gli altri restano ipotecaria e catastale</span></div>
+        <div><b class="num">{GUIDE_N}</b><span>guide verificate sulle fonti ufficiali, scaricabili in PDF</span></div>
+        <div><b class="num">12</b><span>modelli di lettera pronti per banca, utenze, condominio e fratelli</span></div>
+      </div>
+      <p class="small" style="margin-top:16px;color:var(--muted)">Fonti: MEF, Dipartimento Finanze, anno 2024. <a class="link" href="/osservatorio/">Tutti i dati nell'Osservatorio</a></p>
+    </div>
+  </section>
 
-    <section id="percorso" aria-labelledby="percorso-title">
-      <h2 id="percorso-title">Da dove partire: 3 domande</h2>
+  <section class="sec sec--sand" id="percorso" aria-labelledby="percorso-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Da dove partire</span>
+          <h2 class="h-l" id="percorso-title">Tre domande, la tua strada</h2>
+        </div>
+        <p class="lede">Ogni eredità è diversa. Rispondi e ti indichiamo le guide da leggere per prime. Per la checklist completa con le tue scadenze, <a class="link" href="/percorso/">crea il percorso personale in 8 domande</a>.</p>
+      </div>
       <form class="wizard" id="wizard">
         <fieldset>
           <legend>1. A che punto è la successione?</legend>
@@ -44,7 +73,7 @@ import { FOTO_AREA, FOTO_HERO } from '../data/foto';
             <label><input type="radio" name="accordo" value="no" /><span>No</span></label>
           </div>
         </fieldset>
-        <fieldset>
+        <fieldset style="margin-bottom:0">
           <legend>3. Cosa vorresti fare?</legend>
           <div class="choices">
             <label><input type="radio" name="obiettivo" value="vendere" /><span>Vendere</span></label>
@@ -54,15 +83,56 @@ import { FOTO_AREA, FOTO_HERO } from '../data/foto';
         </fieldset>
         <div class="result" id="wizard-result" hidden aria-live="polite"></div>
       </form>
-      <p>Vuoi la checklist completa, con le scadenze calcolate sulla tua situazione? <a href="/percorso/">Crea il tuo percorso personale in 8 domande →</a></p>
-    </section>
+    </div>
+  </section>
 
-    <section aria-labelledby="aree-title">
-      <h2 id="aree-title">Le guide</h2>
-      <div class="grid">
+  <section class="sec" aria-labelledby="fasi-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Come funziona</span>
+          <h2 class="h-l" id="fasi-title">Dal lutto alla decisione, in quattro fasi</h2>
+        </div>
+        <p class="lede">Le scadenze di legge non aspettano: alcune decisioni vanno prese nei primi tre mesi. Ecco l'ordine giusto, con la guida per ogni passo.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Primi passi</h3>
+          <p>Conto del defunto, chiavi, utenze, testamento. Cosa fare nelle prime settimane senza accettare l'eredità per sbaglio.</p>
+          <a class="link" href="/casa-ereditata/primi-passi/">Leggi la guida</a>
+        </li>
+        <li>
+          <h3>Accettare o rinunciare</h3>
+          <p>Accettazione pura, con beneficio d'inventario o rinuncia. Le conseguenze se ci sono debiti o un'ipoteca.</p>
+          <a class="link" href="/casa-ereditata/accettare-rinunciare/">Leggi la guida</a>
+        </li>
+        <li>
+          <h3>Successione e tasse</h3>
+          <p>Dichiarazione entro 12 mesi, imposte, voltura catastale, agevolazioni prima casa. Con il calcolatore.</p>
+          <a class="link" href="/casa-ereditata/successione/">Leggi la guida</a>
+        </li>
+        <li>
+          <h3>Decidere cosa fare</h3>
+          <p>Vendere, affittare o tenere. Mettere d'accordo i fratelli, comprare le loro quote, fissare il prezzo giusto.</p>
+          <a class="link" href="/casa-ereditata/decidere/">Leggi la guida</a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec sec--soft" aria-labelledby="aree-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Le guide</span>
+          <h2 class="h-l" id="aree-title">Tutto sulla casa ereditata</h2>
+        </div>
+        <p class="lede">Dieci aree, quasi cinquanta guide. Ognuna indica la data di verifica, cita le fonti normative e si scarica in PDF da condividere con gli altri eredi.</p>
+      </div>
+      <div class="grid grid--3 grid--aree">
         {AREAS.map((a) => (
           <a class="card card-photo" href={a.path}>
-            <Image src={FOTO_AREA[a.id].src} alt="" widths={[400, 640]} sizes="(max-width: 600px) 100vw, 360px" />
+            <Image src={FOTO_AREA[a.id].src} alt="" widths={[400, 640]} sizes="(max-width: 640px) 100vw, 380px" />
             <div class="card-body">
               <h3>{a.title}</h3>
               <p>{a.short}</p>
@@ -70,57 +140,64 @@ import { FOTO_AREA, FOTO_HERO } from '../data/foto';
           </a>
         ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="lead-magnet" aria-labelledby="ebook-title">
+  <section class="sec" aria-labelledby="ebook-title">
+    <div class="wrap split">
       <div>
-        <p class="eyebrow">Guida gratuita in PDF</p>
-        <h2 id="ebook-title">Tutto quello che serve sapere sulla casa ereditata, in un unico documento</h2>
-        <p>Successione, tasse, accettazione, eredi in disaccordo, vendita e gestione della casa: tutte le nostre guide raccolte in un PDF da stampare, conservare e condividere con gli altri eredi.</p>
-        <ul class="check-list">
+        <span class="eyebrow" style="margin:0">Guida gratuita in PDF</span>
+        <h2 class="h-l" id="ebook-title">Tutta la casa ereditata in un unico documento</h2>
+        <p class="lede">Successione, tasse, accettazione, eredi in disaccordo, vendita e gestione della casa: tutte le guide raccolte in un PDF da stampare, conservare e condividere.</p>
+        <ul class="checks">
           <li>Scadenze e documenti in ordine</li>
           <li>Esempi di calcolo delle imposte</li>
           <li>Errori da evitare e checklist operative</li>
         </ul>
       </div>
       <GuidaDownload pdf={PDF_COMPLETO} guida="guida-completa" idPrefix="home" titolo="Scarica la guida completa" testo="Inserisci la tua email: il download parte subito." />
-    </section>
+    </div>
+  </section>
 
-    <section aria-labelledby="strumenti-title">
-      <h2 id="strumenti-title">Strumenti gratuiti</h2>
-      <div class="grid">
-        <a class="card" href="/strumenti/scadenzario-successione/">
-          <h3>Scadenzario della successione</h3>
-          <p>Dalla data del decesso, tutte le scadenze in ordine.</p>
-        </a>
-        <a class="card" href="/strumenti/calcolatore-imposte-successione/">
-          <h3>Calcolatore imposte</h3>
-          <p>Imposta di successione, ipotecaria e catastale sulla casa.</p>
-        </a>
-        <a class="card" href="/valuta-casa-ereditata/">
-          <h3>Valutazione della casa</h3>
-          <p>Quanto vale oggi la casa ereditata, gratis e senza impegno.</p>
-        </a>
-        <a class="card" href="/modelli-lettere/">
-          <h3>Modelli di lettera</h3>
-          <p>12 lettere pronte per banca, utenze, condominio, inquilino e coeredi.</p>
-        </a>
-        <a class="card" href="/osservatorio/">
-          <h3>Osservatorio dati</h3>
-          <p>Successioni e case ereditate in Italia, confronto con l'Europa.</p>
-        </a>
-        <a class="card" href="/glossario/">
-          <h3>Glossario</h3>
-          <p>Le parole della successione spiegate in modo semplice.</p>
-        </a>
+  <section class="sec sec--sand" aria-labelledby="strumenti-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Strumenti gratuiti</span>
+          <h2 class="h-l" id="strumenti-title">Calcoli, scadenze e lettere già pronte</h2>
+        </div>
+        <p class="lede">Strumenti semplici per fare i conti, non perdere una scadenza e scrivere a banca, condominio e fratelli senza partire da zero.</p>
       </div>
-    </section>
+      <div class="grid grid--3">
+        {TOOLS.map((t, i) => (
+          <a class="card" href={t.href}>
+            <span class="card__n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-    <section class="read" aria-labelledby="metodo-title">
-      <h2 id="metodo-title">Perché fidarsi</h2>
-      <p>Ogni guida indica la data di aggiornamento, è verificata sulle fonti normative ufficiali e le cita in fondo alla pagina. Scopri il nostro <a href="/metodo-editoriale/">metodo editoriale</a>.</p>
-    </section>
-  </div>
+  <section class="sec" aria-labelledby="metodo-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Perché fidarsi</span>
+          <h2 class="h-l" id="metodo-title">Fonti ufficiali, citate in ogni guida</h2>
+        </div>
+        <p class="lede">Ogni guida riporta la data di verifica e le fonti normative: Codice civile, Agenzia delle Entrate, Normattiva. Dove la legge lascia spazio a interpretazioni, lo diciamo. <a class="link" href="/metodo-editoriale/">Il nostro metodo</a></p>
+      </div>
+      <div class="grid grid--3">
+        <article class="card"><span class="card__n">01</span><h3>Verificate sulle norme</h3><p>Ogni affermazione è controllata sul testo della legge o sui documenti dell'Agenzia delle Entrate, non su altri siti.</p></article>
+        <article class="card"><span class="card__n">02</span><h3>Aggiornate</h3><p>Le regole cambiano: ogni guida porta la data dell'ultima verifica e le riforme già approvate, come i testi unici dal 2027.</p></article>
+        <article class="card"><span class="card__n">03</span><h3>Oneste sui limiti</h3><p>Informazioni generali, non consulenza. Ti diciamo quando serve un notaio, un avvocato o un commercialista.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
 
   <script>
     const LINKS = {

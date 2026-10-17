@@ -1,0 +1,19 @@
+---
+/** Intestazione delle pagine interne su fondo sabbia: percorso, etichetta, titolo, testo e azioni opzionali. */
+import Breadcrumbs from './Breadcrumbs.astro';
+interface Props {
+  title: string;
+  eyebrow?: string;
+  crumbs?: { name: string; href: string }[];
+}
+const { title, eyebrow, crumbs } = Astro.props;
+---
+<section class="page-head">
+  <div class="wrap">
+    {crumbs && <Breadcrumbs items={crumbs} />}
+    {eyebrow && <span class="eyebrow" style="margin:0">{eyebrow}</span>}
+    <h1>{title}</h1>
+    {Astro.slots.has('default') && <p class="lede"><slot /></p>}
+    <slot name="after" />
+  </div>
+</section>

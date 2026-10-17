@@ -1,11 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PageHead from '../../components/PageHead.astro';
 ---
 <Base title="Strumenti gratuiti per la casa ereditata" description="Calcolatore delle imposte di successione, scadenzario della successione e valutazione gratuita della casa ereditata.">
+  <PageHead title="Strumenti gratuiti" crumbs={[{ name: 'Strumenti', href: '/strumenti/' }]} />
   <div class="wrap">
-    <Breadcrumbs items={[{ name: 'Strumenti', href: '/strumenti/' }]} />
-    <h1>Strumenti gratuiti</h1>
     <div class="grid">
       <a class="card" href="/strumenti/scadenzario-successione/">
         <h3>Scadenzario della successione</h3>
