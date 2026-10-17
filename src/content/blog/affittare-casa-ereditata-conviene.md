@@ -126,7 +126,7 @@ Il consiglio è mettere per iscritto, prima di cercare l'inquilino, un accordo t
 - Gli eredi vogliono tenerla per un motivo preciso: un figlio che ci andrà a vivere tra qualche anno, un legame forte, un mercato locale in ripresa.
 - L'accettazione dell'eredità è già chiara e non ci sono dubbi sui debiti.
 
-Se invece nessuno può occuparsene, la casa ha bisogno di lavori o gli eredi non vanno d'accordo, l'affitto rischia di trasformare un'eredità in un secondo lavoro, poco pagato.
+Se invece nessuno può occuparsene, la casa ha bisogno di lavori o gli eredi non vanno d'accordo, l'affitto rischia di trasformare un'eredità in un secondo lavoro, poco pagato. Prima di scegliere, guarda anche [quanto costa ereditare una casa nel 2026](/blog/quanto-costa-ereditare-casa-2026/) e come si muove oggi [il mercato delle case ereditate](/blog/case-ereditate-mercato-venditori-over-60/). Se tra eredi le posizioni sono già distanti, leggi [i sette errori che fanno litigare i fratelli](/blog/fratelli-casa-ereditata-errori/).
 
 <div class="next-step">
   <h2>Cosa fare adesso</h2>

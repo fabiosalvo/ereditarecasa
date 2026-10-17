@@ -120,7 +120,7 @@ Nelle prossime settimane conviene guardare a tre cose:
 2. eventuali **altri decreti correttivi** sui testi unici, come quello di agosto 2026;
 3. i chiarimenti dell'Agenzia sulle successioni **a cavallo** tra 2026 e 2027.
 
-Noi aggiorneremo le guide con i nuovi articoli dal 1° gennaio 2027. Per i costi del tuo caso trovi gli importi aggiornati nella guida su [quanto costa la successione](/casa-ereditata/successione/costi/).
+Noi aggiorneremo le guide con i nuovi articoli dal 1° gennaio 2027. Per i costi del tuo caso trovi gli importi aggiornati nella guida su [quanto costa la successione](/casa-ereditata/successione/costi/). Per vedere le imposte su tre famiglie tipo, leggi [quanto costa ereditare una casa nel 2026](/blog/quanto-costa-ereditare-casa-2026/).
 
 <div class="next-step">
   <h2>Cosa fare adesso</h2>

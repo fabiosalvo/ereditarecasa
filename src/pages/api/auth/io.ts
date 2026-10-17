@@ -5,6 +5,6 @@ export const prerender = false;
 
 export const GET: APIRoute = async ({ cookies }) => {
   const u = await currentUser(cookies).catch(() => null);
-  if (!u) return json({ ok: false }, 401);
+  if (!u) return json({ ok: false });
   return json({ ok: true, utente: u });
 };

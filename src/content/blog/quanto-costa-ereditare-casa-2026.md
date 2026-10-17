@@ -128,9 +128,9 @@ I compensi sono **solo indicativi**. Non esistono tariffe ufficiali: le fasce ve
 - **Pubblicazione del testamento**: se c'è un testamento olografo, va pubblicato da un notaio. Il costo dipende dallo studio: chiedi un preventivo.
 - **Sistemazioni catastali**: se la planimetria non corrisponde allo stato della casa serve un tecnico, con un compenso a parte.
 - **IMU e utenze**: dal giorno del decesso la casa genera costi propri. Se non è l'abitazione principale di nessuno, l'IMU va pagata. Vedi la guida sull'[IMU della casa ereditata](/casa-ereditata/tasse/imu/).
-- **Plusvalenza**: se vendi una casa ricevuta in eredità **non paghi** IRPEF sul guadagno, anche se vendi subito.
+- **Plusvalenza**: se vendi una casa ricevuta in eredità **non paghi** IRPEF sul guadagno, anche se vendi subito. Se invece pensate di tenerla e affittarla, ecco [quando l'affitto conviene davvero](/blog/affittare-casa-ereditata-conviene/).
 
-Un'ultima nota sulle date. Dal 1° gennaio 2027 queste regole passano nel nuovo testo unico dei tributi indiretti (D.Lgs. 123/2025). Aliquote, franchigie e importi descritti qui restano gli stessi: cambiano i numeri degli articoli.
+Un'ultima nota sulle date. Dal 1° gennaio 2027 queste regole passano nel nuovo testo unico dei tributi indiretti (D.Lgs. 123/2025). Aliquote, franchigie e importi descritti qui restano gli stessi: cambiano i numeri degli articoli. Abbiamo confrontato articolo per articolo [cosa cambia con i testi unici del 2027](/blog/testi-unici-2027-successioni/).
 
 <div class="next-step">
   <h2>Cosa fare adesso</h2>

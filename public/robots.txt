@@ -4,5 +4,7 @@ Disallow: /grazie/
 Disallow: /stampa/
 Disallow: /pdf/
 Disallow: /pdf-manifest.json
+Disallow: /api/
+Disallow: /area-riservata/
 
 Sitemap: https://www.ereditarecasa.it/sitemap-index.xml

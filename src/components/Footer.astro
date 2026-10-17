@@ -12,13 +12,13 @@ const year = new Date().getFullYear();
         <p style="max-width:38ch;margin:0">{SITE.tagline}. Informazioni generali, non consulenza legale o fiscale: per il tuo caso rivolgiti a un professionista.</p>
       </div>
       <div>
-        <h4>Guide</h4>
+        <p class="foot-title">Guide</p>
         <ul>
           {AREAS.map((a) => <li><a href={a.path}>{a.title}</a></li>)}
         </ul>
       </div>
       <div>
-        <h4>Strumenti</h4>
+        <p class="foot-title">Strumenti</p>
         <ul>
           <li><a href="/percorso/">Il tuo percorso</a></li>
           <li><a href="/strumenti/calcolatore-imposte-successione/">Calcolatore imposte</a></li>
@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
         </ul>
       </div>
       <div>
-        <h4>Chi siamo</h4>
+        <p class="foot-title">Chi siamo</p>
         <ul>
           <li><a href="/chi-siamo/">Chi siamo</a></li>
           <li><a href="/metodo-editoriale/">Metodo editoriale</a></li>

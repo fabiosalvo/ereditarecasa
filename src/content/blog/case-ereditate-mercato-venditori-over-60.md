@@ -99,7 +99,7 @@ Elena e Davide ereditano a febbraio 2026 l'appartamento della madre in una citt�
 
 Se la trattativa si chiude con lo sconto medio del Sud e Isole (9%), il prezzo finale sarebbe intorno a **118.000 euro**. Se servono i tempi medi, circa cinque mesi dall'annuncio, l'atto arriverebbe a fine anno, dopo aver presentato la dichiarazione e trascritto l'accettazione.
 
-Nel frattempo la casa costa: IMU, condominio, utenze minime, assicurazione. Per una casa vuota questi costi si pagano senza un reddito in cambio. Per questo conviene fare un conto onesto: quanto costa tenerla un anno, e quanto si potrebbe guadagnare affittandola. Il confronto completo è nella guida [vendere, affittare o tenere](/casa-ereditata/decidere/).
+Nel frattempo la casa costa: IMU, condominio, utenze minime, assicurazione. Per una casa vuota questi costi si pagano senza un reddito in cambio. Per questo conviene fare un conto onesto: quanto costa tenerla un anno, e quanto si potrebbe guadagnare affittandola. Il confronto completo è nella guida [vendere, affittare o tenere](/casa-ereditata/decidere/). Tutte le voci, con tre casi d'esempio, sono in [quanto costa ereditare una casa nel 2026](/blog/quanto-costa-ereditare-casa-2026/); se pensate all'alternativa, c'è il conto su [affittare o vendere la casa ereditata](/blog/affittare-casa-ereditata-conviene/).
 
 > **Attenzione.** Non fissare il prezzo sul valore indicato nella dichiarazione di successione: è il valore catastale, quasi sempre più basso del mercato. E prima di fare qualcosa sulla casa, come affittarla o firmare un incarico di vendita, informati sull'accettazione dell'eredità: alcuni atti valgono come accettazione tacita. Leggi la guida [accettare o rinunciare](/casa-ereditata/accettare-rinunciare/).
 

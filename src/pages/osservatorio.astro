@@ -63,7 +63,11 @@ const datasetLd = {
   name: 'Osservatorio sulle case ereditate in Italia',
   description: 'Successioni, immobili ereditati, imposte e confronto europeo, da fonti ufficiali (MEF, ISTAT, Banca d’Italia, Agenzia delle Entrate, OCSE).',
   dateModified: '2026-10-17',
-  creator: { '@type': 'Organization', name: 'EreditareCasa' },
+  creator: { '@type': 'Organization', name: 'EreditareCasa', url: 'https://www.ereditarecasa.it' },
+  url: 'https://www.ereditarecasa.it/osservatorio/',
+  inLanguage: 'it-IT',
+  spatialCoverage: { '@type': 'Place', name: 'Italia' },
+  keywords: ['successioni', 'case ereditate', 'imposta di successione', 'immobili ereditati', 'Italia'],
   isBasedOn: FONTI.map(([, u]) => u),
 };
 ---

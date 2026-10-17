@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 import CtaBox from '../../components/CtaBox.astro';
@@ -22,12 +22,24 @@ const url = `/blog/${entry.id}/`;
 
 // Guide collegate: titolo letto dalla collezione delle guide
 const guide = await getCollection('guide');
-const { guideUrl } = await import('../../data/site');
+const { guideUrl, AREAS } = await import('../../data/site');
 const collegate = d.guide
   .map((u) => guide.find((g) => guideUrl(g.data.area, g.data.slug) === u))
   .filter((g): g is NonNullable<typeof g> => Boolean(g));
-const altri = posts.filter((p) => p.id !== entry.id).slice(0, 3);
+// Articoli correlati: prima quelli che condividono guide o area, poi la stessa categoria, poi i più recenti
+const area = (u: string) => AREAS.find((a) => u.startsWith(a.path))?.id ?? u;
+const affinita = (p: (typeof posts)[number]) =>
+  p.data.guide.filter((g) => d.guide.includes(g)).length * 3 +
+  p.data.guide.filter((g) => d.guide.some((x) => area(x) === area(g))).length +
+  (p.data.categoria === d.categoria ? 2 : 0);
+const altri = posts
+  .filter((p) => p.id !== entry.id)
+  .map((p) => ({ p, s: affinita(p) }))
+  .sort((a, b) => b.s - a.s || b.p.data.date.getTime() - a.p.data.date.getTime())
+  .slice(0, 3)
+  .map((x) => x.p);
 
+const ogImg = await getImage({ src: FOTO_AREA[d.foto].src, width: 1200, format: 'jpg' });
 const ld = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -35,6 +47,7 @@ const ld = {
   description: d.description,
   datePublished: d.date.toISOString(),
   dateModified: (d.updated ?? d.date).toISOString(),
+  image: [new URL(ogImg.src, SITE.url).toString()],
   inLanguage: 'it-IT',
   mainEntityOfPage: new URL(url, SITE.url).toString(),
   author: { '@type': 'Organization', name: d.autore, url: `${SITE.url}/chi-siamo/` },
@@ -93,7 +106,7 @@ const ld = {
 
     {altri.length > 0 && (
       <section>
-        <h2 class="h-m">Altri articoli</h2>
+        <h2 class="h-m">Articoli correlati</h2>
         <div class="grid grid--3">
           {altri.map((p) => (
             <a class="card card-photo" href={`/blog/${p.id}/`}>

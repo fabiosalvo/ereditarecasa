@@ -87,7 +87,7 @@ La prelazione non serve se vendi la quota a un fratello: protegge dall'ingresso 
 
 Nella nostra guida [vendere, affittare o tenere](/casa-ereditata/decidere/) un esempio con numeri di fantasia arriva a **oltre 4.000 euro l'anno** di costi per un trilocale vuoto. In cinque anni sono più di 20.000 euro, divisi tra i fratelli, senza un euro di entrate. I tuoi importi saranno diversi: dipendono dalla rendita, dall'aliquota del Comune e dal condominio. Ma l'ordine di grandezza fa capire perché rinviare non è mai una scelta neutra.
 
-Il rimedio non è "vendere subito". È **darsi una data**: entro sei mesi decidiamo se vendere, affittare o se uno compra le quote degli altri. Per la gestione nel frattempo c'è la guida sulla [casa ereditata vuota](/casa-ereditata/gestire-la-casa/casa-vuota/) e quella sull'[IMU](/casa-ereditata/tasse/imu/).
+Il rimedio non è "vendere subito". È **darsi una data**: entro sei mesi decidiamo se vendere, affittare o se uno compra le quote degli altri. Per la gestione nel frattempo c'è la guida sulla [casa ereditata vuota](/casa-ereditata/gestire-la-casa/casa-vuota/) e quella sull'[IMU](/casa-ereditata/tasse/imu/). Se l'idea è affittarla, fate prima [i conti su quanto rende davvero l'affitto](/blog/affittare-casa-ereditata-conviene/). E se uno di voi aveva ricevuto la casa in donazione dai genitori, leggete cosa cambia con [la riforma della casa donata](/blog/casa-donata-legge-182-2025/).
 
 ## Errore 6: andare subito in causa, saltando la mediazione
 

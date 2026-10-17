@@ -87,7 +87,7 @@ Molte cose restano come prima, e confonderle è il rischio più grande per chi l
 
 - **La legittima.** Le quote riservate ai familiari sono le stesse.
 - **L'azione di riduzione.** Il legittimario leso può sempre agire contro il donatario. Cambia solo che cosa può ottenere dai terzi.
-- **La collazione tra fratelli.** Alla morte del donante, la casa donata va considerata nella divisione tra coeredi come prima. Lo spieghiamo nella guida sulla [casa ricevuta in donazione](/casa-ereditata/testamento-e-legittima/casa-donata/).
+- **La collazione tra fratelli.** Alla morte del donante, la casa donata va considerata nella divisione tra coeredi come prima. Lo spieghiamo nella guida sulla [casa ricevuta in donazione](/casa-ereditata/testamento-e-legittima/casa-donata/). Se tra fratelli la tensione sale, abbiamo raccolto [i sette errori più comuni sulla casa ereditata](/blog/fratelli-casa-ereditata-errori/).
 - **I testamenti.** Per le disposizioni testamentarie la riforma ha toccato solo un aspetto: se la domanda di riduzione contro l'erede o il legatario è trascritta dopo tre anni dall'apertura della successione, la sentenza non pregiudica chi ha comprato da loro con un atto trascritto prima (art. 2652, n. 8).
 
 ## Cosa controllare se compri una casa donata

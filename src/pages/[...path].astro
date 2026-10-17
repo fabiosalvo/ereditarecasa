@@ -6,7 +6,7 @@ import CtaBox from '../components/CtaBox.astro';
 import GuidaDownload from '../components/GuidaDownload.astro';
 import GuidaGate from '../components/GuidaGate.astro';
 import GuidaSplit from '../components/GuidaSplit.astro';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { SITE, areaById, guideUrl, pdfUrl } from '../data/site';
 import { FOTO_AREA } from '../data/foto';
 
@@ -19,6 +19,8 @@ export async function getStaticPaths() {
 }
 
 const { entry, siblings } = Astro.props;
+// Articoli del blog che rimandano a questa guida (o alla sua area)
+const posts = await getCollection('blog');
 const { Content } = await render(entry);
 const d = entry.data;
 const area = areaById(d.area);
@@ -28,19 +30,29 @@ const updated = fmtDate(d.updated);
 const children = siblings.filter((g) => !g.data.pillar).sort((a, b) => a.data.order - b.data.order);
 const pillar = siblings.find((g) => g.data.pillar);
 
+const areaPrefix = area.path;
+const dalBlog = posts
+  .map((p) => ({ p, score: p.data.guide.includes(url) ? 2 : p.data.guide.some((g) => g.startsWith(areaPrefix)) ? 1 : 0 }))
+  .filter((x) => x.score > 0)
+  .sort((a, b) => b.score - a.score || b.p.data.date.getTime() - a.p.data.date.getTime())
+  .slice(0, 3)
+  .map((x) => x.p);
+
 const crumbs = [{ name: 'Guide', href: '/casa-ereditata/' }];
 if (!d.pillar) crumbs.push({ name: area.title, href: area.path });
 crumbs.push({ name: d.pillar ? area.title : d.title, href: url });
 
+const ogImg = await getImage({ src: FOTO_AREA[d.area].src, width: 1200, format: 'jpg' });
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: d.title,
   description: d.description,
   dateModified: d.updated.toISOString(),
+  image: [new URL(ogImg.src, SITE.url).toString()],
   mainEntityOfPage: new URL(url, SITE.url).toString(),
   inLanguage: 'it-IT',
-  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url, logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/logo.png` } },
   author: { '@type': 'Organization', name: `Redazione ${SITE.name}`, url: `${SITE.url}/chi-siamo/` },
 };
 articleLd.isAccessibleForFree = false;
@@ -128,6 +140,17 @@ if (d.faq.length) {
 
         {!d.pillar && pillar && (
           <p>Fa parte della guida <a href={area.path}>{pillar.data.title}</a>.</p>
+        )}
+
+        {dalBlog.length > 0 && (
+          <section class="no-print">
+            <h2>Dal blog</h2>
+            <ul class="link-list">
+              {dalBlog.map((p) => (
+                <li><a href={`/blog/${p.id}/`}>{p.data.title}</a> <span class="post-meta">{p.data.categoria}</span></li>
+              ))}
+            </ul>
+          </section>
         )}
 
         <p class="disclaimer">
