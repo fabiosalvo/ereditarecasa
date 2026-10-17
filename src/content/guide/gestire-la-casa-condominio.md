@@ -21,6 +21,10 @@ fonti:
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art754"
   - title: "Codice civile, art. 1104: obblighi dei partecipanti alla comunione (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art1104"
+  - title: "Codice civile, art. 1025: obblighi di chi ha il diritto di abitazione (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art1025"
+  - title: "Codice civile, art. 1005: riparazioni straordinarie a carico del proprietario (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art1005"
   - title: "Codice civile, art. 460: poteri del chiamato prima dell'accettazione (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art460"
 faq:
@@ -105,6 +109,43 @@ Quando un appartamento appartiene a più persone in comproprietà indivisa, ques
 - chi va in assemblea riferisce agli altri e invia il verbale.
 
 Ogni condomino può farsi rappresentare anche da un delegato con delega scritta.
+
+## Se nella casa vive il coniuge superstite
+
+Molto spesso la casa ereditata dai figli è ancora abitata dal genitore superstite, che ha per legge il **diritto di abitazione** sulla casa familiare. In questo caso le spese condominiali non si dividono semplicemente per quote ereditarie.
+
+Il codice civile dice che chi ha il diritto di abitazione e occupa tutta la casa è tenuto alle **riparazioni ordinarie** e al pagamento dei **tributi** come l'usufruttuario (art. 1025 c.c.); le norme sull'usufrutto si applicano, in quanto compatibili, anche all'abitazione. Per l'usufrutto, spese e oneri di custodia, amministrazione e manutenzione ordinaria sono di chi gode la casa, mentre le **riparazioni straordinarie** restano al **proprietario** (artt. 1004 e 1005 c.c.).
+
+| Spesa condominiale | Chi la sostiene, di regola |
+| --- | --- |
+| Rate ordinarie (pulizie, portineria, luce delle scale, manutenzione ordinaria) | Il coniuge che abita la casa |
+| Riscaldamento e acqua a consumo | Il coniuge |
+| Lavori straordinari (tetto, facciata, rifacimento scale) | I figli proprietari, pro quota |
+| Arretrati del defunto | Gli eredi, compreso il coniuge, pro quota ereditaria |
+
+Verso il condominio, però, l'amministratore può non conoscere questi accordi interni: comunicategli per iscritto chi paga cosa e a chi intestare gli avvisi. Nei casi dubbi (per esempio un ascensore nuovo, che è un miglioramento) conviene un accordo scritto in famiglia.
+
+## Se in casa va a vivere uno degli eredi
+
+Se un coerede si trasferisce nella casa, le spese d'uso (riscaldamento, acqua, quote legate ai servizi) sono sue. Le spese di conservazione delle parti comuni e i lavori straordinari restano a carico di tutti i comproprietari, pro quota. Scrivetelo nell'accordo di gestione e informate l'amministratore. Vedi anche [se un coerede occupa la casa](/eredi-in-disaccordo/coerede-occupa-casa/).
+
+## Casa vuota con riscaldamento centralizzato
+
+Se il palazzo ha il riscaldamento centralizzato, una casa vuota continua di solito a pagare la sua parte di spese: anche con i contabilizzatori di calore sui termosifoni, una quota resta legata ai millesimi e alla dispersione dell'impianto, non ai consumi. Chiudere le valvole riduce la parte a consumo, ma non azzera la rata. Il distacco dall'impianto comune è possibile solo a condizioni precise e con una verifica tecnica: chiedi all'amministratore cosa prevedono il regolamento e la normativa prima di decidere. In inverno, inoltre, lasciare i termosifoni al minimo protegge l'appartamento dall'umidità e dalla muffa, e le tubature dal gelo.
+
+## I documenti da chiedere all'amministratore
+
+| Documento | Perché ti serve |
+| --- | --- |
+| Estratto conto dell'unità | Arretrati del defunto e rate successive |
+| Bilancio preventivo dell'anno | Stimare le spese della casa nei prossimi mesi |
+| Ultimo consuntivo approvato | Capire se ci sono conguagli |
+| Verbali delle assemblee degli ultimi anni | Lavori deliberati e contenziosi in corso |
+| Tabelle millesimali | Verificare il riparto |
+| Regolamento di condominio | Divieti e obblighi, utili anche per affitto o vendita |
+| Eventuali decreti ingiuntivi o solleciti | Capire se c'è un procedimento in corso |
+
+Chiedili tutti con la prima comunicazione: ti serviranno per la decisione sull'eredità, per la dichiarazione dei debiti e, più avanti, per l'eventuale vendita.
 
 ## Se vendete la casa
 
