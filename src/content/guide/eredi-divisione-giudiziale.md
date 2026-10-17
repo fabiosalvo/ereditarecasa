@@ -171,6 +171,22 @@ Una divisione, anche giudiziale, può essere rimessa in discussione se un coered
 
 > **Attenzione.** La divisione giudiziale tende a ridurre il valore per tutti: anni di spese legali, IMU e manutenzione che continuano, e il rischio di un'asta a prezzo inferiore al mercato. Usala come ultima risorsa, o come leva per riaprire una trattativa seria. E non trascurare la mediazione: è il momento in cui un accordo costa meno.
 
+## Come prepararsi al primo incontro con l'avvocato
+
+Il primo colloquio costa meno e rende di più se arrivi con i documenti in ordine. Porta con te:
+
+- il certificato di morte e, se c'è, il testamento pubblicato;
+- la dichiarazione di successione presentata e la ricevuta;
+- la visura catastale aggiornata e, se l'hai, l'ultimo atto di provenienza della casa;
+- l'elenco degli altri beni dell'eredità (conti, altri immobili, mobili di valore);
+- le donazioni fatte in vita dal defunto ai figli o al coniuge, anche se lontane nel tempo: possono pesare sulla divisione;
+- le spese che hai sostenuto per la casa dopo il decesso, con le ricevute;
+- le lettere, email e messaggi scambiati con gli altri eredi sulla casa.
+
+Fai anche alcune domande precise. Quanto costerà, in modo realistico, ogni fase: mediazione, causa, perizia? Quanto potrebbe durare il giudizio nel tribunale competente? Ci sono margini per una proposta di accordo prima di iniziare? Come verranno divise le spese legali se la causa si chiude con un accordo a metà strada?
+
+Chiedi infine un preventivo scritto. Non esistono tariffe fisse: il compenso dipende dal valore della causa e dal lavoro richiesto, e confrontare due preventivi è normale.
+
 ## Gli errori frequenti
 
 **Saltare la mediazione.** La causa diventa improcedibile e si perde tempo.

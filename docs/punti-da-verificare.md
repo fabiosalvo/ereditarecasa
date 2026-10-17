@@ -92,6 +92,16 @@ Tempi e costi della divisione giudiziale e indennità di mediazione sono descrit
 | E.4 | Regno Unito: nessuna conversione del cambio. Portogallo: solo il bollo del 10%. Svizzera: "molti cantoni" senza conteggio. | C |
 | E.5 | Il gettito OCSE (voce 4300) comprende anche le imposte sulle donazioni. La rendita di 900 € dell'esempio è inventata. | C |
 
+## 7-ter. Divisione, quote e prezzo (guide eredi/vendere/accettare)
+
+| # | Punto | Priorità |
+|---|---|---|
+| D.1 | Agevolazione prima casa sul conguaglio della divisione e sulla quota già ereditata: c'è un possibile contrasto tra la circolare 18/E/2013 e la Cassazione (n. 7606/2018 e altre). | A |
+| D.2 | Usucapione tra coeredi; indennità di occupazione (orientamento prevalente, sentenze non citate). | B |
+| D.3 | Esempi fiscali sulle divisioni semplificati: base catastale e ripartizione tra 1% e conguaglio. Dal 2027 la materia passa ai nuovi testi unici. | B |
+| D.4 | Dati non indicati: costi di curatore e CTU, contributo unificato, IVA sulle indennità di mediazione, durata della giacenza, superficie lorda o netta nelle schede OMI. | C |
+| D.5 | Valori OMI degli esempi in €/m²: ipotetici e dichiarati come tali. | C |
+
 ## 8. Fonti da aprire da un browser
 
 Normattiva non è raggiungibile dall'ambiente di lavoro automatico. Questi articoli sono stati controllati solo in modo indiretto, tramite le guide già verificate e Brocardi:
