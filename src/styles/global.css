@@ -410,3 +410,8 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--i
 .page-head .meta { max-width: 70ch; }
 @media print { .page-head { background: none; padding: 0; } .page-head .lede { font-size: 11pt; } }
 .wrap > h1:first-child { margin-top: 56px; }
+
+/* pagine di testo: il contenitore resta a tutta griglia (allineato alla testata), solo il testo si limita alla misura di lettura */
+.wrap.read { max-width: var(--max); }
+.wrap.read > :not(.grid):not(.sec-head):not(.facts):not(.steps):not(.wide) { max-width: 760px; }
+.wrap.read { padding-bottom: clamp(48px, 6vw, 88px); }

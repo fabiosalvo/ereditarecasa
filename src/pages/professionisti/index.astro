@@ -1,24 +1,57 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import PageHead from '../../components/PageHead.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { TITOLARE } from '../../data/site';
+
+const PRO = [
+  { n: '01', t: 'Notaio', q: 'Accettazione, rinuncia, beneficio d’inventario, pubblicazione del testamento, rogito di vendita.', g: '/casa-ereditata/accettare-rinunciare/' },
+  { n: '02', t: 'Commercialista o CAF', q: 'Dichiarazione di successione, calcolo delle imposte, 730 e plusvalenza dopo la vendita.', g: '/casa-ereditata/successione/' },
+  { n: '03', t: 'Avvocato', q: 'Eredi in disaccordo, divisione, lesione di legittima, impugnazione del testamento.', g: '/eredi-in-disaccordo/' },
+  { n: '04', t: 'Geometra o architetto', q: 'Conformità catastale e urbanistica, sanatorie, APE, stima del valore.', g: '/casa-ereditata/casi/immobile-irregolare/' },
+];
 ---
 <Base title="Professionisti per successioni e case ereditate" description="Avvocati, notai, commercialisti e geometri esperti di successioni e case ereditate, verificati, città per città.">
-  <PageHead title="Professionisti per la casa ereditata" crumbs={[{ name: 'Professionisti', href: '/professionisti/' }]}>
-    Stiamo selezionando, città per città, professionisti esperti di successioni e immobili ereditati.
+  <PageHead title="Professionisti per la casa ereditata" crumbs={[{ name: 'Professionisti', href: '/professionisti/' }]} eyebrow="Directory in costruzione">
+    Stiamo selezionando, città per città, professionisti esperti di successioni e immobili ereditati. Intanto ecco chi ti serve e quando.
   </PageHead>
-  <div class="wrap read prose">
-    <table>
-      <thead><tr><th>Professionista</th><th>Quando serve</th></tr></thead>
-      <tbody>
-        <tr><td>Notaio</td><td>Accettazione, rinuncia, beneficio d'inventario, pubblicazione del testamento, rogito</td></tr>
-        <tr><td>Commercialista o CAF</td><td>Dichiarazione di successione e calcolo delle imposte</td></tr>
-        <tr><td>Avvocato</td><td>Eredi in disaccordo, divisione, lesione di legittima, impugnazione del testamento</td></tr>
-        <tr><td>Geometra o architetto</td><td>Conformità catastale e urbanistica, sanatorie, APE</td></tr>
-      </tbody>
-    </table>
-    <h2>Sei un professionista?</h2>
-    <p>L'inserimento nella directory è gratuito e riservato a professionisti iscritti all'albo con esperienza in successioni. Scrivici a <a href={`mailto:${TITOLARE.emailContatti}?subject=Directory professionisti`}>{TITOLARE.emailContatti}</a> indicando città, albo e specializzazione.</p>
-  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Chi ti serve</span>
+          <h2 class="h-l">Quattro professionisti, quattro momenti diversi</h2>
+        </div>
+        <p class="lede">Non servono tutti. Dipende da cosa c’è nell’eredità, da quanti eredi siete e da cosa volete fare della casa.</p>
+      </div>
+      <div class="grid grid--4">
+        {PRO.map((p) => (
+          <article class="card">
+            <span class="card__n">{p.n}</span>
+            <h3>{p.t}</h3>
+            <p>{p.q}</p>
+            <a class="card__go link" href={p.g}>Leggi la guida</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--sand">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow" style="margin:0">Sei un professionista?</span>
+        <h2 class="h-l">Entra nella directory</h2>
+      </div>
+      <div>
+        <p class="lede">L’inserimento è gratuito e riservato a professionisti iscritti all’albo con esperienza in successioni. Scrivici indicando città, albo e specializzazione.</p>
+        <div class="actions">
+          <a class="btn" href={`mailto:${TITOLARE.emailContatti}?subject=Directory professionisti`}>Scrivici</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
 </Base>
