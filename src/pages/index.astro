@@ -1,14 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import { AREAS, SITE } from '../data/site';
+import { FOTO_AREA, FOTO_HERO } from '../data/foto';
 ---
 <Base title={`${SITE.name}: hai ereditato una casa? Cosa fare, passo per passo`} description={SITE.description}>
   <div class="wrap">
-    <section class="hero">
-      <p class="eyebrow">Guida alla casa ereditata</p>
-      <h1>Hai ereditato una casa?<br />Ti diciamo cosa fare, passo per passo.</h1>
-      <p class="lead">Successione, tasse, eredi da mettere d'accordo, vendita: tutto quello che serve, spiegato in modo semplice e con le scadenze giuste.</p>
-      <p><a class="btn" href="#percorso">Trova il tuo punto di partenza</a></p>
+    <section class="hero hero-split">
+      <div class="hero-text">
+        <p class="eyebrow">Guida alla casa ereditata</p>
+        <h1>Hai ereditato una casa?<br />Ti diciamo cosa fare, passo per passo.</h1>
+        <p class="lead">Successione, tasse, eredi da mettere d'accordo, vendita: tutto quello che serve, spiegato in modo semplice e con le scadenze giuste.</p>
+        <p class="hero-actions">
+          <a class="btn" href="#percorso">Trova il tuo punto di partenza</a>
+          <a class="btn btn-ghost" href="/valuta-casa-ereditata/">Valuta la casa</a>
+        </p>
+      </div>
+      <figure class="hero-media">
+        <Image src={FOTO_HERO.src} alt={FOTO_HERO.alt} widths={[480, 720, 960, 1200]} sizes="(max-width: 860px) 100vw, 46vw" loading="eager" fetchpriority="high" />
+      </figure>
     </section>
 
     <section id="percorso" aria-labelledby="percorso-title">
@@ -46,9 +56,12 @@ import { AREAS, SITE } from '../data/site';
       <h2 id="aree-title">Le guide</h2>
       <div class="grid">
         {AREAS.map((a) => (
-          <a class="card" href={a.path}>
-            <h3>{a.title}</h3>
-            <p>{a.short}</p>
+          <a class="card card-photo" href={a.path}>
+            <Image src={FOTO_AREA[a.id].src} alt="" widths={[400, 640]} sizes="(max-width: 600px) 100vw, 360px" />
+            <div class="card-body">
+              <h3>{a.title}</h3>
+              <p>{a.short}</p>
+            </div>
           </a>
         ))}
       </div>
