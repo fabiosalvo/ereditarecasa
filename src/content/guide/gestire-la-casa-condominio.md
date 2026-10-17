@@ -191,6 +191,7 @@ La madre di Laura, Pietro e Nicola muore il **15 aprile 2026**. I tre ereditano 
 4. **Dividere il condominio in parti uguali quando le quote sono diverse.** Si divide secondo le quote ereditarie, non per teste.
 5. **Lasciare accumulare le rate.** Il decreto ingiuntivo aggiunge spese legali che nessuno vuole pagare.
 6. **Vendere senza la dichiarazione dell'amministratore.** È la prima cosa che chiederà il notaio dell'acquirente.
+7. **Dimenticare il coniuge superstite.** Se abita la casa, le spese ordinarie sono di regola sue, quelle straordinarie dei proprietari: dividerle tutte per quote ereditarie crea squilibri.
 
 <div class="next-step">
   <h2>Cosa fare adesso</h2>

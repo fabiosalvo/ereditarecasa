@@ -25,6 +25,8 @@ fonti:
     url: "https://www.agenziaentrate.gov.it/portale/it/schede/dichiarazioni/dichiarazione-di-successione/risposte-alle-domande-frequenti-dichiarazione-successione"
   - title: "Agenzia delle Entrate, istruzioni Dichiarazione di successione (Fascicolo 1): esonero e codici diritto"
     url: "https://www.agenziaentrate.gov.it/portale/documents/20143/244895/Succ_FASCICOLO_I_Nov_23.pdf/ebc28cca-a79f-5a00-5a9a-7e4b70611a6b?t=1752664229629"
+  - title: "Codice civile, art. 540: diritto di abitazione del coniuge (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art540"
   - title: "Legge 160/2019, art. 1, commi 738 e seguenti: IMU (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2019-12-27;160"
   - title: "Agenzia delle Entrate, istruzioni modello 730/2026 (quadro B)"
@@ -105,6 +107,24 @@ Rosa, nel 2010, ha donato al figlio Andrea la casa in cui viveva, riservandosi l
   - Con un'aliquota ipotetica dell'1,06%: 117.600 × 1,06% = 1.246,56 € l'anno.
   - Per 7 mesi: 1.246,56 × 7/12 = **727 €** circa, da versare con il saldo del 16 dicembre 2026.
 - **730 del 2027** (redditi 2026): Andrea indica la casa nel quadro B dal 18 maggio al 31 dicembre, con codice "a disposizione". Se la casa è in un Comune diverso da quello della sua abitazione principale, l'IMU sostituisce l'IRPEF e in pratica non c'è imposta sul reddito; se è nello stesso Comune, la rendita conta per il 50%. Vedi la guida su come [dichiarare la casa ereditata nel 730](/casa-ereditata/tasse/730-casa-ereditata/).
+
+## Secondo esempio: usufrutto dei genitori con accrescimento
+
+Nel 2005 Franco e Lucia hanno comprato un appartamento a Lecce: la nuda proprietà a nome della figlia Sara, l'usufrutto a nome di entrambi, "con diritto di accrescimento". Franco muore il 3 febbraio 2026.
+
+- **Cosa succede al diritto**: per effetto dell'accrescimento, Lucia diventa usufruttuaria dell'**intero** appartamento. Sara resta nuda proprietaria e non può ancora usare la casa.
+- **Catasto**: l'Agenzia aggiorna d'ufficio l'intestazione togliendo Franco, ma l'accrescimento a favore di Lucia va fatto risultare con una **domanda di voltura** presentata da Lucia, esente da tributi, **entro il 3 febbraio 2027**. Può usare il servizio online Voltura catastale web o rivolgersi all'Ufficio provinciale - Territorio.
+- **Successione di Franco**: per l'appartamento non c'è nulla da dichiarare, perché la quota di usufrutto di Franco non passa ai suoi eredi. La dichiarazione servirà se Franco aveva altri immobili o più di 100.000 € di beni.
+- **IMU**: Lucia vive nella casa e vi ha la residenza: come titolare dell'usufrutto è lei il soggetto passivo e, trattandosi di abitazione principale non di lusso, di norma non paga.
+- **Quando morirà Lucia**: l'usufrutto si estinguerà del tutto e Sara diventerà piena proprietaria, con aggiornamento catastale d'ufficio.
+
+Se nell'atto **non** ci fosse stato l'accrescimento, alla morte di Franco la sua metà di usufrutto si sarebbe riunita subito alla nuda proprietà di Sara. Sara sarebbe diventata piena proprietaria per metà e nuda proprietaria per l'altra metà, con IMU sulla sua metà se non è la sua abitazione principale. Per questo è importante rileggere l'atto di acquisto o di donazione.
+
+## Diritto di abitazione del coniuge: stessa logica
+
+Il coniuge superstite ha per legge il **diritto di abitazione** sulla casa familiare (art. 540 del codice civile). È un diritto simile all'usufrutto ma più limitato: consente di abitare la casa, non di affittarla. Finché il coniuge è in vita, è lui a pagare l'IMU ed è lui a indicare la casa nella dichiarazione dei redditi; i figli, proprietari "gravati" dal diritto, non la dichiarano.
+
+Alla morte del coniuge il diritto di abitazione si estingue e si riunisce alla proprietà dei figli. Dal 2025 anche questo aggiornamento catastale è fatto **d'ufficio e senza oneri**. Attenzione però: in questo caso il coniuge era spesso anche **comproprietario** della casa per la sua quota di eredità o di comunione. Quella quota invece passa ai suoi eredi e richiede la **dichiarazione di successione** del coniuge, con le relative imposte.
 
 ## Redditi, utenze, condominio: la checklist
 
