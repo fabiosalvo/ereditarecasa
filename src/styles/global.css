@@ -614,3 +614,101 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary); box-sh
 .logo { display: inline-flex; align-items: center; gap: 10px; }
 .logo__mark { flex: none; display: block; }
 @media (max-width: 400px) { .logo { font-size: 20px; gap: 8px; } .logo__mark { width: 30px; height: 29px; } }
+
+/* logo B: ereditare verde foresta, casa terracotta */
+.logo { color: var(--primary-container); gap: 10px; }
+.logo b { color: var(--secondary); }
+.foot .logo { color: #fff; }
+.foot .logo b { color: #ff9d7a; }
+
+/* ============================================================
+   Palette marrone/sabbia ispirata al Sole 24 Ore + titoli macchina da scrivere
+   (sovrascrive i colori Neo-Elegance; componenti e forme restano)
+   ============================================================ */
+@font-face { font-family: 'Newsreader'; font-weight: 200 800; font-style: normal; font-display: swap; src: url(/fonts/newsreader.woff2) format('woff2'); }
+@font-face { font-family: 'Newsreader'; font-weight: 200 800; font-style: italic; font-display: swap; src: url(/fonts/newsreader-italic.woff2) format('woff2'); }
+:root {
+  --headline: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --black: #0f0f0f;                 /* pulsanti, come il Sole 24 Ore */
+  --brown-900: #2b1d14;             /* bande scure, footer */
+  --brown-800: #3a2618;             /* titoli */
+  --brown-600: #5c3b22;
+  --brown-500: #8a5530;             /* accento: etichette, link, prezzi */
+  --brown-400: #b07a4a;
+  --brown-300: #d9a877;
+  --sand-200: #f5e5d5;
+  --sand-100: #fce9d7;
+  --sand-50: #fff5ec;
+  --paper-0: #fffaf5;
+
+  --primary: var(--black);
+  --primary-container: var(--brown-900);
+  --primary-fixed: var(--sand-200);
+  --inverse-primary: #e6cdb3;
+  --emerald: var(--brown-600);
+  --secondary: var(--brown-500);
+  --secondary-hover: #6e4124;
+  --secondary-container: var(--sand-200);
+  --surface: var(--paper-0);
+  --surface-low: var(--sand-50);
+  --surface-cont: var(--sand-100);
+  --surface-high: var(--sand-200);
+  --on-surface: var(--black);
+  --on-surface-variant: #3d3d3d;
+  --outline: #6f6f6f;
+  --outline-variant: #e3cfba;
+  --hairline: #f0e1d1;
+  --ink-hover: #2a2a2a;
+  --shadow-sm: 0 1px 2px rgba(60, 38, 20, .06), 0 4px 14px -6px rgba(60, 38, 20, .1);
+  --shadow-lg: 0 2px 6px rgba(60, 38, 20, .06), 0 18px 40px -16px rgba(60, 38, 20, .24);
+  --note-bg: var(--sand-200);
+  --note-fg: #5c3b22;
+}
+
+
+/* titoli in Newsreader, serif editoriale da quotidiano */
+h1, h2, .h-xl, .h-l, .h-m, .big, .facts b, .kpi-value { font-family: var(--headline); font-weight: 600; font-optical-sizing: auto; letter-spacing: -.015em; color: var(--brown-800); }
+.h-xl { font-size: clamp(42px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -.025em; font-weight: 500; }
+.h-l { font-size: clamp(32px, 3.8vw, 48px); line-height: 1.08; font-weight: 500; letter-spacing: -.02em; }
+.h-m { font-size: clamp(24px, 2.4vw, 30px); }
+h1 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.06; font-weight: 500; letter-spacing: -.02em; }
+.prose h2 { font-size: clamp(26px, 2.6vw, 32px); }
+.facts b, .kpi-value { font-weight: 600; }
+.sec--ink :is(.h-xl, .h-l, .h-m, h2, h3), .cta-box h3 { color: #fff5ec; }
+
+/* pulsanti neri */
+.btn { background: var(--black); border-color: var(--black); color: #fff; }
+.btn:hover { background: #2a2a2a; border-color: #2a2a2a; color: #fff; box-shadow: 0 8px 20px -8px rgba(15, 15, 15, .45); }
+.btn-ghost, .btn--ghost { background: transparent; color: var(--black); border-color: var(--black); }
+.btn-ghost:hover, .btn--ghost:hover { background: rgba(15, 15, 15, .05); color: var(--black); border-color: var(--black); }
+.cta .btn, .cta-box .btn { background: var(--sand-200); border-color: var(--sand-200); color: var(--black); }
+.cta .btn:hover, .cta-box .btn:hover { background: #fff5ec; border-color: #fff5ec; color: var(--black); }
+.cta .btn-ghost { color: #fff5ec; border-color: rgba(255, 245, 236, .6); }
+
+/* fondi e superfici calde */
+.top { background: rgba(255, 250, 245, .92); border-bottom-color: var(--outline-variant); box-shadow: 0 1px 2px rgba(60, 38, 20, .05); }
+.nav a:not(.btn):hover, .nav a[aria-current='page'] { color: var(--black); }
+.nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--brown-500); }
+.sec--ink { background: var(--brown-900) radial-gradient(120% 140% at 100% 0%, rgba(138, 85, 48, .45), rgba(43, 29, 20, 0) 60%); color: var(--inverse-primary); }
+.sec--ink .eyebrow, .foot h4 { color: var(--brown-300); }
+.cta-box { background: var(--brown-900) radial-gradient(120% 120% at 100% 0%, rgba(138, 85, 48, .45), rgba(43, 29, 20, 0) 60%); }
+.hero__bg::before { background: linear-gradient(90deg, rgba(255, 250, 245, .96) 0%, rgba(255, 250, 245, .6) 18%, rgba(255, 250, 245, 0) 45%); }
+@media (max-width: 860px) { .hero__bg::before { background: linear-gradient(0deg, rgba(255, 250, 245, .5) 0%, rgba(255, 250, 245, 0) 40%); } }
+.gate__fade { background: linear-gradient(rgba(255, 250, 245, 0), var(--surface)); }
+.prose thead th { background: var(--brown-900); }
+.badge { background: var(--black); }
+.chip--primary { background: var(--black); color: #fff; }
+.choices label:has(input:checked) { background: var(--black); color: #fff; }
+.checks li::before, .check-list li::before { background-color: var(--brown-800); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f5e5d5' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-9'/%3E%3C/svg%3E"); }
+.is-media .bar-fill { background: repeating-linear-gradient(135deg, var(--brown-400) 0 3px, var(--outline-variant) 3px 7px); }
+.progress span { background: var(--brown-500); }
+input:focus, select:focus, textarea:focus { border-color: var(--black); box-shadow: 0 0 0 3px rgba(138, 85, 48, .15); }
+.foot { background: var(--brown-900); color: var(--inverse-primary); }
+.foot a { color: #f5e5d5; }
+.foot__legal { border-top-color: rgba(230, 205, 179, .2); }
+.logo { color: var(--brown-800); }
+.logo b { color: var(--brown-500); }
+.foot .logo { color: #fff5ec; }
+.foot .logo b { color: var(--brown-300); }
+.cta .btn.btn-ghost { background: transparent; color: #fff5ec; border-color: rgba(255, 245, 236, .6); }
+.cta .btn.btn-ghost:hover { background: rgba(255, 245, 236, .08); color: #fff; }

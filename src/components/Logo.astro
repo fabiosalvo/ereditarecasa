@@ -1,20 +1,22 @@
 ---
-/** Logo: casa verde foresta con la serratura come porta, tetto terracotta che protegge. Ereditare una casa è riceverne le chiavi. */
+/** Logo: una casa grande e una piccola, la casa che passa da una generazione all'altra. */
 interface Props {
   href?: string;
   dark?: boolean;
 }
 const { href = '/', dark = false } = Astro.props;
-const roof = dark ? '#ffb59b' : '#95482c';
-const body = dark ? '#f5fbf5' : '#1b3022';
-const hole = dark ? '#1b3022' : '#f5fbf5';
+const big = dark ? '#fff5ec' : '#3a2618';
+const small = dark ? '#d9a877' : '#b07a4a';
+const mask = dark ? 'logo-cut-d' : 'logo-cut';
+const smallHouse = 'M30 41 44 28.5 58 41V57H30z';
 ---
 <a class="logo" href={href} aria-label="EreditareCasa, pagina iniziale">
-  <svg class="logo__mark" viewBox="4 5 56 54" width="34" height="33" aria-hidden="true">
-    <path d="M7 30.5 32 9.5l25 21" fill="none" stroke={roof} stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M14.5 28.4 32 13.8l17.5 14.6V51a4.5 4.5 0 0 1-4.5 4.5H19a4.5 4.5 0 0 1-4.5-4.5z" fill={body} />
-    <circle cx="32" cy="34.5" r="5.6" fill={hole} />
-    <path d="M29.3 37.6h5.4l1.9 11.4h-9.2z" fill={hole} />
+  <svg class="logo__mark" viewBox="2 8 58 51" width="38" height="33" aria-hidden="true">
+    <defs>
+      <mask id={mask}><rect width="64" height="64" fill="#fff" /><path d={smallHouse} fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round" /></mask>
+    </defs>
+    <path d="M5 28.5 23.5 11 42 28.5V57H5z" fill={big} stroke={big} stroke-width="3" stroke-linejoin="round" mask={`url(#${mask})`} />
+    <path d={smallHouse} fill={small} stroke={small} stroke-width="3" stroke-linejoin="round" />
   </svg>
-  <span>ereditare<b>Casa</b></span>
+  <span>ereditare<b>casa</b></span>
 </a>
