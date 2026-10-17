@@ -1,10 +1,7 @@
 ---
-import ConsentFields from './ConsentFields.astro';
-
+/** Invito a scaricare il PDF: il pulsante apre il modulo contatti (PdfLeadModal). */
 interface Props {
-  // URL del PDF pubblicato in /pdf/
   pdf: string;
-  // Identificativo della guida, salvato con il contatto
   guida: string;
   titolo?: string;
   testo?: string;
@@ -15,67 +12,10 @@ const {
   guida,
   titolo = 'Scarica questa guida in PDF',
   testo = 'Ricevi la versione stampabile da conservare o condividere con gli altri eredi.',
-  idPrefix = 'dl',
 } = Astro.props;
 ---
 <div class="download-box">
   <h3>{titolo}</h3>
   <p>{testo}</p>
-  <form class="download-form" data-download-form data-pdf={pdf} data-guida={guida} novalidate>
-    <div class="field">
-      <label for={`${idPrefix}-email`}>La tua email</label>
-      <input id={`${idPrefix}-email`} name="email" type="email" autocomplete="email" required />
-    </div>
-    <ConsentFields />
-    <p class="form-error" role="alert" data-error></p>
-    <button class="btn" type="submit">Scarica il PDF</button>
-  </form>
-  <p class="download-ok" data-ok hidden>
-    Grazie! Il download è partito. Se non si avvia, <a data-link href={pdf} download>scarica il PDF da qui</a>.
-  </p>
+  <a class="btn" href={pdf} data-pdf-open data-pdf={pdf} data-guida={guida}>Scarica il PDF</a>
 </div>
-
-<script>
-  import { formToObject, submitLead } from '../scripts/lead';
-  import { hasAccess, unlock } from '../scripts/accesso';
-
-  for (const form of document.querySelectorAll<HTMLFormElement>('[data-download-form]')) {
-    const box = form.parentElement!;
-    const error = form.querySelector<HTMLElement>('[data-error]')!;
-    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-    const ok = box.querySelector<HTMLElement>('[data-ok]')!;
-    // Chi ha già lasciato l'email scarica direttamente
-    const direct = () => {
-      form.hidden = true;
-      ok.hidden = false;
-      ok.innerHTML = '';
-      const a = document.createElement('a');
-      a.className = 'btn';
-      a.href = form.dataset.pdf!;
-      a.download = '';
-      a.textContent = 'Scarica il PDF';
-      ok.append(a);
-    };
-    if (hasAccess()) direct();
-    document.addEventListener('ec:unlocked', direct);
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        error.textContent = 'Inserisci la tua email e accetta l\'informativa privacy.';
-        return;
-      }
-      button.disabled = true;
-      const fields = formToObject(form);
-      try {
-        await submitLead('guida', { ...fields, guida: form.dataset.guida });
-      } catch (err) {
-        // Se l'invio non va a buon fine il PDF si scarica comunque
-        console.warn(err);
-      }
-      form.hidden = true;
-      ok.hidden = false;
-      box.querySelector<HTMLAnchorElement>('[data-link]')?.click();
-      unlock(String(fields.email || ''));
-    });
-  }
-</script>

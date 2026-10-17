@@ -1,0 +1,94 @@
+---
+/** Modulo contatti per scaricare il PDF di una guida (window.ecOpenPdf(url, guida)). */
+import ConsentFields from './ConsentFields.astro';
+---
+<dialog class="modal" id="modal-pdf" aria-labelledby="modal-pdf-title">
+  <div class="modal-head">
+    <h2 id="modal-pdf-title">Scarica la guida in PDF</h2>
+    <button class="modal-close" type="button" aria-label="Chiudi" data-close>×</button>
+  </div>
+  <p class="modal-intro">La versione stampabile, da conservare o condividere con gli altri eredi. Il download parte subito dopo l'invio.</p>
+  <form class="form" data-pdf-form novalidate>
+    <div class="row">
+      <div class="field"><label for="pdf-nome">Nome</label><input id="pdf-nome" name="nome" type="text" autocomplete="name" required /></div>
+      <div class="field"><label for="pdf-email">Email</label><input id="pdf-email" name="email" type="email" autocomplete="email" required /></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="pdf-tel">Telefono <span class="hint">(facoltativo)</span></label><input id="pdf-tel" name="telefono" type="tel" autocomplete="tel" /></div>
+      <div class="field"><label for="pdf-comune">Comune della casa</label><input id="pdf-comune" name="comune" type="text" /></div>
+    </div>
+    <div class="field">
+      <label for="pdf-intenzione">Cosa pensi di fare con la casa?</label>
+      <select id="pdf-intenzione" name="intenzione">
+        <option value="">Scegli…</option>
+        <option>Venderla</option>
+        <option>Affittarla</option>
+        <option>Tenerla per me o per la famiglia</option>
+        <option>Non lo so ancora</option>
+      </select>
+    </div>
+    <ConsentFields />
+    <p class="form-error" role="alert" data-error></p>
+    <button class="btn" type="submit">Scarica il PDF</button>
+  </form>
+  <p class="download-ok" data-ok hidden>Grazie! Il download è partito. Se non si avvia, <a data-link href="#" download>scarica il PDF da qui</a>.</p>
+</dialog>
+
+<script>
+  import { formToObject, submitLead } from '../scripts/lead';
+  import { attachAutocomplete } from '../scripts/autocomplete';
+  import { suggestComuni } from '../scripts/geocoding';
+
+  const dlg = document.getElementById('modal-pdf') as HTMLDialogElement;
+  const form = dlg.querySelector<HTMLFormElement>('[data-pdf-form]')!;
+  const ok = dlg.querySelector<HTMLElement>('[data-ok]')!;
+  const link = dlg.querySelector<HTMLAnchorElement>('[data-link]')!;
+  const error = form.querySelector<HTMLElement>('[data-error]')!;
+  let pdf = '';
+  let guida = '';
+  attachAutocomplete(form.querySelector<HTMLInputElement>('input[name="comune"]')!, suggestComuni, (p) => p.title);
+
+  (window as any).ecOpenPdf = (url: string, id: string) => {
+    pdf = url;
+    guida = id;
+    form.hidden = false;
+    ok.hidden = true;
+    error.textContent = '';
+    try {
+      const u = JSON.parse(localStorage.getItem('ec-accesso') || 'null');
+      if (u?.email) form.querySelector<HTMLInputElement>('input[name="email"]')!.value ||= u.email;
+      if (u?.nome) form.querySelector<HTMLInputElement>('input[name="nome"]')!.value ||= u.nome;
+    } catch {}
+    dlg.showModal();
+  };
+  dlg.querySelector('[data-close]')!.addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      error.textContent = "Inserisci nome ed email e accetta l'informativa privacy.";
+      return;
+    }
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    btn.disabled = true;
+    try {
+      await submitLead('guida', { ...formToObject(form), guida });
+    } catch (err) {
+      console.warn(err);
+    }
+    btn.disabled = false;
+    form.hidden = true;
+    ok.hidden = false;
+    link.href = pdf;
+    link.click();
+  });
+
+  // Ogni pulsante "Scarica il PDF" del sito apre questo modulo
+  document.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>('[data-pdf-open]');
+    if (!b) return;
+    e.preventDefault();
+    (window as any).ecOpenPdf(b.dataset.pdf, b.dataset.guida);
+  });
+</script>

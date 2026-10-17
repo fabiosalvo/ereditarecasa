@@ -3,21 +3,34 @@
 }
 
 :{$PORT:8080} {
-	root * /srv
 	encode zstd gzip
 
 	header {
 		X-Content-Type-Options nosniff
 		Referrer-Policy strict-origin-when-cross-origin
 		X-Frame-Options DENY
+		Strict-Transport-Security "max-age=31536000"
 	}
-	header /_astro/* Cache-Control "public, max-age=31536000, immutable"
-	# I PDF si scaricano dopo il consenso: niente indicizzazione
-	header /pdf/* X-Robots-Tag "noindex"
 
-	file_server
+	# API (account, sessioni): server Node sulla stessa macchina
+	handle /api/* {
+		header Cache-Control "no-store"
+		reverse_proxy 127.0.0.1:4321 {
+			header_up X-Forwarded-Host {host}
+		}
+	}
+
+	handle {
+		root * /app/dist/client
+		header /_astro/* Cache-Control "public, max-age=31536000, immutable"
+		# I PDF si scaricano dopo il modulo contatti: niente indicizzazione
+		header /pdf/* X-Robots-Tag "noindex"
+		header /area-riservata/* X-Robots-Tag "noindex"
+		file_server
+	}
 
 	handle_errors {
+		root * /app/dist/client
 		rewrite * /404.html
 		file_server
 	}

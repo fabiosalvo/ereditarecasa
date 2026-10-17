@@ -30,7 +30,7 @@ const COLUMNS = {
     'versione_consensi', 'pagina', 'referrer', 'utm',
   ],
   guida: [
-    'ricevuto', 'email', 'guida', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
+    'ricevuto', 'nome', 'email', 'telefono', 'comune', 'intenzione', 'guida', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
     'pagina', 'referrer', 'utm',
   ],
 };

@@ -75,6 +75,7 @@ import CtaBox from '../../components/CtaBox.astro';
   </div>
 
   <script>
+    import { requireLogin } from '../../scripts/accesso';
     const RULES = {
       retta: { franchigia: 1_000_000, aliquota: 0.04 },
       fratelli: { franchigia: 100_000, aliquota: 0.06 },
@@ -86,6 +87,18 @@ import CtaBox from '../../components/CtaBox.astro';
     const form = document.getElementById('calc') as HTMLFormElement;
     const out = document.getElementById('out') as HTMLDivElement;
     const set = (k: string, v: string) => (out.querySelector(`[data-o="${k}"]`)!.textContent = v);
+
+    // Il calcolo è riservato agli utenti registrati: prima accesso o registrazione, poi il risultato
+    form.addEventListener(
+      'submit',
+      (e) => {
+        if (document.documentElement.classList.contains('ec-logged')) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        requireLogin(() => form.requestSubmit());
+      },
+      { capture: true },
+    );
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();

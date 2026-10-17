@@ -11,10 +11,15 @@
     "pdf": "node scripts/genera-pdf.mjs"
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.8",
     "@astrojs/sitemap": "3.7.4",
-    "astro": "7.4.0"
+    "astro": "7.4.0",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.10",
+    "@electric-sql/pglite-socket": "^0.2.13",
+    "@types/pg": "^8.23.1",
     "playwright": "1.55.0"
   }
 }

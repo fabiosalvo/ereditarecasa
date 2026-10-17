@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import { AREAS, PDF_COMPLETO } from '../../data/site';
+---
+<Base title="La tua area riservata" description="Il tuo account EreditareCasa: guide, strumenti, percorso e impostazioni." noindex>
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow" style="margin:0">Area riservata</span>
+      <h1 data-hello>La tua area riservata</h1>
+      <p class="lede" data-email></p>
+    </div>
+  </section>
+
+  <div class="wrap" data-area hidden>
+    <section>
+      <div class="grid grid--3">
+        <a class="card" href="/percorso/"><span class="card__n">01</span><h3>Il tuo percorso</h3><p>La checklist con le scadenze calcolate sulla tua situazione.</p></a>
+        <a class="card" href="/strumenti/calcolatore-imposte-successione/"><span class="card__n">02</span><h3>Calcolatore imposte</h3><p>Imposta di successione, ipotecaria e catastale sulla casa.</p></a>
+        <a class="card" href="/strumenti/scadenzario-successione/"><span class="card__n">03</span><h3>Scadenzario</h3><p>Tutte le scadenze dalla data del decesso.</p></a>
+        <a class="card" href="/modelli-lettere/"><span class="card__n">04</span><h3>Modelli di lettera</h3><p>12 lettere pronte per banca, utenze, condominio e coeredi.</p></a>
+        <a class="card" href={PDF_COMPLETO} data-pdf-open data-pdf={PDF_COMPLETO} data-guida="guida-completa"><span class="card__n">05</span><h3>Guida completa in PDF</h3><p>Tutte le guide in un unico documento da stampare.</p></a>
+        <a class="card" href="/valuta-casa-ereditata/"><span class="card__n">06</span><h3>Valutazione della casa</h3><p>Quanto vale oggi la casa ereditata, gratis.</p></a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="h-m">Le guide</h2>
+      <div class="grid">
+        {AREAS.map((a) => <a class="card" href={a.path}><h3>{a.title}</h3><p>{a.short}</p></a>)}
+      </div>
+    </section>
+
+    <section class="split split--top">
+      <form class="form" id="pref-form">
+        <h2 class="h-m" style="margin-top:0">I tuoi dati</h2>
+        <div class="field"><label for="pref-nome">Nome</label><input id="pref-nome" name="nome" type="text" autocomplete="given-name" /></div>
+        <label class="check"><input type="checkbox" name="marketing" /><span>Voglio ricevere via email guide, promemoria sulle scadenze e proposte relative alla vendita della casa.</span></label>
+        <p class="hint" data-pref-msg></p>
+        <button class="btn" type="submit">Salva</button>
+      </form>
+      <form class="form" id="pw-change">
+        <h2 class="h-m" style="margin-top:0" data-pw-title>Cambia password</h2>
+        <div class="field" data-has-pw><label for="pw-old">Password attuale</label><input id="pw-old" name="attuale" type="password" autocomplete="current-password" /></div>
+        <div class="field"><label for="pw-new">Nuova password</label><input id="pw-new" name="nuova" type="password" autocomplete="new-password" minlength="8" /><p class="hint">Almeno 8 caratteri.</p></div>
+        <p class="form-error" role="alert" data-pw-msg></p>
+        <button class="btn" type="submit">Aggiorna la password</button>
+      </form>
+    </section>
+
+    <section class="account-actions">
+      <button class="btn btn-ghost" type="button" data-logout>Esci</button>
+      <button class="btn btn-ghost danger" type="button" data-delete>Elimina l'account</button>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { api, markLoggedOut, me } from '../../scripts/accesso';
+
+  const area = document.querySelector<HTMLElement>('[data-area]')!;
+  me().then((u) => {
+    if (!u) {
+      location.href = '/accedi/?da=/area-riservata/';
+      return;
+    }
+    area.hidden = false;
+    document.querySelector('[data-hello]')!.textContent = u.nome ? `Ciao ${u.nome}` : 'La tua area riservata';
+    document.querySelector('[data-email]')!.textContent = `Hai fatto l'accesso come ${u.email}${u.google ? ' (con Google)' : ''}.`;
+    const pref = document.getElementById('pref-form') as HTMLFormElement;
+    (pref.elements.namedItem('nome') as HTMLInputElement).value = u.nome ?? '';
+    (pref.elements.namedItem('marketing') as HTMLInputElement).checked = !!u.consenso_marketing;
+    if (!u.ha_password) {
+      document.querySelector<HTMLElement>('[data-has-pw]')!.hidden = true;
+      document.querySelector('[data-pw-title]')!.textContent = 'Imposta una password';
+    }
+  });
+
+  document.getElementById('pref-form')!.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = e.target as HTMLFormElement;
+    const res = await api('preferenze', {
+      nome: (f.elements.namedItem('nome') as HTMLInputElement).value,
+      marketing: (f.elements.namedItem('marketing') as HTMLInputElement).checked,
+    });
+    document.querySelector('[data-pref-msg]')!.textContent = res.ok ? 'Salvato.' : 'Non salvato, riprova.';
+  });
+
+  document.getElementById('pw-change')!.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = e.target as HTMLFormElement;
+    const res = await api('cambia-password', {
+      attuale: (f.elements.namedItem('attuale') as HTMLInputElement).value,
+      nuova: (f.elements.namedItem('nuova') as HTMLInputElement).value,
+    });
+    document.querySelector('[data-pw-msg]')!.textContent = res.ok ? 'Password aggiornata.' : res.error ?? 'Errore, riprova.';
+    if (res.ok) f.reset();
+  });
+
+  document.querySelector('[data-logout]')!.addEventListener('click', async () => {
+    await api('esci');
+    markLoggedOut();
+    location.href = '/';
+  });
+  document.querySelector('[data-delete]')!.addEventListener('click', async () => {
+    if (!confirm("Vuoi davvero eliminare l'account? I tuoi dati saranno cancellati e l'operazione non si può annullare.")) return;
+    await api('elimina-account');
+    markLoggedOut();
+    location.href = '/';
+  });
+</script>

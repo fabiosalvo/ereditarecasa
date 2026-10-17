@@ -12,6 +12,7 @@ const path = Astro.url.pathname;
       {NAV.map((item) => (
         <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
       ))}
+      <a class="nav__account" href="/accedi/" data-account>Accedi</a>
       <a class="btn btn-small" href="/valuta-casa-ereditata/">Valuta la casa</a>
     </nav>
   </div>

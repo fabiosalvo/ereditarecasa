@@ -1,0 +1,158 @@
+---
+/** Modulo di accesso e registrazione: email e password, oppure Google. Più istanze per pagina sono ammesse. */
+import { CONSENT_TEXT } from '../scripts/lead';
+interface Props {
+  id: string;
+  mode?: 'registrati' | 'accedi';
+}
+const { id, mode = 'registrati' } = Astro.props;
+const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID ?? '';
+---
+<div class="auth" data-auth data-mode={mode} data-google-client={googleClientId}>
+  <div class="auth__tabs" role="tablist">
+    <button type="button" role="tab" data-tab="registrati" aria-selected={mode === 'registrati' ? 'true' : 'false'}>Registrati</button>
+    <button type="button" role="tab" data-tab="accedi" aria-selected={mode === 'accedi' ? 'true' : 'false'}>Accedi</button>
+  </div>
+
+  <div class="gate__google">
+    <div data-google-button></div>
+    <button class="btn btn-ghost gate__google-fallback" type="button" data-google-fallback>
+      <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 38.2 44 33 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+      <span data-google-label>Registrati con Google</span>
+    </button>
+  </div>
+
+  <div class="gate__or"><span>oppure con email</span></div>
+
+  <form data-auth-form novalidate>
+    <div class="hp" aria-hidden="true"><label>Lascia vuoto <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="field" data-only="registrati">
+      <label for={`${id}-nome`}>Nome (facoltativo)</label>
+      <input id={`${id}-nome`} name="nome" type="text" autocomplete="given-name" />
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for={`${id}-email`}>Email</label>
+        <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for={`${id}-password`}>Password</label>
+        <input id={`${id}-password`} name="password" type="password" autocomplete="new-password" minlength="8" required />
+        <p class="hint" data-only="registrati">Almeno 8 caratteri.</p>
+        <p class="hint" data-only="accedi"><a href="/password-dimenticata/">Password dimenticata?</a></p>
+      </div>
+    </div>
+    <div data-only="registrati">
+      <label class="check">
+        <input type="checkbox" name="privacy" />
+        <span>Ho letto l'<a href="/privacy/" target="_blank">informativa privacy</a>. (obbligatorio)</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="marketing" />
+        <span>{CONSENT_TEXT.marketing} (facoltativo)</span>
+      </label>
+    </div>
+    <p class="form-error" role="alert" data-error></p>
+    <button class="btn" type="submit" data-submit>Crea l'account</button>
+  </form>
+</div>
+
+<script>
+  import { api, markLoggedIn, type Utente } from '../scripts/accesso';
+  import { CONSENT_VERSION, submitLead } from '../scripts/lead';
+
+  const done = (u: Utente, nuovo: boolean) => {
+    markLoggedIn(u);
+    if (nuovo) submitLead('registrazione', { email: u.email, nome: u.nome, metodo: 'account', guida: location.pathname }).catch(() => {});
+    document.dispatchEvent(new CustomEvent('ec:login', { detail: u }));
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-auth]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('[data-auth-form]')!;
+    const error = root.querySelector<HTMLElement>('[data-error]')!;
+    const submit = root.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const pw = form.querySelector<HTMLInputElement>('input[name="password"]')!;
+    const gLabel = root.querySelector<HTMLElement>('[data-google-label]')!;
+
+    const setMode = (m: string) => {
+      root.dataset.mode = m;
+      root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === m)));
+      root.querySelectorAll<HTMLElement>('[data-only]').forEach((e) => (e.hidden = e.dataset.only !== m));
+      submit.textContent = m === 'registrati' ? "Crea l'account" : 'Accedi';
+      gLabel.textContent = m === 'registrati' ? 'Registrati con Google' : 'Accedi con Google';
+      pw.autocomplete = m === 'registrati' ? 'new-password' : 'current-password';
+      error.textContent = '';
+    };
+    setMode(root.dataset.mode || 'registrati');
+    root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => setMode(t.dataset.tab!)));
+    root.addEventListener('ec:mode', (e) => setMode((e as CustomEvent).detail));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const mode = root.dataset.mode;
+      const email = String(fd.get('email') ?? '').trim();
+      const password = String(fd.get('password') ?? '');
+      if (!email || !password) return void (error.textContent = 'Inserisci email e password.');
+      if (mode === 'registrati' && password.length < 8) return void (error.textContent = 'La password deve avere almeno 8 caratteri.');
+      if (mode === 'registrati' && !fd.get('privacy')) return void (error.textContent = "Spunta la presa visione dell'informativa privacy.");
+      submit.disabled = true;
+      error.textContent = '';
+      const res =
+        mode === 'registrati'
+          ? await api('registrati', {
+              email,
+              password,
+              nome: fd.get('nome'),
+              privacy: true,
+              marketing: !!fd.get('marketing'),
+              versione: CONSENT_VERSION,
+              website: fd.get('website'),
+            })
+          : await api('accedi', { email, password });
+      submit.disabled = false;
+      if (res.ok && res.utente) return done(res.utente, mode === 'registrati');
+      error.textContent = res.error ?? 'Qualcosa non ha funzionato, riprova.';
+      if (res.code === 'esiste') setTimeout(() => setMode('accedi'), 1200);
+    });
+
+    // Accesso con Google (Google Identity Services): attivo quando è configurato il client ID
+    const clientId = root.dataset.googleClient;
+    const fallback = root.querySelector<HTMLButtonElement>('[data-google-fallback]')!;
+    const slot = root.querySelector<HTMLElement>('[data-google-button]')!;
+    if (!clientId) {
+      fallback.addEventListener('click', () => {
+        error.textContent = "L'accesso con Google sarà attivo a breve: intanto usa email e password.";
+      });
+      return;
+    }
+    const render = () => {
+      const w = window as any;
+      if (!w.__ecGsiInit) {
+        w.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: async (resp: { credential: string }) => {
+            const res = await api('google', { credential: resp.credential, versione: CONSENT_VERSION });
+            if (res.ok && res.utente) done(res.utente, false);
+            else document.querySelectorAll<HTMLElement>('[data-auth] [data-error]').forEach((el) => (el.textContent = res.error ?? 'Accesso con Google non riuscito'));
+          },
+        });
+        w.__ecGsiInit = true;
+      }
+      w.google.accounts.id.renderButton(slot, { theme: 'outline', size: 'large', text: 'continue_with', shape: 'rectangular', locale: 'it', width: 280 });
+      fallback.hidden = true;
+    };
+    if ((window as any).google?.accounts) render();
+    else {
+      let s = document.querySelector<HTMLScriptElement>('script[data-gsi]');
+      if (!s) {
+        s = document.createElement('script');
+        s.src = 'https://accounts.google.com/gsi/client';
+        s.async = true;
+        s.dataset.gsi = '1';
+        document.head.append(s);
+      }
+      s.addEventListener('load', render);
+    }
+  });
+</script>

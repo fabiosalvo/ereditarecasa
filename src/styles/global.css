@@ -741,3 +741,29 @@ h3, .h-s, .card h3, .cta-box h3, .download-box h3 { font-family: var(--headline)
 .post-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
 .post-filter .chip { border: 0; cursor: pointer; }
 @media (max-width: 860px) { .post-feature { grid-template-columns: minmax(0, 1fr); } }
+
+/* suggerimenti di comune e indirizzo (come nel sito Gromia) */
+.has-suggestions { position: relative; }
+.suggestions { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 40; display: none; max-height: 320px; overflow: auto; padding: 6px; border: 1px solid var(--outline-variant); border-radius: var(--r); background: #fff; box-shadow: var(--shadow-lg); font-size: 15px; line-height: 1.35; }
+.suggestions:not(:empty) { display: block; }
+.suggestion { display: block; padding: 10px 12px; border-radius: 6px; cursor: pointer; color: var(--on-surface); }
+.suggestion:hover, .suggestion[aria-selected='true'] { background: var(--sand-50); }
+.suggestion b { font-weight: 600; display: block; }
+.suggestion small { display: block; color: var(--outline); }
+/* titoli neri */
+h1, h2, h3, .h-xl, .h-l, .h-m, .h-s, .card h3, .big, .facts b, .kpi-value { color: var(--black); }
+.sec--ink :is(.h-xl, .h-l, .h-m, h2, h3), .cta-box h3, .card--ink h3 { color: #fff5ec; }
+
+/* accesso e area riservata */
+.auth { display: grid; gap: 16px; }
+.auth__tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: var(--r); background: var(--sand-100); }
+.auth__tabs button { border: 0; background: transparent; border-radius: 6px; padding: 10px; font: 600 15px var(--sans); color: var(--outline); cursor: pointer; }
+.auth__tabs button[aria-selected='true'] { background: #fff; color: var(--black); box-shadow: var(--shadow-sm); }
+.auth form { display: grid; gap: 4px; }
+.auth .btn[data-submit] { justify-self: start; margin-top: 8px; }
+.auth-page { max-width: 640px; }
+.nav__account { font-weight: 600 !important; }
+.account-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn.danger { color: #8f1d14; border-color: #8f1d14; }
+.modal .auth { margin-top: 8px; }
+input[type='password'] { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid var(--outline-variant); border-radius: var(--r); background: #fff; font: 400 16px/1.4 var(--sans); color: var(--on-surface); }

@@ -1,0 +1,32 @@
+---
+/** Finestra di accesso/registrazione richiamabile da qualsiasi pagina (window.ecOpenAuth). */
+import AuthForm from './AuthForm.astro';
+---
+<dialog class="modal" id="modal-accesso" aria-labelledby="modal-accesso-title">
+  <div class="modal-head">
+    <h2 id="modal-accesso-title">Accedi o registrati</h2>
+    <button class="modal-close" type="button" aria-label="Chiudi" data-close>×</button>
+  </div>
+  <p class="modal-intro">Per usare gli strumenti e leggere le guide complete serve un account gratuito.</p>
+  <AuthForm id="am" />
+</dialog>
+
+<script>
+  const dlg = document.getElementById('modal-accesso') as HTMLDialogElement;
+  const auth = dlg.querySelector<HTMLElement>('[data-auth]')!;
+  let after: (() => void) | null = null;
+  (window as any).ecOpenAuth = (mode: string, then?: () => void) => {
+    after = then ?? null;
+    auth.dispatchEvent(new CustomEvent('ec:mode', { detail: mode }));
+    dlg.showModal();
+  };
+  dlg.querySelector('[data-close]')!.addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
+  document.addEventListener('ec:login', () => {
+    if (!dlg.open) return;
+    dlg.close();
+    const f = after;
+    after = null;
+    f?.();
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import AuthForm from '../components/AuthForm.astro';
+---
+<Base title="Accedi o registrati" description="Accedi alla tua area riservata di EreditareCasa o crea un account gratuito." noindex>
+  <PageHead title="Accedi o registrati" crumbs={[{ name: 'Accedi', href: '/accedi/' }]} eyebrow="Area riservata">
+    Con un account gratuito leggi tutte le guide, usi gli strumenti e ritrovi il tuo percorso e le tue scadenze.
+  </PageHead>
+  <div class="wrap read">
+    <div class="form auth-page"><AuthForm id="pg" mode="accedi" /></div>
+  </div>
+</Base>
+<script>
+  import { me } from '../scripts/accesso';
+  const go = () => {
+    const da = new URLSearchParams(location.search).get('da');
+    location.href = da && da.startsWith('/') && !da.startsWith('//') ? da : '/area-riservata/';
+  };
+  me().then((u) => u && go());
+  document.addEventListener('ec:login', go);
+</script>

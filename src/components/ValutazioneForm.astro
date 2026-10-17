@@ -139,9 +139,25 @@ const p = Astro.props.idPrefix ?? 'val';
 
 <script>
   import { formToObject, submitLead } from '../scripts/lead';
+  import { attachAutocomplete } from '../scripts/autocomplete';
+  import { suggestAddresses, suggestComuni } from '../scripts/geocoding';
 
   // Modulo a 3 passi: può comparire più volte (pagina dedicata e modale)
   for (const form of document.querySelectorAll<HTMLFormElement>('[data-valutazione-form]')) {
+    // Suggerimenti di comune e indirizzo, come nel sito Gromia (Stadia Maps, solo Italia)
+    const comune = form.querySelector<HTMLInputElement>('input[name="comune"]');
+    const indirizzo = form.querySelector<HTMLInputElement>('input[name="indirizzo"]');
+    if (comune) attachAutocomplete(comune, suggestComuni, (p) => p.title);
+    if (indirizzo)
+      attachAutocomplete(
+        indirizzo,
+        (t) => suggestAddresses(t, comune?.value.trim() ?? ''),
+        (p) => {
+          if (comune && p.comune && !comune.value.trim()) comune.value = p.comune;
+          return p.title;
+        },
+      );
+
     const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
     const prev = form.querySelector<HTMLButtonElement>('[data-prev]')!;
     const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
