@@ -56,7 +56,7 @@ La differenza con una vendita normale è che molti documenti sono da ricostruire
 5. **Valutazione e messa in vendita.** Un prezzo corretto dall'inizio riduce i tempi: le case ereditate sono spesso datate e da ristrutturare, e il prezzo deve tenerne conto. Vedi [come fissare il prezzo](/casa-ereditata/vendere/prezzo/).
 6. **Preliminare e rogito.** Il notaio verifica la continuità delle trascrizioni, la conformità e le ipoteche, poi stipula l'atto.
 
-> **Attenzione all'agevolazione prima casa.** Se in successione hai chiesto l'agevolazione prima casa e vendi entro cinque anni dall'apertura della successione, potresti perderla, salvo riacquisto di un'altra casa da destinare ad abitazione principale entro **due anni** dalla vendita (le istruzioni dell'Agenzia delle Entrate aggiornate a luglio 2025 indicano due anni, non più uno). Verificalo con il notaio prima di mettere in vendita.
+> **Attenzione all'agevolazione prima casa.** Se in successione hai chiesto l'agevolazione prima casa e vendi entro cinque anni dall'apertura della successione, potresti perderla, salvo riacquisto di un'altra casa da destinare ad abitazione principale entro **un anno** dalla vendita (la legge di bilancio 2025 ha portato a due anni un termine diverso: quello per vendere la casa già posseduta quando se ne compra una nuova con l'agevolazione). Verificalo con il notaio prima di mettere in vendita.
 
 ## Tempi tipici, fase per fase
 

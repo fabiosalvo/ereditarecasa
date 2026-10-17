@@ -107,7 +107,7 @@ Per un terreno ereditato, il prezzo di acquisto da cui partire è **il valore di
 ## Cosa resta da pagare quando vendi
 
 - Nessuna imposta sulla vendita a carico del venditore: l'imposta di registro la paga chi compra.
-- Eventuale perdita dell'**agevolazione prima casa** chiesta in successione, se vendi entro cinque anni dall'apertura della successione. La decadenza non scatta se entro **due anni** dalla vendita riacquisti un'altra casa da destinare ad abitazione principale (le istruzioni dell'Agenzia delle Entrate aggiornate a luglio 2025 indicano due anni, non più uno). Se perdi l'agevolazione, paghi la differenza tra imposte fisse e ordinarie, con interessi ed eventuali sanzioni. Verifica il tuo caso con il notaio e vedi [agevolazioni prima casa](/casa-ereditata/tasse/agevolazioni-prima-casa/).
+- Eventuale perdita dell'**agevolazione prima casa** chiesta in successione, se vendi entro cinque anni dall'apertura della successione. La decadenza non scatta se entro **un anno** dalla vendita riacquisti un'altra casa da destinare ad abitazione principale (il termine di due anni introdotto dalla legge di bilancio 2025 riguarda un caso diverso: la vendita della casa già posseduta quando se ne compra una nuova con l'agevolazione). Conferma il termine con il notaio. Se perdi l'agevolazione, paghi la differenza tra imposte fisse e ordinarie, con interessi ed eventuali sanzioni. Verifica il tuo caso con il notaio e vedi [agevolazioni prima casa](/casa-ereditata/tasse/agevolazioni-prima-casa/).
 - Spese per conformità, APE ed eventuale provvigione d'agenzia.
 - La quota di **IMU** dell'anno, fino al mese del rogito.
 
@@ -129,7 +129,7 @@ Le buone ragioni per aspettare sono altre: il tempo del lutto, un accordo da tro
 | Domanda da fare al notaio prima del preliminare | Perché |
 | --- | --- |
 | La provenienza è tutta per successione? | Se c'è una donazione o un acquisto nella catena, cambia la tassazione |
-| In successione è stata chiesta l'agevolazione prima casa? | Per valutare la decadenza e il riacquisto entro due anni |
+| In successione è stata chiesta l'agevolazione prima casa? | Per valutare la decadenza e il riacquisto entro un anno |
 | Ci sono detrazioni per lavori ancora in corso? | Per decidere a chi vanno le quote residue |
 | Serve l'imposta sostitutiva? | Solo se c'è una quota comprata o donata tassabile |
 

@@ -11,6 +11,8 @@ fonti:
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:presidente.consiglio.ministri:decreto:2013-12-05;159~art5"
   - title: "D.P.C.M. 159/2013, art. 2: calcolo di ISE e ISEE (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:presidente.consiglio.ministri:decreto:2013-12-05;159~art2"
+  - title: "D.P.C.M. 159/2013, art. 4: indicatore della situazione reddituale e detrazione del canone (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:presidente.consiglio.ministri:decreto:2013-12-05;159~art4"
   - title: "D.P.C.M. 159/2013, art. 9: ISEE corrente (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:presidente.consiglio.ministri:decreto:2013-12-05;159~art9"
   - title: "INPS, Nuovi criteri ISEE per l'inclusione sociale: aggiornamento procedure (13 gennaio 2026, messaggio n. 102/2026)"
@@ -65,6 +67,8 @@ Il valore è quello **definito ai fini IMU**, anche se la casa è esente dall'im
 
 **rendita catastale × 1,05 × 160**
 
+Lo stesso moltiplicatore 160 vale per **box, cantine e soffitte** (categorie C/6, C/2 e C/7): se la casa ereditata ha un box con rendita propria, il suo valore IMU si aggiunge a quello dell'appartamento. Per un negozio (C/1) il moltiplicatore è 55, per un ufficio (A/10) è 80.
+
 Per i fabbricati intestati a persone fisiche si considera la **quota posseduta**: se erediti il 50%, nell'ISEE indichi il 50% del valore. Dal valore si toglie, fino a concorrenza, il **mutuo residuo** al 31 dicembre di riferimento, se era stato contratto per comprare o costruire quella casa.
 
 Attenzione: è un valore molto diverso da quello usato per la successione (rendita × 1,05 × 110 o 120) e da quello di mercato.
@@ -106,9 +110,31 @@ Laura vive da sola in affitto. Ha un ISEE di 9.000 €. Sua madre muore a marzo 
 **DSU 2027** (riferimento 31 dicembre 2025):
 
 - caso A, la casa resta **vuota**: l'ISP di Laura aumenta di 42.000 €. Nell'ISE entra il 20%: **8.400 €**. Laura vive sola, quindi il parametro della scala è 1: l'ISEE sale di **8.400 €**, a circa **17.400 €**;
-- caso B, Laura **va a vivere nella casa** e vi porta la residenza: la sua quota (42.000 €) è sotto la franchigia di 52.500 € dell'ISEE ordinario, quindi per la casa **non conta nulla**. Il suo ISEE può persino scendere, perché smette di pagare l'affitto, che però conta in modo diverso nei redditi: chiedi al CAF di simulare i due casi.
+- caso B, Laura **va a vivere nella casa** e vi porta la residenza: la sua quota (42.000 €) è sotto la franchigia di 52.500 € dell'ISEE ordinario, quindi per la casa **non conta nulla**. Attenzione però: chi vive in affitto con contratto registrato può sottrarre dai redditi il canone annuo, fino a **7.000 €** (art. 4 del regolamento), e questa detrazione è alternativa a quella per chi vive in casa di proprietà. Lasciando l'affitto, Laura perde quella detrazione: l'effetto netto va simulato con il CAF.
 
 Il salto da 9.000 a 17.400 € può far perdere o ridurre prestazioni con soglie basse. Per questo conviene pensarci **prima** del 31 dicembre dell'anno che farà da riferimento.
+
+## Un secondo esempio: famiglia con figli e nuove franchigie
+
+Marta e Giorgio vivono a Roma in affitto con due figli. Nel 2025 Marta eredita per intero la casa della zia, sempre a Roma, e la famiglia ci va a vivere, portandovi la residenza. Valore IMU della casa: **150.000 €**.
+
+| | ISEE ordinario | ISEE per l'Assegno unico |
+| --- | --- | --- |
+| Franchigia | 52.500 € (nessun aumento con due figli) | 120.000 € + 2.500 € (secondo figlio) = 122.500 € |
+| Parte eccedente | 150.000 − 52.500 = 97.500 € | 150.000 − 122.500 = 27.500 € |
+| Valore che entra nell'ISP (due terzi) | 65.000 € | 18.333 € circa |
+| Effetto sull'ISE (20%) | +13.000 € | +3.667 € circa |
+
+Per l'Assegno unico, quindi, la casa pesa molto meno che per le altre prestazioni, come l'università o i servizi comunali. L'ISE va poi diviso per la scala di equivalenza della famiglia, che per le prestazioni "nuove" è stata resa più favorevole per i nuclei con figli. Lo stesso nucleo potrà avere due valori di ISEE diversi, uno ordinario e uno per le prestazioni familiari e di inclusione.
+
+## Conti, titoli e altri beni ereditati
+
+Oltre alla casa, l'eredità porta spesso **conti correnti, titoli, buoni postali**. Entrano nel **patrimonio mobiliare**, con regole proprie su date e valori che trovi nelle istruzioni della DSU. Il regolamento prevede alcune protezioni:
+
+- una **franchigia** sul patrimonio mobiliare di **6.000 €**, aumentata di 2.000 € per ogni componente del nucleo dopo il primo, fino a 10.000 €, e di altri 1.000 € per ogni figlio dopo il secondo;
+- l'esclusione di **titoli di Stato, buoni fruttiferi postali e libretti di risparmio postale** fino a **50.000 €** complessivi per nucleo. Nella DSU precompilata l'esclusione è automatica, in quella autodichiarata va fatta da chi compila.
+
+Ogni componente del nucleo indica le proprie quote: se hai ereditato un terzo della casa e un terzo di un conto, indichi un terzo di ciascuno. Le case e i conti degli altri eredi che non fanno parte del tuo nucleo non ti riguardano.
 
 ## Effetti sulle prestazioni
 
@@ -137,6 +163,24 @@ L'**ISEE corrente** permette di aggiornare l'indicatore quando la situazione cam
 È utile soprattutto quando il patrimonio **scende**: per esempio se la casa ereditata è stata venduta e il ricavato speso o diviso. Tieni presente che il ricavato della vendita, finché resta sul conto, entra nel patrimonio mobiliare.
 
 > **Attenzione.** L'ISEE è una **dichiarazione sostitutiva**: se ometti la casa ereditata o ne indichi un valore sbagliato, rischi la revoca delle prestazioni, la restituzione di quanto ricevuto e sanzioni. Nella DSU **precompilata** i dati catastali arrivano dalle banche dati, ma non sempre sono aggiornati dopo una successione recente: controlla tu che la quota e la rendita siano giuste. Se sei solo **chiamato** all'eredità e non hai ancora deciso se accettare, chiedi al CAF come indicare la casa.
+
+## Errori frequenti
+
+- **Indicare la casa nella DSU sbagliata.** Se il decesso è del 2025, nella DSU 2026 la casa non va indicata come tua: la data di riferimento è il 31 dicembre 2024. Comparirà dalla DSU 2027.
+- **Usare il valore di mercato o quello della successione.** Nell'ISEE si usa il valore IMU: rendita × 1,05 × 160 per le abitazioni, non la stima dell'agenzia immobiliare.
+- **Indicare l'intero valore invece della quota.** Se hai ereditato il 50%, indichi il 50%.
+- **Dimenticare il mutuo residuo.** Se la casa ereditata aveva un mutuo per l'acquisto e lo stai pagando tu come erede, il debito residuo alla data di riferimento si sottrae dal valore.
+- **Applicare la franchigia a una casa in cui non vivi.** La franchigia vale solo per la casa di abitazione del nucleo, con residenza.
+- **Confondere le soglie.** Le franchigie da 91.500 € e 120.000 € valgono solo per le prestazioni indicate dall'INPS, non per tutte.
+- **Non aggiornare dopo una vendita.** Se il patrimonio è sceso molto, dal 1° aprile valuta l'ISEE corrente invece di aspettare la DSU dell'anno dopo.
+
+## Cosa chiedere al CAF
+
+1. Da quale DSU devo indicare la casa ereditata e per quale quota?
+2. Qual è il valore IMU da riportare, anche se la casa è esente o inagibile?
+3. Quale ISEE mi serve: ordinario, per l'Assegno unico, per l'università, socio-sanitario?
+4. Cosa cambia se vado a vivere nella casa o se la affitto?
+5. Mi conviene un ISEE corrente dopo la vendita o la divisione?
 
 ## Checklist
 

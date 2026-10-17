@@ -124,7 +124,7 @@ Con più venditori la vendita funziona meglio se c'è **un referente**: uno degl
 Per la parte ereditata **nessun erede paga la plusvalenza**, anche se la vendita è subito dopo la successione. Restano due attenzioni:
 
 - l'**IMU** dell'anno è dovuta da ciascun erede per la sua quota fino al mese del rogito;
-- se uno degli eredi aveva chiesto in successione l'**agevolazione prima casa**, è lui a rischiare di perderla vendendo entro cinque anni, salvo riacquisto entro due anni di una casa da destinare ad abitazione principale.
+- se uno degli eredi aveva chiesto in successione l'**agevolazione prima casa**, è lui a rischiare di perderla vendendo entro cinque anni, salvo riacquisto entro un anno di una casa da destinare ad abitazione principale.
 
 Se uno degli eredi aveva comprato la quota di un fratello prima della vendita, su quella parte la plusvalenza può essere tassata: vedi [plusvalenza della casa ereditata](/casa-ereditata/tasse/plusvalenza/).
 
