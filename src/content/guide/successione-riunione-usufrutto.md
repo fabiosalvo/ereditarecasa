@@ -25,6 +25,8 @@ fonti:
     url: "https://www.agenziaentrate.gov.it/portale/it/schede/dichiarazioni/dichiarazione-di-successione/risposte-alle-domande-frequenti-dichiarazione-successione"
   - title: "Agenzia delle Entrate, istruzioni Dichiarazione di successione (Fascicolo 1): esonero e codici diritto"
     url: "https://www.agenziaentrate.gov.it/portale/documents/20143/244895/Succ_FASCICOLO_I_Nov_23.pdf/ebc28cca-a79f-5a00-5a9a-7e4b70611a6b?t=1752664229629"
+  - title: "Codice civile, art. 999: locazioni concluse dall'usufruttuario (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art999"
   - title: "Codice civile, art. 540: diritto di abitazione del coniuge (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art540"
   - title: "Legge 160/2019, art. 1, commi 738 e seguenti: IMU (Normattiva)"
@@ -136,6 +138,10 @@ Alla morte del coniuge il diritto di abitazione si estingue e si riunisce alla p
 - [ ] **condominio**: comunica all'amministratore il cambio, con la visura;
 - [ ] **contratti di affitto** firmati dall'usufruttuario: chiedi a un professionista come proseguono, perché la durata dipende dal contratto e dalla legge;
 - [ ] **assicurazione** sulla casa: aggiorna il contraente.
+
+## Se la casa era affittata dall'usufruttuario
+
+L'usufruttuario può affittare la casa e incassare i canoni. Quando muore, i canoni maturati fino al decesso spettano ai suoi eredi; quelli successivi spettano al nuovo pieno proprietario, che dal decesso dichiara anche il reddito della locazione. Il codice civile prevede che le locazioni concluse dall'usufruttuario, se hanno data certa, continuino per la durata stabilita ma non oltre cinque anni dalla cessazione dell'usufrutto (art. 999). Comunica subito all'inquilino il cambio di proprietario e i nuovi estremi per il pagamento, e verifica con un professionista la registrazione del subentro nel contratto. Nel frattempo conserva le ricevute: ti serviranno per la dichiarazione dei redditi.
 
 ## Bonus edilizi dell'usufruttuario
 
