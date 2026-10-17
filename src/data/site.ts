@@ -53,6 +53,7 @@ export const NAV = [
   { href: '/casa-ereditata/', label: 'Guide' },
   { href: '/strumenti/', label: 'Strumenti' },
   { href: '/eredi-in-disaccordo/', label: 'Eredi in disaccordo' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/professionisti/', label: 'Professionisti' },
 ];
 

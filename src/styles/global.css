@@ -729,3 +729,15 @@ h3, .h-s, .card h3, .cta-box h3, .download-box h3 { font-family: var(--headline)
 @media (max-width: 520px) { .gate__row { grid-template-columns: minmax(0, 1fr); } }
 .pdf-box { margin: 32px 0; }
 [data-google-button]:empty { display: none; }
+
+/* blog */
+.post-feature { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 48px); align-items: center; text-decoration: none; color: var(--text); margin-bottom: clamp(40px, 5vw, 64px); }
+.post-feature__img { border-radius: var(--r-l); overflow: hidden; box-shadow: var(--shadow-lg); }
+.post-feature__img img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; transition: transform .5s ease; }
+.post-feature:hover img { transform: scale(1.03); }
+.post-feature__tx { display: grid; gap: 14px; }
+.post-feature:hover .h-l { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.post-meta { font-size: 13.5px; color: var(--outline); margin: 0; }
+.post-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.post-filter .chip { border: 0; cursor: pointer; }
+@media (max-width: 860px) { .post-feature { grid-template-columns: minmax(0, 1fr); } }

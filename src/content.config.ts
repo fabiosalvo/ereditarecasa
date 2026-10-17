@@ -23,4 +23,22 @@ const guide = defineCollection({
   }),
 });
 
-export const collections = { guide };
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(170),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    categoria: z.enum(['Novità normative', 'Tasse', 'Mercato', 'Famiglia ed eredi', 'Consigli pratici']),
+    // Foto di copertina: una delle foto delle aree (src/data/foto.ts)
+    foto: z.enum(['primi-passi', 'gestire-la-casa', 'vendere', 'tasse', 'successione', 'eredi-in-disaccordo', 'accettare-rinunciare', 'testamento-legittima', 'casi', 'decidere']),
+    autore: z.string().default('Redazione EreditareCasa'),
+    verified: z.coerce.date().optional(),
+    fonti: z.array(z.object({ title: z.string(), url: z.string().url() })).default([]),
+    // Guide collegate (URL interni)
+    guide: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { guide, blog };

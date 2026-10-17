@@ -8,6 +8,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { getCollection } from 'astro:content';
 
 const ALL = await getCollection('guide');
+const POSTS = (await getCollection('blog')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 const GUIDE_N = ALL.length;
 const COUNT: Record<string, number> = {};
 for (const g of ALL) COUNT[g.data.area] = (COUNT[g.data.area] ?? 0) + 1;
@@ -148,6 +149,34 @@ const TOOLS = [
       </div>
     </div>
   </section>
+
+  {POSTS.length > 0 && (
+    <section class="sec" aria-labelledby="blog-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <span class="eyebrow">Dal blog</span>
+            <h2 class="h-l" id="blog-title">Novità e analisi</h2>
+          </div>
+          <p class="lede">Riforme, tasse e mercato: cosa cambia per chi eredita una casa, con i numeri e le fonti. <a class="link" href="/blog/">Tutti gli articoli</a></p>
+        </div>
+        <div class="grid grid--3">
+          {POSTS.map((p) => (
+            <a class="card card-photo" href={`/blog/${p.id}/`}>
+              <div class="card-media">
+                <Image src={FOTO_AREA[p.data.foto].src} alt="" widths={[400, 640]} sizes="(max-width: 640px) 100vw, 380px" />
+                <span class="badge">{p.data.categoria}</span>
+              </div>
+              <div class="card-body">
+                <h3>{p.data.title}</h3>
+                <p>{p.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="sec" aria-labelledby="ebook-title">
     <div class="wrap split">
