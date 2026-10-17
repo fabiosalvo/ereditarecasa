@@ -264,3 +264,16 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); bor
 /* L'attributo hidden vince sempre sugli stili di visualizzazione (es. .btn) */
 [hidden] { display: none !important; }
 .form .step h2 { margin-top: .4em; }
+
+/* Percorso personalizzato */
+.percorso-form fieldset { border: 0; padding: 0; margin: 0 0 20px; }
+.percorso-form legend { font-weight: 600; margin-bottom: 8px; }
+.percorso-head { margin-top: 32px; }
+.progress { height: 8px; background: var(--soft); border-radius: 99px; overflow: hidden; margin: 8px 0 24px; }
+.progress span { display: block; height: 100%; width: 0; background: var(--brand); transition: width .3s ease; }
+.fase h3 { margin-top: 28px; }
+.checklist { list-style: none; padding: 0; margin: 0; }
+.checklist li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; }
+.checklist .check { font-size: 1rem; margin: 0; }
+.checklist input:checked + span strong { text-decoration: line-through; color: var(--muted); }
+.scadenza { color: var(--brand); font-weight: 600; font-family: var(--mono); font-size: .85rem; }

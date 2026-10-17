@@ -10,7 +10,7 @@ export const CONSENT_TEXT = {
     'Acconsento a ricevere via email guide, promemoria sulle scadenze e proposte relative alla vendita della casa. Posso revocare il consenso in ogni momento.',
 };
 
-export type LeadType = 'valutazione' | 'scadenzario' | 'professionista' | 'guida';
+export type LeadType = 'valutazione' | 'scadenzario' | 'professionista' | 'guida' | 'percorso';
 
 export async function submitLead(type: LeadType, fields: Record<string, unknown>): Promise<void> {
   // Campo trappola invisibile: lo compilano solo i bot

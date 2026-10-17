@@ -49,6 +49,7 @@ export const areaById = (id: AreaId) => AREAS.find((a) => a.id === id)!;
 export const guideUrl = (area: AreaId, slug: string) => areaById(area).path + (slug ? `${slug}/` : '');
 
 export const NAV = [
+  { href: '/percorso/', label: 'Il tuo percorso' },
   { href: '/casa-ereditata/', label: 'Guide' },
   { href: '/strumenti/', label: 'Strumenti' },
   { href: '/eredi-in-disaccordo/', label: 'Eredi in disaccordo' },

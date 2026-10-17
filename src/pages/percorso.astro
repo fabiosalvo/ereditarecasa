@@ -1,0 +1,275 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConsentFields from '../components/ConsentFields.astro';
+---
+<Base title="Il tuo percorso: cosa fare con la casa ereditata, in ordine" description="Rispondi a 8 domande e ottieni la tua checklist personale con scadenze calcolate, rischi da evitare e le guide giuste per ogni passo.">
+  <div class="wrap read">
+    <Breadcrumbs items={[{ name: 'Il tuo percorso', href: '/percorso/' }]} />
+    <p class="eyebrow">Percorso personalizzato</p>
+    <h1>Ho ereditato una casa: cosa devo fare, in ordine?</h1>
+    <p class="lead">Rispondi a 8 domande. Ti prepariamo una checklist con le scadenze calcolate sulla tua situazione, i rischi da evitare e la guida giusta per ogni passo. Non serve registrarsi e puoi saltare le domande a cui non sai rispondere.</p>
+
+    <form class="form percorso-form no-print" id="percorso">
+      <div class="field">
+        <label for="p-decesso">1. Data del decesso <span class="hint">(serve per calcolare le scadenze)</span></label>
+        <input id="p-decesso" name="decesso" type="date" />
+      </div>
+      <fieldset>
+        <legend>2. Che rapporto avevi con la persona scomparsa?</legend>
+        <div class="choices">
+          <label><input type="radio" name="rapporto" value="coniuge" /><span>Coniuge o unito civilmente</span></label>
+          <label><input type="radio" name="rapporto" value="figlio" /><span>Figlio o figlia</span></label>
+          <label><input type="radio" name="rapporto" value="fratello" /><span>Fratello o sorella</span></label>
+          <label><input type="radio" name="rapporto" value="altro" /><span>Altro parente o nessuna parentela</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>3. C'è un testamento?</legend>
+        <div class="choices">
+          <label><input type="radio" name="testamento" value="si" /><span>Sì</span></label>
+          <label><input type="radio" name="testamento" value="no" /><span>No</span></label>
+          <label><input type="radio" name="testamento" value="nonso" /><span>Non lo so</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>4. Quanti eredi siete e siete d'accordo?</legend>
+        <div class="choices">
+          <label><input type="radio" name="eredi" value="solo" /><span>Sono l'unico erede</span></label>
+          <label><input type="radio" name="eredi" value="accordo" /><span>Siamo più eredi, d'accordo</span></label>
+          <label><input type="radio" name="eredi" value="disaccordo" /><span>Siamo più eredi, non d'accordo</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>5. Vivi nella casa o ne hai le chiavi e te ne occupi?</legend>
+        <div class="choices">
+          <label><input type="radio" name="possesso" value="si" /><span>Sì</span></label>
+          <label><input type="radio" name="possesso" value="no" /><span>No</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>6. La persona scomparsa aveva debiti?</legend>
+        <div class="choices">
+          <label><input type="radio" name="debiti" value="no" /><span>No</span></label>
+          <label><input type="radio" name="debiti" value="si" /><span>Sì</span></label>
+          <label><input type="radio" name="debiti" value="nonso" /><span>Non lo so</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>7. Sulla casa c'è un mutuo ancora da pagare?</legend>
+        <div class="choices">
+          <label><input type="radio" name="mutuo" value="no" /><span>No</span></label>
+          <label><input type="radio" name="mutuo" value="si" /><span>Sì</span></label>
+          <label><input type="radio" name="mutuo" value="nonso" /><span>Non lo so</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>8. Cosa vorresti fare della casa?</legend>
+        <div class="choices">
+          <label><input type="radio" name="obiettivo" value="vendere" /><span>Venderla</span></label>
+          <label><input type="radio" name="obiettivo" value="tenere" /><span>Tenerla o viverci</span></label>
+          <label><input type="radio" name="obiettivo" value="affittare" /><span>Affittarla</span></label>
+          <label><input type="radio" name="obiettivo" value="nonso" /><span>Non lo so ancora</span></label>
+        </div>
+      </fieldset>
+      <p><button class="btn" type="submit">Crea il mio percorso</button></p>
+    </form>
+
+    <section id="risultato" hidden aria-live="polite">
+      <div class="percorso-head">
+        <h2>Il tuo percorso</h2>
+        <p class="meta" data-progress></p>
+        <div class="progress" aria-hidden="true"><span data-bar></span></div>
+      </div>
+      <div data-alerts></div>
+      <div data-fasi></div>
+      <p class="no-print">
+        <button class="btn btn-ghost btn-small" type="button" onclick="window.print()">Stampa o salva in PDF</button>
+        <button class="btn btn-ghost btn-small" type="button" data-reset>Ricomincia</button>
+      </p>
+
+      <form class="form no-print" id="percorso-email" novalidate>
+        <h2>Ricevi i promemoria delle tue scadenze</h2>
+        <p>Ti scriviamo prima di ogni scadenza del tuo percorso, con cosa preparare. Puoi cancellarti in ogni momento.</p>
+        <div class="field">
+          <label for="p-email">Email</label>
+          <input id="p-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <ConsentFields marketingRequired />
+        <p class="form-error" role="alert" data-error></p>
+        <button class="btn" type="submit">Attiva i promemoria</button>
+      </form>
+      <p class="disclaimer">Il percorso è una guida generale costruita sulle tue risposte. Non sostituisce il parere di un notaio, avvocato o commercialista sul tuo caso.</p>
+    </section>
+  </div>
+
+  <script>
+    import { formToObject, submitLead } from '../scripts/lead';
+
+    type R = Record<string, string>;
+    type Item = {
+      id: string;
+      fase: number;
+      titolo: string;
+      testo: string;
+      link?: [string, string];
+      se?: (r: R) => boolean;
+      scadenza?: (d: Date) => Date;
+    };
+
+    const FASI = ['Subito, nella prima settimana', 'Entro 3 mesi', 'Entro 12 mesi', 'Decidere cosa fare della casa'];
+    const addMonths = (d: Date, m: number) => { const r = new Date(d); r.setMonth(r.getMonth() + m); return r; };
+    const addDays = (d: Date, n: number) => new Date(d.getTime() + n * 86_400_000);
+    const piuEredi = (r: R) => r.eredi === 'accordo' || r.eredi === 'disaccordo';
+
+    const ITEMS: Item[] = [
+      { id: 'certificati', fase: 0, titolo: 'Procurati certificato di morte e documenti degli eredi', testo: 'Servono per banca, utenze, notaio e dichiarazione di successione. Fanne più copie.', link: ['/casa-ereditata/primi-passi/', 'Cosa fare nei primi 30 giorni'] },
+      { id: 'casa-sicura', fase: 0, titolo: 'Metti in sicurezza la casa senza comportarti da proprietario', testo: 'Chiudi, controlla acqua e gas, fai foto delle stanze. Non vendere, regalare o buttare beni: certi atti valgono come accettazione dell\'eredità.', link: ['/casa-ereditata/accettare-rinunciare/atti-accettazione-tacita/', 'Quali atti valgono come accettazione'] },
+      { id: 'testamento-cerca', fase: 0, titolo: 'Verifica se esiste un testamento', testo: 'Chiedi ai notai di fiducia della famiglia e al Registro generale dei testamenti; cerca anche tra le carte di casa.', link: ['/casa-ereditata/testamento-e-legittima/testamento-e-casa/', 'Testamento e casa'], se: (r) => r.testamento !== 'si' },
+      { id: 'testamento-pubblica', fase: 0, titolo: 'Fai pubblicare il testamento da un notaio', testo: 'Il testamento olografo va pubblicato prima di poter essere usato per la successione.', link: ['/casa-ereditata/testamento-e-legittima/testamento-e-casa/', 'Testamento e casa'], se: (r) => r.testamento === 'si' },
+      { id: 'banca', fase: 0, titolo: 'Comunica il decesso alla banca', testo: 'Il conto viene bloccato: chiedi il saldo alla data del decesso, ti servirà per la dichiarazione.', link: ['/casa-ereditata/primi-passi/conto-defunto/', 'Il conto del defunto'] },
+      { id: 'inventario', fase: 1, titolo: 'Decidi se accettare con beneficio d\'inventario', testo: 'Se vivi nella casa o ne hai il possesso e vuoi limitare la responsabilità per i debiti, l\'inventario va fatto entro 3 mesi dal decesso.', link: ['/casa-ereditata/accettare-rinunciare/', 'Accettare o rinunciare'], se: (r) => r.possesso === 'si', scadenza: (d) => addMonths(d, 3) },
+      { id: 'debiti', fase: 1, titolo: 'Verifica debiti, cartelle e ipoteche prima di accettare', testo: 'Visure ipotecarie, estratto di ruolo, Centrale rischi: se i debiti superano i beni, valuta beneficio d\'inventario o rinuncia.', link: ['/casa-ereditata/accettare-rinunciare/debiti-ipoteca/', 'Casa con debiti o ipoteca'], se: (r) => r.debiti !== 'no' },
+      { id: 'mutuo', fase: 1, titolo: 'Chiedi alla banca il saldo del mutuo e se c\'è una polizza', testo: 'Molti mutui hanno un\'assicurazione per il caso di morte che estingue il debito residuo.', link: ['/casa-ereditata/casi/', 'Situazioni particolari'], se: (r) => r.mutuo !== 'no' },
+      { id: 'utenze', fase: 1, titolo: 'Sistema utenze e condominio', testo: 'Avvisa l\'amministratore di condominio, decidi voltura o disdetta di luce, gas e acqua, chiedi gli arretrati.', link: ['/casa-ereditata/gestire-la-casa/utenze/', 'Utenze della casa ereditata'] },
+      { id: 'accordo', fase: 1, titolo: 'Mettete per iscritto un accordo provvisorio tra eredi', testo: 'Chi tiene le chiavi, chi paga cosa e come si decide: evita la maggior parte delle liti.', link: ['/casa-ereditata/gestire-la-casa/', 'Gestire la casa in attesa di decidere'], se: piuEredi },
+      { id: 'disaccordo', fase: 1, titolo: 'Valuta mediazione e soluzioni per sbloccare il disaccordo', testo: 'Una stima indipendente della casa e la mediazione risolvono molti conflitti prima del tribunale.', link: ['/eredi-in-disaccordo/', 'Eredi in disaccordo'], se: (r) => r.eredi === 'disaccordo' },
+      { id: 'dichiarazione', fase: 2, titolo: 'Presenta la dichiarazione di successione', testo: 'Con una casa è sempre obbligatoria. Con la dichiarazione telematica si chiedono anche le volture catastali.', link: ['/casa-ereditata/successione/', 'Dichiarazione di successione con immobili'], scadenza: (d) => addMonths(d, 12) },
+      { id: 'imposte', fase: 2, titolo: 'Calcola e paga le imposte', testo: 'Ipotecaria e catastale alla presentazione; l\'imposta di successione, se dovuta, entro 90 giorni dal termine della dichiarazione.', link: ['/strumenti/calcolatore-imposte-successione/', 'Calcolatore imposte'], scadenza: (d) => addDays(addMonths(d, 12), 90) },
+      { id: 'prima-casa', fase: 2, titolo: 'Valuta l\'agevolazione prima casa', testo: 'Riduce ipotecaria e catastale a 200 € ciascuna, ma se vendi entro 5 anni senza riacquistare puoi perderla.', link: ['/casa-ereditata/tasse/agevolazioni-prima-casa/', 'Agevolazioni prima casa'] },
+      { id: 'imu', fase: 2, titolo: 'Paga l\'IMU per la tua quota', testo: 'Dalla data del decesso, se la casa non è la tua abitazione principale: acconto il 16 giugno, saldo il 16 dicembre.', link: ['/casa-ereditata/tasse/imu/', 'IMU sulla casa ereditata'] },
+      { id: 'coniuge', fase: 3, titolo: 'Considera il diritto di abitazione del coniuge', testo: 'Il coniuge può continuare a vivere nella casa familiare per tutta la vita: incide su vendita e prezzo.', link: ['/casa-ereditata/casi/diritto-abitazione-coniuge/', 'Diritto di abitazione del coniuge'], se: (r) => r.rapporto === 'coniuge' },
+      { id: 'legittima', fase: 3, titolo: 'Controlla che il testamento rispetti la legittima', testo: 'Coniuge, figli e in certi casi genitori hanno diritto a una quota minima anche contro il testamento.', link: ['/casa-ereditata/testamento-e-legittima/', 'Chi eredita la casa'], se: (r) => r.testamento === 'si' },
+      { id: 'vendere', fase: 3, titolo: 'Prepara la casa per la vendita', testo: 'Conformità catastale e urbanistica, APE, trascrizione dell\'accettazione: sono i punti che il notaio controllerà.', link: ['/casa-ereditata/vendere/', 'Come vendere una casa ereditata'], se: (r) => r.obiettivo === 'vendere' },
+      { id: 'quote', fase: 3, titolo: 'Valuta come liquidare gli altri eredi', testo: 'Divisione con conguaglio o acquisto delle quote: tasse e costi sono diversi.', link: ['/casa-ereditata/vendere/comprare-quota-fratelli/', 'Comprare la quota dei fratelli'], se: (r) => r.obiettivo === 'tenere' && piuEredi(r) },
+      { id: 'affitto', fase: 3, titolo: 'Fai i conti dell\'affitto prima di decidere', testo: 'Canone netto, cedolare secca, IMU, manutenzione e mesi sfitti: il confronto su 5 anni con la vendita.', link: ['/casa-ereditata/decidere/', 'Vendere, affittare o tenere'], se: (r) => r.obiettivo === 'affittare' },
+      { id: 'decidere', fase: 3, titolo: 'Confronta le opzioni con i numeri', testo: 'Costi di tenere la casa vuota, rendimento dell\'affitto e incasso della vendita su 5 anni.', link: ['/casa-ereditata/decidere/', 'Vendere, affittare o tenere'], se: (r) => r.obiettivo === 'nonso' || !r.obiettivo },
+      { id: 'valore', fase: 3, titolo: 'Fai stimare il valore della casa', testo: 'Serve per decidere, per dividere tra eredi e per fissare un prezzo realistico. La stima è gratuita e senza impegno.', link: ['/valuta-casa-ereditata/', 'Richiedi la valutazione'], se: (r) => r.obiettivo !== 'tenere' || piuEredi(r) },
+    ];
+
+    const fmt = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+    const KEY = 'ec-percorso';
+    const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
+    const save = (v: unknown) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} };
+
+    const form = document.getElementById('percorso') as HTMLFormElement;
+    const out = document.getElementById('risultato') as HTMLElement;
+    const fasiEl = out.querySelector<HTMLElement>('[data-fasi]')!;
+    const alertsEl = out.querySelector<HTMLElement>('[data-alerts]')!;
+    let state: { r: R; done: string[] } = load() ?? { r: {}, done: [] };
+
+    function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text) e.textContent = text;
+      return e;
+    }
+
+    function render() {
+      const r = state.r;
+      const d = r.decesso ? new Date(`${r.decesso}T12:00:00`) : null;
+      const items = ITEMS.filter((i) => !i.se || i.se(r));
+
+      alertsEl.replaceChildren();
+      const alerts: string[] = [];
+      if (r.possesso === 'si' && r.debiti !== 'no') alerts.push('Hai il possesso della casa e i debiti non sono esclusi: valuta subito il beneficio d\'inventario, che va fatto entro 3 mesi dal decesso.');
+      if (r.eredi === 'disaccordo') alerts.push('Con eredi in disaccordo, nessuno può vendere la casa intera da solo, ma ognuno può chiedere la divisione: una stima condivisa è il primo passo.');
+      if (r.rapporto === 'fratello' || r.rapporto === 'altro') alerts.push('Per fratelli e altri parenti le franchigie sono basse o assenti: l\'imposta di successione potrebbe essere dovuta. Fai una stima con il calcolatore.');
+      for (const a of alerts) {
+        const p = el('p', 'notice', a);
+        alertsEl.append(p);
+      }
+
+      fasiEl.replaceChildren();
+      FASI.forEach((titolo, f) => {
+        const list = items.filter((i) => i.fase === f);
+        if (!list.length) return;
+        const sec = el('section', 'fase');
+        sec.append(el('h3', '', titolo));
+        const ul = el('ul', 'checklist');
+        for (const i of list) {
+          const li = el('li');
+          const label = el('label', 'check');
+          const cb = el('input') as HTMLInputElement;
+          cb.type = 'checkbox';
+          cb.checked = state.done.includes(i.id);
+          cb.addEventListener('change', () => {
+            state.done = cb.checked ? [...new Set([...state.done, i.id])] : state.done.filter((x) => x !== i.id);
+            save(state);
+            progress(items.length);
+          });
+          const body = el('span');
+          const strong = el('strong', '', i.titolo);
+          body.append(strong);
+          if (d && i.scadenza) body.append(el('span', 'scadenza', ` · entro il ${fmt.format(i.scadenza(d))}`));
+          body.append(el('br'), document.createTextNode(i.testo + ' '));
+          if (i.link) {
+            const a = el('a', '', `${i.link[1]} →`) as HTMLAnchorElement;
+            a.href = i.link[0];
+            body.append(a);
+          }
+          label.append(cb, body);
+          li.append(label);
+          ul.append(li);
+        }
+        sec.append(ul);
+        fasiEl.append(sec);
+      });
+      progress(items.length);
+      out.hidden = false;
+    }
+
+    function progress(total: number) {
+      const visible = ITEMS.filter((i) => !i.se || i.se(state.r)).map((i) => i.id);
+      const n = state.done.filter((x) => visible.includes(x)).length;
+      out.querySelector('[data-progress]')!.textContent = `${n} passi completati su ${total}`;
+      (out.querySelector('[data-bar]') as HTMLElement).style.width = `${Math.round((n / total) * 100)}%`;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = formToObject(form) as R;
+      state = { r: data, done: state.done };
+      save(state);
+      render();
+      out.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    out.querySelector('[data-reset]')!.addEventListener('click', () => {
+      state = { r: {}, done: [] };
+      save(state);
+      form.reset();
+      out.hidden = true;
+      form.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Ripristina un percorso già creato su questo dispositivo
+    if (Object.keys(state.r).length) {
+      for (const [k, v] of Object.entries(state.r)) {
+        const field = form.elements.namedItem(k);
+        if (field instanceof RadioNodeList) field.value = v;
+        else if (field instanceof HTMLInputElement) field.value = v;
+      }
+      render();
+    }
+
+    const emailForm = document.getElementById('percorso-email') as HTMLFormElement;
+    emailForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const error = emailForm.querySelector<HTMLElement>('[data-error]')!;
+      const button = emailForm.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      if (!emailForm.checkValidity()) {
+        error.textContent = 'Inserisci la tua email e accetta i consensi richiesti.';
+        return;
+      }
+      button.disabled = true;
+      try {
+        await submitLead('percorso', { ...formToObject(emailForm), ...state.r });
+        emailForm.replaceChildren(el('p', 'download-ok', 'Fatto: riceverai i promemoria prima di ogni scadenza.'));
+      } catch {
+        error.textContent = 'Invio non riuscito. Riprova tra poco.';
+        button.disabled = false;
+      }
+    });
+  </script>
+</Base>
