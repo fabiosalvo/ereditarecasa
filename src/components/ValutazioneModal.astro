@@ -1,6 +1,5 @@
 ---
 import ValutazioneForm from './ValutazioneForm.astro';
-import { TITOLARE } from '../data/site';
 ---
 <dialog class="modal" id="modal-valutazione" aria-labelledby="modal-valutazione-title">
   <div class="modal-head">
@@ -8,7 +7,6 @@ import { TITOLARE } from '../data/site';
     <button type="button" class="modal-close" data-close aria-label="Chiudi">×</button>
   </div>
   <p class="modal-intro">Stima gratuita e senza impegno, anche se la successione non è conclusa o gli eredi non hanno ancora deciso.</p>
-  <p class="notice">La valutazione è fornita da {TITOLARE.ragioneSociale}, agenzia immobiliare che gestisce EreditareCasa.it. Nessun obbligo di affidarci la vendita.</p>
   <ValutazioneForm idPrefix="modale" />
 </dialog>
 

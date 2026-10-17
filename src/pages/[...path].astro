@@ -85,9 +85,9 @@ if (d.faq.length) {
         </figure>
         <script is:inline>try{if(!localStorage.getItem('ec-accesso'))document.documentElement.classList.add('ec-locked')}catch(e){}</script>
         <GuidaSplit><Content /></GuidaSplit>
-        <GuidaGate pdf={pdfUrl(d.area, d.slug)} guida={entry.id} />
+        <GuidaGate />
 
-        <div class="no-print gate-after">
+        <div class="no-print pdf-box" id="scarica">
           <GuidaDownload pdf={pdfUrl(d.area, d.slug)} guida={entry.id} idPrefix="dl-fine" />
         </div>
 

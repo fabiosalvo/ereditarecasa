@@ -6,11 +6,13 @@ export const CONSENT_VERSION = '2026-10-16';
 export const CONSENT_TEXT = {
   privacy:
     "Ho letto l'informativa privacy e chiedo di essere ricontattato per la richiesta inviata.",
+  registrazione:
+    "Registrandomi dichiaro di aver letto l'informativa privacy (registrazione per leggere le guide complete).",
   marketing:
     'Acconsento a ricevere via email guide, promemoria sulle scadenze e proposte relative alla vendita della casa. Posso revocare il consenso in ogni momento.',
 };
 
-export type LeadType = 'valutazione' | 'scadenzario' | 'professionista' | 'guida' | 'percorso';
+export type LeadType = 'valutazione' | 'scadenzario' | 'professionista' | 'guida' | 'percorso' | 'registrazione';
 
 export async function submitLead(type: LeadType, fields: Record<string, unknown>): Promise<void> {
   // Campo trappola invisibile: lo compilano solo i bot
@@ -26,7 +28,7 @@ export async function submitLead(type: LeadType, fields: Record<string, unknown>
     fields,
     consent: {
       version: CONSENT_VERSION,
-      privacy: fields.consent_privacy === true ? CONSENT_TEXT.privacy : null,
+      privacy: type === 'registrazione' ? CONSENT_TEXT.registrazione : fields.consent_privacy === true ? CONSENT_TEXT.privacy : null,
       marketing: fields.consent_marketing === true ? CONSENT_TEXT.marketing : null,
       timestamp: new Date().toISOString(),
     },

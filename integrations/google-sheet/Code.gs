@@ -7,6 +7,9 @@
 // Indirizzi che ricevono l'avviso a ogni nuova richiesta di valutazione (separati da virgola)
 const NOTIFY_EMAIL = 'fabio@gromia.com';
 
+// Client ID OAuth di Google usato dal pulsante "Registrati con Google" (lo stesso di PUBLIC_GOOGLE_CLIENT_ID)
+const GOOGLE_CLIENT_ID = '';
+
 const COLUMNS = {
   valutazione: [
     'ricevuto', 'nome', 'telefono', 'email', 'comune', 'indirizzo', 'tipologia', 'mq', 'occupazione',
@@ -22,6 +25,10 @@ const COLUMNS = {
     'ricevuto', 'email', 'decesso', 'rapporto', 'testamento', 'eredi', 'possesso', 'debiti', 'mutuo', 'obiettivo',
     'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm',
   ],
+  registrazione: [
+    'ricevuto', 'email', 'nome', 'metodo', 'verificato', 'guida', 'consenso_privacy', 'consenso_marketing',
+    'versione_consensi', 'pagina', 'referrer', 'utm',
+  ],
   guida: [
     'ricevuto', 'email', 'guida', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
     'pagina', 'referrer', 'utm',
@@ -35,6 +42,15 @@ function doPost(e) {
     if (!COLUMNS[type]) return reply({ ok: false, error: 'Tipo non valido' });
 
     const f = data.fields || {};
+    // Registrazione con Google: l'email vale solo se il token è verificato da Google
+    if (type === 'registrazione') {
+      f.verificato = 'no';
+      if (f.metodo === 'google' && f.google_token) {
+        const g = verifyGoogle(f.google_token);
+        if (g) { f.email = g.email; f.nome = g.name || f.nome; f.verificato = 'sì'; }
+      }
+      delete f.google_token;
+    }
     const c = data.consent || {};
     const s = data.source || {};
     const row = Object.assign({}, f, {
@@ -105,4 +121,18 @@ function clean(v) {
 
 function reply(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Verifica il token di "Accedi con Google" presso Google e ne restituisce i dati, oppure null.
+function verifyGoogle(token) {
+  try {
+    const res = UrlFetchApp.fetch('https://oauth2.googleapis.com/tokeninfo?id_token=' + encodeURIComponent(token), { muteHttpExceptions: true });
+    if (res.getResponseCode() !== 200) return null;
+    const t = JSON.parse(res.getContentText());
+    if (GOOGLE_CLIENT_ID && t.aud !== GOOGLE_CLIENT_ID) return null;
+    if (t.email_verified !== 'true' && t.email_verified !== true) return null;
+    return t;
+  } catch (err) {
+    return null;
+  }
 }
