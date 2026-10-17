@@ -1,6 +1,6 @@
 ---
-title: "Come stabilire il prezzo di una casa ereditata"
-description: "Valore catastale e valore di mercato non coincidono. Come usare le quotazioni OMI dell'Agenzia delle Entrate, quando serve una perizia e quanto pesano i lavori."
+title: "Quanto vale la casa ereditata: prezzo, OMI e perizia"
+description: "Valore catastale e valore di mercato non coincidono. Come stimare quanto vale la casa ereditata con le quotazioni OMI, quando serve una perizia e quanto pesano i lavori."
 area: vendere
 slug: prezzo
 order: 20

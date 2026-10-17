@@ -1,6 +1,6 @@
 ---
-title: "Come vendere una casa ereditata, passo per passo"
-description: "Cosa serve per vendere una casa ereditata: successione, accettazione, documenti, conformità, APE, tasse e tempi fase per fase. La guida completa con la checklist."
+title: "Vendere casa ereditata: cosa serve, documenti, tempi e costi"
+description: "Cosa serve per vendere una casa ereditata: successione, accettazione trascritta, documenti, conformità, tasse e tempi fase per fase. Con la checklist completa."
 area: vendere
 pillar: true
 updated: 2026-10-17

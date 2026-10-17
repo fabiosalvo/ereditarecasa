@@ -1,6 +1,6 @@
 ---
-title: "Il fratello vive nella casa ereditata: cosa puoi fare"
-description: "Un coerede può usare la casa comune ma non escludere gli altri. Quando è dovuta un'indennità di occupazione, come chiederla e perché l'usucapione non è facile."
+title: "Casa ereditata occupata da un erede: indennità e soluzioni"
+description: "Un coerede può usare la casa ma non escludere gli altri: quando è dovuta l'indennità di occupazione, come chiederla, chi paga IMU e spese, perché l'usucapione è rara."
 area: eredi-in-disaccordo
 slug: coerede-occupa-casa
 order: 20

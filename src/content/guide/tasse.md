@@ -1,6 +1,6 @@
 ---
-title: "Tasse sulla casa ereditata, tutte le imposte da pagare"
-description: "Imposta di successione, ipotecaria, catastale, IMU, TARI, IRPEF e plusvalenza: chi paga, quando e quanto sulla casa ereditata, con due esempi di calcolo."
+title: "Imposta di successione sulla casa: aliquote, franchigie e tasse"
+description: "Imposta di successione con franchigie (1 milione per coniuge e figli, 100.000 tra fratelli), ipotecaria, catastale, IMU e plusvalenza: chi paga e quanto, con esempi."
 area: tasse
 pillar: true
 updated: 2026-10-17

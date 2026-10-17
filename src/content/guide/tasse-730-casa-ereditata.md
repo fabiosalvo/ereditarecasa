@@ -1,6 +1,6 @@
 ---
-title: "Casa ereditata nel 730: quadro B, quota, giorni e codici"
-description: "Casa ereditata nel 730 o nel Redditi: quadro B, quota e giorni dal decesso, codici utilizzo, comodato, coniuge con diritto di abitazione e IMU sostitutiva."
+title: "Casa ereditata nel 730: quadro B, codici e vendita"
+description: "Casa ereditata nel 730: quadro B, quota e giorni, codici utilizzo, coniuge con diritto di abitazione, IMU sostitutiva. E se l'hai venduta: va dichiarata?"
 area: tasse
 slug: 730-casa-ereditata
 order: 40

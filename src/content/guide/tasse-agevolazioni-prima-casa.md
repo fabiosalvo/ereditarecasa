@@ -1,6 +1,6 @@
 ---
-title: "Agevolazione prima casa in successione: requisiti e decadenza"
-description: "Con la prima casa in successione ipotecaria e catastale costano 200 € ciascuna. Requisiti, estensione agli altri eredi, vendita entro 5 anni, riacquisto e credito."
+title: "Prima casa in successione: requisiti e vendita entro 5 anni"
+description: "Con la prima casa in successione ipotecaria e catastale costano 200 € ciascuna. Requisiti, altri eredi, cosa succede se vendi entro 5 anni, riacquisto e credito."
 area: tasse
 slug: agevolazioni-prima-casa
 order: 50

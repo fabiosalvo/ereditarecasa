@@ -1,6 +1,6 @@
 ---
-title: "Quanto costa la successione con una casa: imposte e compensi"
-description: "Imposte ipotecaria e catastale, bollo, tasse fisse, compensi indicativi di CAF, commercialista e notaio e trascrizione dell'accettazione: tre esempi di costo totale."
+title: "Quanto costa la successione di una casa: imposte, CAF e notaio"
+description: "Imposte ipotecaria e catastale, bollo, tasse fisse, compensi indicativi di CAF, commercialista e notaio, trascrizione dell'accettazione: tre esempi di costo totale."
 area: successione
 slug: costi
 order: 30

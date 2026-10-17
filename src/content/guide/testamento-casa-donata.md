@@ -1,6 +1,6 @@
 ---
-title: "Casa ricevuta in donazione dal defunto: collazione e rischi"
-description: "La casa donata in vita va considerata nella successione: collazione tra coeredi e possibile riduzione. Dal 2025 chi la compra dal donatario è più tutelato."
+title: "Casa donata dai genitori: si può vendere? Collazione e rischi"
+description: "Una casa donata si può vendere, ma conta nella successione: collazione tra coeredi e possibile riduzione. Dal 18/12/2025 chi la compra è più tutelato. Cosa sapere."
 area: testamento-legittima
 slug: casa-donata
 order: 30

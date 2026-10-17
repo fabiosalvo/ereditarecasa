@@ -1,6 +1,6 @@
 ---
-title: "Un erede non vuole vendere la casa, cosa fare"
-description: "Fratelli o coeredi non d'accordo sulla casa ereditata: le soluzioni, dall'accordo alla vendita della quota, dalla mediazione obbligatoria alla divisione giudiziale."
+title: "Un erede o un fratello non vuole vendere la casa: cosa fare"
+description: "Fratello o coerede che non vuole vendere la casa ereditata: le soluzioni, dall'accordo alla vendita della quota, dalla mediazione obbligatoria alla divisione giudiziale."
 area: eredi-in-disaccordo
 pillar: true
 updated: 2026-10-17

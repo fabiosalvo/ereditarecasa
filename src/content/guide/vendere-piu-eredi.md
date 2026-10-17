@@ -1,6 +1,6 @@
 ---
-title: "Vendere una casa ereditata con più eredi"
-description: "Come si vende una casa ereditata da più fratelli o eredi: chi firma, come si divide il ricavato, mediazione, indennità di occupazione ed erede lontano o che non risponde."
+title: "Vendere casa ereditata tra fratelli o con più eredi"
+description: "Come si vende una casa ereditata tra fratelli o più eredi: chi firma, come si divide il ricavato, tempi, spese anticipate ed erede lontano o che non risponde."
 area: vendere
 slug: con-piu-eredi
 order: 10

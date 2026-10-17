@@ -1,6 +1,6 @@
 ---
-title: "Chi eredita la casa: quote di legge, testamento e legittima"
-description: "Senza testamento la casa va agli eredi per quote fissate dal Codice civile. Con il testamento puoi disporre solo della quota disponibile: il resto spetta ai legittimari."
+title: "Successione senza testamento e quota legittima: chi eredita"
+description: "Chi eredita senza testamento (coniuge, figli, fratelli, genitori) e quanto spetta per legge se c'è un testamento: quote, tabelle ed esempi sulla casa ereditata."
 area: testamento-legittima
 slug: ""
 pillar: true

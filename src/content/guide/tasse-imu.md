@@ -1,6 +1,6 @@
 ---
-title: "IMU sulla casa ereditata, chi paga e quanto"
-description: "Chi paga l'IMU sulla casa ereditata, da quando, con quali quote, come si calcola il primo anno e quando spettano esenzioni o la riduzione per comodato."
+title: "IMU casa ereditata: chi paga, da quando e se ci vive un erede"
+description: "Chi paga l'IMU sulla casa ereditata vuota, abitata dalla madre o da un fratello: quote, da quando si paga, scadenze 16 giugno e 16 dicembre, comodato ed esenzioni."
 area: tasse
 slug: imu
 order: 20

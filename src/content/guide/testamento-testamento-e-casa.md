@@ -1,6 +1,6 @@
 ---
-title: "Testamento e casa: olografo, pubblico, pubblicazione e legato"
-description: "Come riconoscere un testamento valido, cosa fare se lo trovi in casa, come si pubblica, cosa cambia se la casa è lasciata con un legato e chi è l'esecutore."
+title: "Testamento olografo e casa: pubblicazione, costi e legato"
+description: "Come riconoscere un testamento valido, cosa fare se lo trovi in casa, come e quanto costa la pubblicazione, cosa cambia con un legato sulla casa e chi è l'esecutore."
 area: testamento-legittima
 slug: testamento-e-casa
 order: 40

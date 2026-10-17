@@ -1,5 +1,5 @@
 ---
-title: "Casa ereditata, vendere, affittare o tenere?"
+title: "Casa ereditata: vendere o affittare? I conti a confronto"
 description: "Vendere, affittare o tenere la casa ereditata: costi annui, rendimento netto su 5 anni con un esempio di calcolo, rischi e come decidere tra eredi."
 area: decidere
 pillar: true

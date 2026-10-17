@@ -1,6 +1,6 @@
 ---
-title: "Dichiarazione di successione con immobili, la guida"
-description: "Quando e come presentare la dichiarazione di successione con una casa: scadenze, documenti, passi del modello online, volture, costi, ritardi e sanzioni."
+title: "Dichiarazione di successione con casa: come farla e documenti"
+description: "Come fare la dichiarazione di successione con una casa: chi la presenta, scadenza di 12 mesi, documenti da allegare, tempi, volture, costi, ritardi e sanzioni."
 area: successione
 pillar: true
 updated: 2026-10-17

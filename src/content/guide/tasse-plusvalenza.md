@@ -1,6 +1,6 @@
 ---
-title: "Plusvalenza sulla casa ereditata, quando si paga"
-description: "Vendere una casa ereditata genera una plusvalenza tassabile? Le regole, le eccezioni (donazione, quote comprate, terreni) ed esempi di calcolo."
+title: "Tasse sulla vendita della casa ereditata: plusvalenza e 5 anni"
+description: "Chi vende una casa ereditata paga tasse? Di norma nessuna plusvalenza, anche prima dei 5 anni. Le eccezioni (donazione, quote comprate, terreni) con esempi."
 area: tasse
 slug: plusvalenza
 order: 10

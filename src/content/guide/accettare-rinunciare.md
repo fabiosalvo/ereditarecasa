@@ -1,6 +1,6 @@
 ---
-title: "Accettare o rinunciare all'eredità di una casa"
-description: "Accettazione espressa, tacita o con beneficio d'inventario, oppure rinuncia: come scegliere se c'è una casa, i termini di 3 mesi e 40 giorni e cosa fare con i debiti."
+title: "Accettare o rinunciare all'eredità: termini, costi e casa"
+description: "Accettazione espressa, tacita o con beneficio d'inventario, oppure rinuncia: come scegliere se c'è una casa, i termini (3 mesi, 40 giorni, 10 anni) e i costi."
 area: accettare-rinunciare
 pillar: true
 updated: 2026-10-17

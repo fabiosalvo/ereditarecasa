@@ -1,6 +1,6 @@
 ---
-title: "Diritto di abitazione del coniuge sulla casa ereditata"
-description: "Il coniuge superstite può abitare per tutta la vita la casa familiare (art. 540 c.c.). Come si calcola il valore del diritto, chi paga l'IMU e come vendere."
+title: "Casa ereditata dove abita la madre: diritto di abitazione"
+description: "Se la madre vedova vive nella casa ha il diritto di abitazione a vita (art. 540 c.c.): chi paga l'IMU, come va nel 730 dei figli, quanto vale e se si può vendere."
 area: casi
 slug: diritto-abitazione-coniuge
 order: 20
