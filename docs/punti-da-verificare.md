@@ -82,6 +82,16 @@ Nel testo questi numeri sono dichiarati come esempi o stime, non come dati uffic
 
 Tempi e costi della divisione giudiziale e indennità di mediazione sono descritti solo in termini qualitativi.
 
+## 7-bis. Tasse di successione in Europa (guida tasse/europa)
+
+| # | Punto | Priorità |
+|---|---|---|
+| E.1 | Data di entrata in vigore del testo unico D.Lgs. 123/2025 (1/1/2027): l'articolo sulla decorrenza non è stato aperto. | B |
+| E.2 | Credito per l'imposta pagata all'estero (art. 26 TUS) e convenzioni contro le doppie imposizioni sulle successioni: il testo resta generico. | B |
+| E.3 | Irlanda: esenzione del coniuge non riportata. Spagna: solo la scala statale, bonifici regionali (Madrid, Andalusia) non verificati. Belgio: solo la Fiandra (Bruxelles e Vallonia non verificate). | C |
+| E.4 | Regno Unito: nessuna conversione del cambio. Portogallo: solo il bollo del 10%. Svizzera: "molti cantoni" senza conteggio. | C |
+| E.5 | Il gettito OCSE (voce 4300) comprende anche le imposte sulle donazioni. La rendita di 900 € dell'esempio è inventata. | C |
+
 ## 8. Fonti da aprire da un browser
 
 Normattiva non è raggiungibile dall'ambiente di lavoro automatico. Questi articoli sono stati controllati solo in modo indiretto, tramite le guide già verificate e Brocardi:
