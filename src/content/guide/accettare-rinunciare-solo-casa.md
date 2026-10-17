@@ -15,6 +15,12 @@ fonti:
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art521"
   - title: "Codice civile, art. 525: revoca della rinuncia (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art525"
+  - title: "Codice civile, art. 468: soggetti della rappresentazione (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art468"
+  - title: "Codice civile, art. 522: devoluzione nelle successioni legittime (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art522"
+  - title: "Codice civile, art. 523: devoluzione nelle successioni testamentarie (Normattiva)"
+    url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art523"
   - title: "Codice civile, art. 649: acquisto del legato (Normattiva)"
     url: "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262~art649"
   - title: "Codice civile, art. 1104: obblighi dei partecipanti alla comunione (Normattiva)"
@@ -62,6 +68,22 @@ Questo è un punto che molti sottovalutano. Se rinunci perché la casa ti "pesa"
 La rinuncia può essere **revocata** finché il diritto di accettare non è prescritto (dieci anni) e purché nessun altro chiamato abbia già acquistato l'eredità (art. 525). Ma è una possibilità teorica su cui non conviene contare.
 
 C'è anche un'eccezione utile: chi rinuncia può comunque **tenere la donazione o chiedere il legato** ricevuto dal defunto, entro i limiti della quota disponibile (art. 521, secondo comma).
+
+## Chi prende la tua parte se rinunci
+
+Prima di rinunciare "per liberarti della casa", guarda chi subentra al tuo posto. Le regole principali sono queste.
+
+| Situazione | Chi subentra al rinunciante | Norma |
+| --- | --- | --- |
+| Sei figlio del defunto e hai figli | I tuoi figli, per rappresentazione | Artt. 467 e 468 c.c. |
+| Sei fratello del defunto e hai figli | I tuoi figli, per rappresentazione | Art. 468 c.c. |
+| Successione senza testamento, non operano rappresentazione o eccezioni | La tua parte si accresce a chi concorreva con te | Art. 522 c.c. |
+| Eri l'unico chiamato | L'eredità va a chi sarebbe stato chiamato se tu mancassi | Art. 522 c.c. |
+| Successione con testamento | Sostituto indicato dal testatore; altrimenti rappresentazione, accrescimento o eredi legittimi | Art. 523 c.c. |
+
+Un esempio aiuta a capire. Giorgio rinuncia all'eredità del padre per non occuparsi della casa di campagna. Giorgio ha due figli, Matteo (22 anni) e Sofia (16 anni). La quota di Giorgio non va alla sorella, come lui pensava: passa per rappresentazione a Matteo e Sofia. Sofia è minorenne, e i minori possono accettare solo con beneficio d'inventario e con le autorizzazioni previste (art. 471). Il risultato è una procedura più lunga e costosa per tutta la famiglia.
+
+Se l'obiettivo è che la casa vada alla sorella, la strada più lineare è un'altra: accettare e poi cedere la quota, oppure fare una divisione.
 
 ## Le alternative realistiche, a confronto
 
