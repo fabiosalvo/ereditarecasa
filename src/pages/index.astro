@@ -7,7 +7,10 @@ import { FOTO_AREA, FOTO_HERO } from '../data/foto';
 import CtaBand from '../components/CtaBand.astro';
 import { getCollection } from 'astro:content';
 
-const GUIDE_N = (await getCollection('guide')).length;
+const ALL = await getCollection('guide');
+const GUIDE_N = ALL.length;
+const COUNT: Record<string, number> = {};
+for (const g of ALL) COUNT[g.data.area] = (COUNT[g.data.area] ?? 0) + 1;
 const TOOLS = [
   { href: '/percorso/', title: 'Il tuo percorso', text: 'Otto domande e ottieni la checklist personalizzata con le tue scadenze.' },
   { href: '/strumenti/calcolatore-imposte-successione/', title: 'Calcolatore imposte', text: 'Imposta di successione, ipotecaria e catastale sulla casa.' },
@@ -30,6 +33,13 @@ const TOOLS = [
         <div class="actions">
           <a class="btn" href="/percorso/">Crea il tuo percorso</a>
           <a class="btn btn-ghost" href="/valuta-casa-ereditata/">Valuta la casa</a>
+        </div>
+        <div class="chips" aria-label="Argomenti più cercati">
+          <a class="chip chip--primary" href="/casa-ereditata/successione/">Dichiarazione di successione</a>
+          <a class="chip" href="/casa-ereditata/tasse/">Tasse</a>
+          <a class="chip" href="/eredi-in-disaccordo/">Fratelli in disaccordo</a>
+          <a class="chip" href="/casa-ereditata/vendere/">Vendere</a>
+          <a class="chip" href="/casa-ereditata/accettare-rinunciare/">Rinunciare</a>
         </div>
       </div>
     </div>
@@ -132,7 +142,10 @@ const TOOLS = [
       <div class="grid grid--3 grid--aree">
         {AREAS.map((a) => (
           <a class="card card-photo" href={a.path}>
-            <Image src={FOTO_AREA[a.id].src} alt="" widths={[400, 640]} sizes="(max-width: 640px) 100vw, 380px" />
+            <div class="card-media">
+              <Image src={FOTO_AREA[a.id].src} alt="" widths={[400, 640]} sizes="(max-width: 640px) 100vw, 380px" />
+              <span class="badge">{COUNT[a.id] ?? 0} guide</span>
+            </div>
             <div class="card-body">
               <h3>{a.title}</h3>
               <p>{a.short}</p>
