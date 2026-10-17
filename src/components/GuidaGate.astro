@@ -1,0 +1,62 @@
+---
+/** Blocco "continua a leggere": con l'email si sblocca il resto della guida (e di tutte le altre) e il PDF. */
+import ConsentFields from './ConsentFields.astro';
+interface Props {
+  pdf: string;
+  guida: string;
+}
+const { pdf, guida } = Astro.props;
+---
+<div class="gate no-print" id="scarica" data-gate data-pdf={pdf} data-guida={guida}>
+  <div class="gate__fade" aria-hidden="true"></div>
+  <div class="gate__box">
+    <span class="eyebrow" style="margin:0">Guida gratuita</span>
+    <h2 class="h-m">Continua a leggere e scarica il PDF</h2>
+    <p>Lascia la tua email: sblocchi questa guida e tutte le altre del sito, e scarichi la versione PDF da conservare o condividere con gli altri eredi. Gratis, senza password.</p>
+    <form data-gate-form novalidate>
+      <div class="field">
+        <label for="gate-email">La tua email</label>
+        <input id="gate-email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <ConsentFields />
+      <p class="form-error" role="alert" data-error></p>
+      <button class="btn" type="submit">Sblocca la guida completa</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  import { formToObject, submitLead } from '../scripts/lead';
+  import { unlock } from '../scripts/accesso';
+
+  const gate = document.querySelector<HTMLElement>('[data-gate]');
+  const form = gate?.querySelector<HTMLFormElement>('[data-gate-form]');
+  // Il pulsante in testata porta al blocco giusto: sblocco se la guida è chiusa, download se è aperta
+  document.querySelector('[data-scarica-pdf]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const locked = document.documentElement.classList.contains('ec-locked');
+    document.querySelector(locked ? '[data-gate]' : '.gate-after')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  if (gate && form) {
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        error.textContent = "Inserisci la tua email e accetta l'informativa privacy.";
+        return;
+      }
+      button.disabled = true;
+      const fields = formToObject(form);
+      try {
+        await submitLead('guida', { ...fields, guida: gate.dataset.guida, modo: 'sblocco' });
+      } catch (err) {
+        // Se l'invio non va a buon fine non blocchiamo chi legge
+        console.warn(err);
+      }
+      unlock(String(fields.email || ''));
+      document.querySelector('.gated-rest')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+</script>

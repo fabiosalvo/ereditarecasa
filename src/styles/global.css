@@ -415,3 +415,16 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--i
 .wrap.read { max-width: var(--max); }
 .wrap.read > :not(.grid):not(.sec-head):not(.facts):not(.steps):not(.wide) { max-width: 760px; }
 .wrap.read { padding-bottom: clamp(48px, 6vw, 88px); }
+
+/* guide: prima parte libera, il resto dopo l'email */
+.gate { display: none; }
+html.ec-locked .gated-rest, html.ec-locked .gate-after { display: none; }
+html.ec-locked .gate { display: block; position: relative; margin: 0 0 40px; }
+.gate__fade { position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(rgba(252, 250, 246, 0), var(--paper)); pointer-events: none; }
+.gate__box { background: var(--sand); border-radius: var(--r-l); padding: clamp(24px, 4vw, 40px); display: grid; gap: 14px; }
+.gate__box h2 { margin: 0; }
+.gate__box p { margin: 0; }
+.gate__box form { margin-top: 6px; }
+.gate__box input[type='email'] { background: #fff; }
+@media print { html.ec-locked .gated-rest { display: block !important; } .gate { display: none !important; } }
+.field label.check { display: grid; font-weight: 400; color: var(--text); }

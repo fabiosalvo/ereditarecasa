@@ -4,6 +4,8 @@ import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBox from '../components/CtaBox.astro';
 import GuidaDownload from '../components/GuidaDownload.astro';
+import GuidaGate from '../components/GuidaGate.astro';
+import GuidaSplit from '../components/GuidaSplit.astro';
 import { Image } from 'astro:assets';
 import { SITE, areaById, guideUrl, pdfUrl } from '../data/site';
 import { FOTO_AREA } from '../data/foto';
@@ -41,6 +43,8 @@ const articleLd: Record<string, unknown> = {
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
   author: { '@type': 'Organization', name: `Redazione ${SITE.name}`, url: `${SITE.url}/chi-siamo/` },
 };
+articleLd.isAccessibleForFree = false;
+articleLd.hasPart = { '@type': 'WebPageElement', isAccessibleForFree: false, cssSelector: '.gated-rest' };
 if (d.fonti.length) articleLd.citation = d.fonti.map((f) => f.url);
 if (d.reviewer) {
   articleLd.reviewedBy = { '@type': 'Person', name: d.reviewer.name, jobTitle: d.reviewer.role, url: d.reviewer.url };
@@ -62,6 +66,7 @@ if (d.faq.length) {
       <span class="eyebrow" style="margin:0">{area.title}</span>
       <h1>{d.title}</h1>
       <p class="lede">{d.description}</p>
+      <div class="actions no-print"><a class="btn btn-ghost btn-small" href="#scarica" data-scarica-pdf>Scarica la guida in PDF</a></div>
       <p class="meta">
           Aggiornato il {updated} · Redazione {SITE.name} ·{' '}
           {d.reviewer
@@ -78,10 +83,12 @@ if (d.faq.length) {
         <figure class="article-photo">
           <Image src={FOTO_AREA[d.area].src} alt={FOTO_AREA[d.area].alt} widths={[480, 720, 1000]} sizes="(max-width: 760px) 100vw, 720px" loading="eager" />
         </figure>
-        <Content />
+        <script is:inline>try{if(!localStorage.getItem('ec-accesso'))document.documentElement.classList.add('ec-locked')}catch(e){}</script>
+        <GuidaSplit><Content /></GuidaSplit>
+        <GuidaGate pdf={pdfUrl(d.area, d.slug)} guida={entry.id} />
 
-        <div class="no-print">
-          <GuidaDownload pdf={pdfUrl(d.area, d.slug)} guida={entry.id} />
+        <div class="no-print gate-after">
+          <GuidaDownload pdf={pdfUrl(d.area, d.slug)} guida={entry.id} idPrefix="dl-fine" />
         </div>
 
         {d.faq.length > 0 && (

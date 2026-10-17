@@ -37,11 +37,27 @@ const {
 
 <script>
   import { formToObject, submitLead } from '../scripts/lead';
+  import { hasAccess, unlock } from '../scripts/accesso';
 
   for (const form of document.querySelectorAll<HTMLFormElement>('[data-download-form]')) {
     const box = form.parentElement!;
     const error = form.querySelector<HTMLElement>('[data-error]')!;
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const ok = box.querySelector<HTMLElement>('[data-ok]')!;
+    // Chi ha già lasciato l'email scarica direttamente
+    const direct = () => {
+      form.hidden = true;
+      ok.hidden = false;
+      ok.innerHTML = '';
+      const a = document.createElement('a');
+      a.className = 'btn';
+      a.href = form.dataset.pdf!;
+      a.download = '';
+      a.textContent = 'Scarica il PDF';
+      ok.append(a);
+    };
+    if (hasAccess()) direct();
+    document.addEventListener('ec:unlocked', direct);
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) {
@@ -49,15 +65,17 @@ const {
         return;
       }
       button.disabled = true;
+      const fields = formToObject(form);
       try {
-        await submitLead('guida', { ...formToObject(form), guida: form.dataset.guida });
-        form.hidden = true;
-        box.querySelector<HTMLElement>('[data-ok]')!.hidden = false;
-        box.querySelector<HTMLAnchorElement>('[data-link]')!.click();
-      } catch {
-        error.textContent = 'Invio non riuscito. Riprova tra poco.';
-        button.disabled = false;
+        await submitLead('guida', { ...fields, guida: form.dataset.guida });
+      } catch (err) {
+        // Se l'invio non va a buon fine il PDF si scarica comunque
+        console.warn(err);
       }
+      form.hidden = true;
+      ok.hidden = false;
+      box.querySelector<HTMLAnchorElement>('[data-link]')?.click();
+      unlock(String(fields.email || ''));
     });
   }
 </script>

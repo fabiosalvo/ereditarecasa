@@ -1,0 +1,27 @@
+---
+/**
+ * Divide il testo della guida in parte libera e parte riservata. Il taglio cade sul titolo h2
+ * più vicino al primo terzo del testo; il resto va in <div class="gated-rest">. Il testo completo
+ * resta nell'HTML (motori di ricerca, stampa, PDF): la pagina lo nasconde solo a chi non ha
+ * ancora lasciato l'email.
+ */
+const html = await Astro.slots.render('default');
+const textLen = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').length;
+const total = textLen(html);
+const heads = [...html.matchAll(/<h2[\s>]/g)].map((m) => m.index!).filter((i) => i > 0);
+let cut = -1;
+let best = Infinity;
+for (const i of heads) {
+  const share = textLen(html.slice(0, i)) / total;
+  // preferisce il primo h2 dopo il terzo, accetta anche poco prima
+  const score = share >= 1 / 3 ? share - 1 / 3 : (1 / 3 - share) * 2;
+  if (score < best && share > 0.2 && share < 0.55) {
+    best = score;
+    cut = i;
+  }
+}
+const free = cut > 0 ? html.slice(0, cut) : html;
+const rest = cut > 0 ? html.slice(cut) : '';
+---
+<Fragment set:html={free} />
+{rest && <div class="gated-rest" set:html={rest} />}
