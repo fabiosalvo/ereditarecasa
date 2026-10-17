@@ -75,7 +75,7 @@ Per chi vive fuori dall'Italia valgono alcune regole particolari: vedi [erede al
 | Ritrasmissione dopo uno scarto | 5 giorni dalla ricevuta di scarto |
 | Accettazione dell'eredità | Il diritto si prescrive in 10 anni |
 
-In alcuni casi i 12 mesi decorrono da una data diversa dal decesso: per esempio, se l'eredità è accettata con beneficio d'inventario entro il termine, dalla scadenza del termine per l'inventario; per chi diventa erede dopo la rinuncia di un altro, dalla data della rinuncia o da quando ne ha avuto notizia. Calcola le tue date esatte con lo [scadenzario della successione](/strumenti/scadenzario-successione/).
+In alcuni casi i 12 mesi decorrono da una data diversa dal decesso: per esempio, se l'eredità è accettata con beneficio d'inventario entro il termine, dalla scadenza del termine per l'inventario; per chi diventa erede dopo la rinuncia di un altro, dalla data della rinuncia o da quando ne ha avuto notizia. Calcola le tue date esatte con lo [scadenzario della successione](/strumenti/scadenzario-successione/): basta la data del decesso per avere tutte le scadenze principali in un unico calendario.
 
 ## Documenti da preparare
 
@@ -167,6 +167,8 @@ Succede spesso di scoprire dopo l'invio un conto in un'altra banca o un terreno 
 | Bene dimenticato scoperto dopo | Dichiarazione integrativa o sostitutiva, con eventuali imposte e sanzioni |
 | L'ufficio chiede documenti mancanti | Sostitutiva di soli allegati (frontespizio e quadro EG) |
 | Volture non riuscite per dati catastali errati | Correzione dei dati catastali e domanda di voltura |
+
+> **Attenzione.** Se stai pensando di **rinunciare** all'eredità o di accettare con **beneficio d'inventario**, decidi prima di inviare la dichiarazione e valuta con il notaio se barrare la casella per non chiedere la voltura automatica: alcune sentenze hanno considerato la voltura un'accettazione tacita.
 
 ## Chi può farla e quanto costa
 

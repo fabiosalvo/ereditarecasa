@@ -124,7 +124,7 @@ Laura e Davide ereditano dalla madre vedova, senza testamento, un appartamento (
 | Imposta di bollo | | 85 € |
 | **Totale da versare** | | **3.985 €** |
 
-Ogni anno, poi, Laura e Davide pagano l'IMU sulla loro metà. **Se Davide avesse i requisiti prima casa** (per esempio, non ha altre case in quel Comune e vi trasferisce la residenza entro 18 mesi), ipotecaria e catastale scenderebbero a 200 € ciascuna: totale 605 €, con un risparmio di 3.380 €.
+Ogni anno, poi, Laura e Davide pagano l'IMU sulla loro metà, perché nessuno dei due ci abita. **Se Davide avesse i requisiti prima casa** (per esempio, non ha altre case in quel Comune e vi trasferisce la residenza entro 18 mesi), ipotecaria e catastale scenderebbero a 200 € ciascuna: totale 605 €, con un risparmio di 3.380 €.
 
 ## Esempio pratico 2: due fratelli
 

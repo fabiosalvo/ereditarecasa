@@ -61,7 +61,7 @@ Se la casa ha un mutuo, il debito non sparisce con la morte: passa agli eredi ch
 
 Se gli eredi vendono, il mutuo si estingue al rogito con una parte del prezzo e il notaio cura la cancellazione dell'ipoteca. Se i debiti complessivi superano il valore dei beni, valuta l'accettazione con beneficio d'inventario o la rinuncia. Approfondisci in [debiti e ipoteca sulla casa ereditata](/casa-ereditata/accettare-rinunciare/debiti-ipoteca/).
 
-**Esempio.** Roberto lascia ai due figli una casa da 200.000 € con 60.000 € di mutuo residuo e nessuna polizza. Se vendono, al rogito 60.000 € vanno alla banca e restano 140.000 € da dividere, meno le spese. Se uno dei due vuole tenerla, può subentrare nel mutuo, con l'accordo della banca, e liquidare l'altro sulla base del valore netto: (200.000 − 60.000) / 2 = 70.000 €.
+**Esempio pratico.** Roberto lascia ai due figli una casa da 200.000 € con 60.000 € di mutuo residuo e nessuna polizza. Se vendono, al rogito 60.000 € vanno alla banca e restano 140.000 € da dividere, meno le spese. Se uno dei due vuole tenerla, può subentrare nel mutuo, con l'accordo della banca, e liquidare l'altro sulla base del valore netto: (200.000 − 60.000) / 2 = 70.000 €.
 
 ## Casa con inquilino
 
@@ -130,6 +130,8 @@ Se nell'eredità ci sono più immobili, tutti vanno nella stessa dichiarazione d
 ## Un erede che non risponde
 
 A volte uno dei chiamati all'eredità non si fa sentire: non accetta, non rinuncia, non firma. Senza di lui la casa intera non si vende. Chiunque vi abbia interesse, per esempio un altro erede, può chiedere al giudice di fissargli un **termine** entro cui dichiarare se accetta o rinuncia: se non risponde entro quel termine, perde il diritto di accettare e la sua quota va agli altri chiamati. È una procedura da fare con un avvocato, ma spesso basta avviarla perché la persona si decida. Se l'erede risponde ma non è d'accordo sulla vendita, vedi invece [eredi in disaccordo](/eredi-in-disaccordo/).
+
+> **Attenzione.** Molte di queste situazioni si scoprono tardi, quando c'è già un acquirente. Controlla visura ipotecaria, planimetria e provenienza **prima** di firmare un preliminare: dopo, ogni sorpresa diventa un ritardo o uno sconto sul prezzo.
 
 ## Checklist: capire subito se il tuo è un caso particolare
 
