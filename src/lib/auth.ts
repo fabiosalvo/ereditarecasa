@@ -86,7 +86,9 @@ export function sameOrigin(request: Request): boolean {
   }
 }
 
+// In produzione il sito è sempre in https (TLS chiuso da Railway prima di Caddy): cookie sempre Secure
 export const isSecure = (request: Request) =>
+  process.env.NODE_ENV === 'production' ||
   (request.headers.get('x-forwarded-proto') ?? new URL(request.url).protocol.replace(':', '')) === 'https';
 
 const hits = new Map<string, { n: number; reset: number }>();
