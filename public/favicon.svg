@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1b3022"/><path d="M16 30 32 17l16 13v17a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2z" fill="none" stroke="#d0e9d4" stroke-width="4" stroke-linejoin="round"/><rect x="28" y="36" width="8" height="13" rx="1.5" fill="#ff9d7a"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 5 56 54" role="img" aria-label="EreditareCasa">
+  <path d="M7 30.5 32 9.5l25 21" fill="none" stroke="#95482c" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.5 28.4 32 13.8l17.5 14.6V51a4.5 4.5 0 0 1-4.5 4.5H19a4.5 4.5 0 0 1-4.5-4.5z" fill="#1b3022"/>
+  <circle cx="32" cy="34.5" r="5.6" fill="#f5fbf5"/>
+  <path d="M29.3 37.6h5.4l1.9 11.4h-9.2z" fill="#f5fbf5"/>
+</svg>
