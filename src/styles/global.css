@@ -191,3 +191,22 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); bor
 /* Tipografia stile Claude: etichette in monospazio, contrasto AA */
 .eyebrow { color: var(--brand); }
 .meta { font-size: .78rem; }
+
+/* Hero a tutta larghezza: testo a sinistra, foto a destra con sfumatura a metà */
+.hero-full { margin: 0; position: relative; overflow: hidden; display: flex; align-items: center; min-height: clamp(540px, 74vh, 760px); background: var(--bg); }
+.hero-bg { position: absolute; inset: 0 0 0 32%; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; display: block; }
+.hero-bg::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, var(--bg) 0%, rgba(250, 249, 245, .82) 14%, rgba(250, 249, 245, .35) 30%, rgba(250, 249, 245, 0) 48%);
+}
+.hero-inner { position: relative; z-index: 2; width: 100%; padding-top: 56px; padding-bottom: 56px; }
+.hero-text { max-width: 540px; }
+.hero-text .lead { color: #3d3c39; }
+@media (max-width: 860px) {
+  .hero-full { display: block; min-height: 0; }
+  .hero-bg { position: relative; inset: auto; height: 320px; }
+  .hero-bg img { object-position: 70% 40%; }
+  .hero-bg::before { background: linear-gradient(0deg, var(--bg) 0%, rgba(250, 249, 245, 0) 50%); }
+  .hero-inner { padding-top: 0; padding-bottom: 32px; margin-top: -24px; }
+}

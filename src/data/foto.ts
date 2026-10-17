@@ -1,6 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import type { AreaId } from './site';
-import hero from '../assets/foto/hero.jpg';
+import hero from '../assets/foto/hero-anziani.jpg';
 import chiavi from '../assets/foto/chiavi.jpg';
 import vendere from '../assets/foto/vendere.jpg';
 import tasse from '../assets/foto/tasse.jpg';
@@ -15,8 +15,8 @@ import decidere from '../assets/foto/decidere.jpg';
 export type Foto = { src: ImageMetadata; alt: string };
 
 export const FOTO_HERO: Foto = {
-  src: hero, // 1775922428717
-  alt: 'Camera di una casa di campagna con travi a vista e una finestra aperta sulle colline toscane',
+  src: hero, // 1554331292-735256644d5f
+  alt: 'Una coppia di anziani seduta di spalle su una panchina guarda le colline e i vigneti',
 };
 
 export const FOTO_CHIAVI: Foto = {
