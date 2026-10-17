@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+// Dati da docs/ricerca-dati.md (fonti ufficiali aperte il 17 ottobre 2026)
+const KPI = [
+  { valore: '≈ 505.000', etichetta: 'successioni registrate nel 2024', nota: 'Il 95% contiene immobili', fonte: 'MEF – Dipartimento Finanze' },
+  { valore: '40,5 mld €', etichetta: 'valore catastale degli immobili in successione', nota: 'Media 84.740 € per pratica (valori catastali, non di mercato)', fonte: 'MEF – Dipartimento Finanze' },
+  { valore: '11%', etichetta: 'delle successioni paga l’imposta di successione', nota: '57.060 pratiche, 780 milioni in tutto', fonte: 'MEF – Dipartimento Finanze' },
+  { valore: '949 mln €', etichetta: 'di imposte ipotecaria e catastale sugli immobili ereditati', nota: 'Più dell’imposta di successione vera e propria', fonte: 'MEF – Dipartimento Finanze' },
+  { valore: '39,4%', etichetta: 'dei proprietari di casa ha più di 65 anni', nota: 'Detengono circa il 44% del valore abitativo (calcolo nostro)', fonte: 'MEF / Agenzia delle Entrate' },
+  { valore: '9,6 mln', etichetta: 'abitazioni non occupate', nota: 'Il 27,2% del totale; 34,9% nelle Isole', fonte: 'ISTAT, Censimento 2021' },
+];
+
+// Imposte su successioni e donazioni in % del PIL, 2024 (OCSE, Revenue Statistics, voce 4300)
+const PIL = [
+  { paese: 'Francia', v: 0.73 },
+  { paese: 'Belgio', v: 0.62 },
+  { paese: 'Finlandia', v: 0.46 },
+  { paese: 'Paesi Bassi', v: 0.3 },
+  { paese: 'Regno Unito', v: 0.29 },
+  { paese: 'Danimarca', v: 0.28 },
+  { paese: 'Germania', v: 0.23 },
+  { paese: 'Spagna', v: 0.22 },
+  { paese: 'Svizzera', v: 0.18 },
+  { paese: 'Media OCSE (2023)', v: 0.15, media: true },
+  { paese: 'Irlanda', v: 0.15 },
+  { paese: 'Italia', v: 0.047, italia: true },
+];
+const max = Math.max(...PIL.map((p) => p.v));
+const fmt = (n: number) => n.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 3 });
+
+const FIGLIO = [
+  { paese: 'Italia', regola: 'Franchigia 1.000.000 € per figlio, poi 4%', esempio: '0 €' },
+  { paese: 'Germania', regola: 'Franchigia 400.000 €, poi 7%–30%', esempio: '≈ 90.000 €' },
+  { paese: 'Francia', regola: 'Abbattimento 100.000 €, poi 5%–45%', esempio: '≈ 213.000 €' },
+  { paese: 'Regno Unito', regola: '40% oltre 325.000 £ (fino a 500.000 £ con la casa ai figli)', esempio: 'Fino a ≈ 250.000 €' },
+  { paese: 'Spagna', regola: 'Scala statale 7,65%–34%, con forti riduzioni regionali', esempio: 'Dipende dalla regione' },
+  { paese: 'Austria, Svezia', regola: 'Imposta abolita (2008, 2004)', esempio: '0 €' },
+];
+
+const FONTI = [
+  ['MEF – Dipartimento Finanze, Atti di successione, anno d’imposta 2024', 'https://www1.finanze.gov.it/finanze/registro/public/index.php?tree=2025ACASSER0101'],
+  ['ISTAT, Censimento permanente 2021 – Caratteristiche delle abitazioni', 'https://www.istat.it/comunicato-stampa/censimento-permanente-2021-caratteristiche-delle-abitazioni/'],
+  ['ISTAT, Indicatori demografici – Anno 2025', 'https://www.istat.it/comunicato-stampa/indicatori-demografici-anno-2025/'],
+  ['MEF / Agenzia delle Entrate, Gli immobili in Italia, edizione 2023', 'https://www1.finanze.gov.it/finanze/immobili/public/contenuti/immobili_2023.pdf'],
+  ['Agenzia delle Entrate – OMI, Rapporto Immobiliare 2026 – Residenziale', 'https://www.agenziaentrate.gov.it/portale/documents/20143/263076/RI2026_Residenziale20260521.pdf/892125df-86a3-c21a-f8a1-86323f45ae93?t=1779343518553'],
+  ['Banca d’Italia, Indagine sui bilanci delle famiglie italiane 2022', 'https://www.bancaditalia.it/pubblicazioni/indagine-famiglie/bil-fam2022/tavole_cross_section.xlsx'],
+  ['Banca d’Italia, I bilanci delle famiglie italiane nel 2014', 'https://www.bancaditalia.it/pubblicazioni/indagine-famiglie/bil-fam2014/suppl_64_15.pdf'],
+  ['OCSE, Revenue Statistics (voce 4300, imposte su successioni e donazioni)', 'https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_OECD@DF_RSOECD,/.TAX_REV.S13.T_4300._T.PT_OTR_SECTOR+PT_B1GQ.A?startPeriod=2019&format=csvfilewithlabels'],
+  ['OCSE, Inheritance Taxation in OECD Countries (2021), presentazione', 'https://www.oecd.org/tax/tax-policy/inheritance-taxation-in-oecd-countries-presentation-may-2021.pdf'],
+  ['Agenzia delle Entrate, Imposta di successione – aliquote e franchigie', 'https://www.agenziaentrate.gov.it/portale/schede/pagamenti/imposta-di-successione/aliquote-e-franchigie'],
+  ['Service-Public.gouv.fr, Droits de succession (F14198)', 'https://www.service-public.gouv.fr/particuliers/vosdroits/F14198'],
+  ['ErbStG §19 (gesetze-im-internet.de)', 'https://www.gesetze-im-internet.de/erbstg_1974/__19.html'],
+  ['GOV.UK, Inheritance Tax', 'https://www.gov.uk/inheritance-tax'],
+  ['Osservatorio CPI, L’evoluzione dell’imposta sulle successioni in Italia (2023)', 'https://osservatoriocpi.unicatt.it/ocpi-pubblicazioni-l-evoluzione-dell-imposta-sulle-successioni-in-italia-e-un-confronto-a-livello-europeo'],
+];
+
+const datasetLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'Osservatorio sulle case ereditate in Italia',
+  description: 'Successioni, immobili ereditati, imposte e confronto europeo, da fonti ufficiali (MEF, ISTAT, Banca d’Italia, Agenzia delle Entrate, OCSE).',
+  dateModified: '2026-10-17',
+  creator: { '@type': 'Organization', name: 'EreditareCasa' },
+  isBasedOn: FONTI.map(([, u]) => u),
+};
+---
+<Base title="Osservatorio: le case ereditate in Italia, i numeri" description="Quante successioni ci sono ogni anno, quanti immobili si ereditano, chi paga l’imposta e come l’Italia si confronta con l’Europa. Dati ufficiali con fonti." jsonLd={[datasetLd]}>
+  <div class="wrap">
+    <Breadcrumbs items={[{ name: 'Osservatorio', href: '/osservatorio/' }]} />
+    <div class="read">
+      <p class="eyebrow">Osservatorio · aggiornato al 17 ottobre 2026</p>
+      <h1>Le case ereditate in Italia, in numeri</h1>
+      <p class="lead">Ogni anno in Italia si aprono circa mezzo milione di successioni e quasi tutte contengono una casa. Ma solo una su nove paga l’imposta di successione: sugli eredi pesano di più le imposte ipotecaria e catastale.</p>
+    </div>
+
+    <section aria-labelledby="kpi-title">
+      <h2 id="kpi-title" class="sr-only">Numeri chiave</h2>
+      <div class="kpi-grid">
+        {KPI.map((k) => (
+          <div class="kpi">
+            <p class="kpi-value">{k.valore}</p>
+            <p class="kpi-label">{k.etichetta}</p>
+            <p class="kpi-note">{k.nota}</p>
+            <p class="kpi-src">{k.fonte}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="read prose" aria-labelledby="mercato-title">
+      <h2 id="mercato-title">Chi vende casa ha più di 60 anni</h2>
+      <p>Nel 2025 in Italia si sono vendute <strong>766.757 abitazioni</strong> (+6,4%), a un valore medio di <strong>162.100 €</strong>. Il <strong>50,5% dei venditori</strong> aveva più di 60 anni e un quarto più di 70, mentre gli over 70 erano solo il 5,5% degli acquirenti. È il segno delle case che passano da una generazione all’altra e tornano sul mercato (Agenzia delle Entrate – OMI, Rapporto Immobiliare 2026).</p>
+      <p>Il 74,3% delle famiglie vive in una casa di proprietà, che vale in media 214.743 € secondo i proprietari (Banca d’Italia, 2022). Già nel 2014 una famiglia su tre aveva ricevuto un’eredità o una donazione, in media di circa 72.000 €: un terzo della ricchezza delle famiglie arriva da lì.</p>
+      <p>Nei prossimi dieci anni potrebbero cambiare mano circa <strong>1.800 miliardi di euro</strong> tra generazioni: è una stima privata di Itinerari Previdenziali (2026), da leggere come ordine di grandezza e non come dato ufficiale.</p>
+    </section>
+
+    <section aria-labelledby="europa-title">
+      <div class="read">
+        <h2 id="europa-title">L’Italia tassa le eredità meno di quasi tutta Europa</h2>
+        <p>Gettito delle imposte su successioni e donazioni in percentuale del PIL, 2024. L’Italia raccoglie lo 0,047% del PIL, meno di un terzo della media OCSE.</p>
+      </div>
+      <figure class="barchart" aria-describedby="europa-note">
+        {PIL.map((p) => (
+          <div class={`bar-row${p.italia ? ' is-italia' : ''}${p.media ? ' is-media' : ''}`} title={`${p.paese}: ${fmt(p.v)}% del PIL`}>
+            <span class="bar-label">{p.paese}</span>
+            <span class="bar-track"><span class="bar-fill" style={`width:${Math.max(1.5, (p.v / max) * 100)}%`}></span></span>
+            <span class="bar-value">{fmt(p.v)}%</span>
+          </div>
+        ))}
+        <figcaption id="europa-note">Fonte: OCSE, Revenue Statistics, voce 4300 (dati 2024; media OCSE 2023). Austria, Svezia e Portogallo non applicano più l’imposta di successione nella forma classica.</figcaption>
+      </figure>
+    </section>
+
+    <section class="read prose" aria-labelledby="figlio-title">
+      <h2 id="figlio-title">Un figlio eredita 1 milione di euro: quanto paga?</h2>
+      <table>
+        <thead><tr><th>Paese</th><th>Regola per i figli</th><th>Imposta su 1 milione</th></tr></thead>
+        <tbody>{FIGLIO.map((f) => <tr><td>{f.paese}</td><td>{f.regola}</td><td>{f.esempio}</td></tr>)}</tbody>
+      </table>
+      <p>Calcoli semplificati su un erede figlio, senza altre donazioni ricevute e senza agevolazioni particolari (fonti: Agenzia delle Entrate, Service-Public.gouv.fr, ErbStG, GOV.UK; stima simile in Osservatorio CPI, 2023). In Italia restano comunque dovute le imposte ipotecaria e catastale sulla casa: vedi <a href="/casa-ereditata/tasse/">tasse sulla casa ereditata</a> e il confronto completo in <a href="/casa-ereditata/tasse/europa/">tasse di successione in Europa</a>.</p>
+
+      <h2>Le tabelle complete</h2>
+      <table>
+        <thead><tr><th>Paese</th><th>% del PIL (2024)</th></tr></thead>
+        <tbody>{PIL.map((p) => <tr><td>{p.paese}</td><td>{fmt(p.v)}%</td></tr>)}</tbody>
+      </table>
+
+      <h2>Come leggere questi numeri</h2>
+      <ul>
+        <li>I valori degli immobili in successione sono <strong>catastali</strong>, molto più bassi dei valori di mercato.</li>
+        <li>Il numero di successioni è una stima: l’amministrazione pubblica il numero di pratiche registrate, non quello delle dichiarazioni.</li>
+        <li>Non esiste un dato ufficiale pubblicato sulla quota di case ricevute in eredità: per questo non lo riportiamo.</li>
+        <li>Le stime sul trasferimento futuro di ricchezza sono di centri studi privati e vanno lette come ordini di grandezza.</li>
+      </ul>
+      <p>Sei un giornalista o un ricercatore? Puoi citare questi dati indicando “Osservatorio EreditareCasa su dati MEF, ISTAT, Banca d’Italia, OCSE” e il link a questa pagina.</p>
+
+      <h2>Fonti</h2>
+      <ul class="fonti-list">{FONTI.map(([t, u]) => <li><a href={u} rel="noopener" target="_blank">{t}</a></li>)}</ul>
+    </section>
+  </div>
+</Base>

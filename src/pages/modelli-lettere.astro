@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import GuidaDownload from '../components/GuidaDownload.astro';
+import { MODELLI } from '../data/modelli';
+import { PDF_COMPLETO } from '../data/site';
+
+const categorie = [...new Set(MODELLI.map((m) => m.categoria))];
+const title = '12 modelli di lettera per chi ha ereditato una casa';
+const description =
+  'Lettere pronte da copiare per banca, utenze, condominio, inquilino, coeredi, Comune e Agenzia delle Entrate: quando usarle, a chi mandarle e cosa evitare.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: title,
+  itemListElement: MODELLI.map((m, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: m.titolo,
+    url: `https://www.ereditarecasa.it/modelli-lettere/#${m.id}`,
+  })),
+};
+---
+<Base title={title} description={description} jsonLd={[jsonLd]}>
+  <div class="wrap">
+    <Breadcrumbs items={[{ name: 'Strumenti', href: '/strumenti/' }, { name: 'Modelli di lettera', href: '/modelli-lettere/' }]} />
+    <p class="eyebrow">Kit gratuito · {MODELLI.length} modelli</p>
+    <h1>Modelli di lettera per la casa ereditata</h1>
+    <p class="lead">
+      Dopo un decesso bisogna scrivere a molte persone: la banca, i fornitori di luce e gas, l'amministratore,
+      l'inquilino, i fratelli. Qui trovi le lettere già impostate. Compili i campi tra
+      {" "}<strong>[parentesi quadre]</strong>, copi e invii.
+    </p>
+    <div class="callout">
+      <strong>Prima di inviare.</strong> Alcuni gesti valgono come accettazione dell'eredità: incassare i canoni,
+      vendere la propria quota, a volte anche pagare spese con i soldi del defunto. Ogni modello ha un riquadro
+      "Attenzione": leggilo. Se non hai ancora deciso se accettare, parlane con un notaio prima di firmare.
+    </div>
+
+    <nav class="modelli-indice" aria-label="Indice dei modelli">
+      {categorie.map((c) => (
+        <div>
+          <h2 class="h-small">{c}</h2>
+          <ol>
+            {MODELLI.filter((m) => m.categoria === c).map((m) => (
+              <li><a href={`#${m.id}`}>{m.titolo}</a></li>
+            ))}
+          </ol>
+        </div>
+      ))}
+    </nav>
+
+    {MODELLI.map((m, i) => (
+      <section class="modello" id={m.id}>
+        <p class="eyebrow">{m.categoria} · Modello {i + 1}</p>
+        <h2>{m.titolo}</h2>
+        <dl class="modello-meta">
+          <dt>Quando serve</dt><dd>{m.quando}</dd>
+          <dt>A chi</dt><dd>{m.destinatario}</dd>
+          <dt>Come inviarla</dt><dd>{m.invio}</dd>
+        </dl>
+        {m.attenzione && (
+          <div class="callout"><strong>Attenzione.</strong> {m.attenzione}</div>
+        )}
+        <div class="modello-testo">
+          <div class="modello-azioni no-print">
+            <button type="button" class="btn btn-ghost" data-copia={`t-${m.id}`}>Copia il testo</button>
+            <button type="button" class="btn btn-ghost" data-scarica={`t-${m.id}`} data-nome={m.id}>Scarica .txt</button>
+          </div>
+          <pre id={`t-${m.id}`}>{m.testo}</pre>
+        </div>
+        {(m.guida || m.fonti?.length) && (
+          <p class="modello-link">
+            {m.guida && <a href={m.guida}>Leggi la guida collegata</a>}
+            {m.fonti?.length ? (
+              <>
+                {m.guida && ' · '}Fonti:{' '}
+                {m.fonti.map((f, j) => (
+                  <>{j > 0 && ', '}<a href={f.url} rel="noopener" target="_blank">{f.title}</a></>
+                ))}
+              </>
+            ) : null}
+          </p>
+        )}
+      </section>
+    ))}
+
+    <section class="lead-magnet">
+      <GuidaDownload pdf={PDF_COMPLETO} guida="modelli-lettere" idPrefix="modelli" titolo="Vuoi tutto in un unico PDF?" testo="Scarica la guida completa alla casa ereditata: passi, scadenze, tasse e vendita. Inserisci la tua email e il download parte subito." />
+    </section>
+
+    <p class="muted small">
+      I modelli sono testi generali e non sostituiscono la consulenza di un notaio, avvocato o commercialista.
+      Aggiornati a ottobre 2026.
+    </p>
+  </div>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copia]').forEach((b) => {
+    b.addEventListener('click', async () => {
+      const t = document.getElementById(b.dataset.copia!)?.textContent ?? '';
+      try {
+        await navigator.clipboard.writeText(t);
+        const old = b.textContent;
+        b.textContent = 'Copiato';
+        setTimeout(() => (b.textContent = old), 1800);
+      } catch {
+        const r = document.createRange();
+        r.selectNodeContents(document.getElementById(b.dataset.copia!)!);
+        const s = getSelection();
+        s?.removeAllRanges();
+        s?.addRange(r);
+      }
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>('[data-scarica]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const t = document.getElementById(b.dataset.scarica!)?.textContent ?? '';
+      const url = URL.createObjectURL(new Blob([t], { type: 'text/plain;charset=utf-8' }));
+      const a = Object.assign(document.createElement('a'), { href: url, download: `${b.dataset.nome}.txt` });
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  });
+</script>
