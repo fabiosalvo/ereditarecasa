@@ -27,7 +27,7 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID ?? '';
   <form data-auth-form novalidate>
     <div class="hp" aria-hidden="true"><label>Lascia vuoto <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
     <div class="field" data-only="registrati">
-      <label for={`${id}-nome`}>Nome (facoltativo)</label>
+      <label for={`${id}-nome`}>Nome</label>
       <input id={`${id}-nome`} name="nome" type="text" autocomplete="given-name" />
     </div>
     <div class="row">
