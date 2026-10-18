@@ -12,7 +12,7 @@ const GOOGLE_CLIENT_ID = '';
 
 const COLUMNS = {
   valutazione: [
-    'ricevuto', 'nome', 'telefono', 'email', 'comune', 'indirizzo', 'tipologia', 'mq', 'occupazione',
+    'ricevuto', 'nome', 'telefono', 'email', 'comune', 'indirizzo', 'civico', 'tipologia', 'mq', 'occupazione',
     'successione', 'eredi', 'accordo', 'obiettivo', 'tempi', 'note', 'priorita',
     'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm', 'stato',
   ],
@@ -90,7 +90,7 @@ function notify(row) {
     `Nome: ${row.nome}`,
     `Telefono: ${row.telefono}`,
     `Email: ${row.email}`,
-    `Immobile: ${row.tipologia}, ${row.mq} m², ${row.comune} ${row.indirizzo || ''}`,
+    `Immobile: ${row.tipologia}, ${row.mq} m², ${row.indirizzo || row.comune} ${row.civico || ''}`,
     `Stato: ${row.occupazione}`,
     `Successione: ${row.successione} · Eredi: ${row.eredi} · Accordo: ${row.accordo}`,
     `Obiettivo: ${row.obiettivo} · Tempi: ${row.tempi}`,

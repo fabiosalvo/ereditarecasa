@@ -779,3 +779,5 @@ input[type='password'] { width: 100%; min-height: 50px; padding: 12px 14px; bord
 select { height: 50px; padding-left: 11px; padding-right: 40px; text-overflow: ellipsis; }
 input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
 input[type='number']::-webkit-outer-spin-button, input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.row.row--addr { grid-template-columns: minmax(0, 1fr) 140px; }
+@media (max-width: 480px) { .row.row--addr { grid-template-columns: minmax(0, 1fr) 96px; } }

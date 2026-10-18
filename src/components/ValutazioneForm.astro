@@ -12,14 +12,15 @@ const p = Astro.props.idPrefix ?? 'val';
 
   <div class="step" data-step="1">
     <h2>La casa</h2>
-    <div class="row">
+    <div class="row row--addr">
       <div class="field">
-        <label for={`${p}-comune`}>Comune</label>
-        <input id={`${p}-comune`} name="comune" type="text" autocomplete="address-level2" required />
+        <label for={`${p}-indirizzo`}>Indirizzo della casa</label>
+        <input id={`${p}-indirizzo`} name="indirizzo" type="text" autocomplete="off" placeholder="Via o piazza, comune" required />
+        <input type="hidden" name="comune" />
       </div>
       <div class="field">
-        <label for={`${p}-indirizzo`}>Indirizzo <span class="hint">(facoltativo)</span></label>
-        <input id={`${p}-indirizzo`} name="indirizzo" type="text" autocomplete="street-address" />
+        <label for={`${p}-civico`}>Civico</label>
+        <input id={`${p}-civico`} name="civico" type="text" autocomplete="off" inputmode="text" maxlength="10" placeholder="es. 12/A" />
       </div>
     </div>
     <div class="row">
@@ -140,23 +141,31 @@ const p = Astro.props.idPrefix ?? 'val';
 <script>
   import { formToObject, submitLead } from '../scripts/lead';
   import { attachAutocomplete } from '../scripts/autocomplete';
-  import { suggestAddresses, suggestComuni } from '../scripts/geocoding';
+  import { suggestAddresses } from '../scripts/geocoding';
 
   // Modulo a 3 passi: può comparire più volte (pagina dedicata e modale)
   for (const form of document.querySelectorAll<HTMLFormElement>('[data-valutazione-form]')) {
-    // Suggerimenti di comune e indirizzo, come nel sito Gromia (Stadia Maps, solo Italia)
-    const comune = form.querySelector<HTMLInputElement>('input[name="comune"]');
-    const indirizzo = form.querySelector<HTMLInputElement>('input[name="indirizzo"]');
-    if (comune) attachAutocomplete(comune, suggestComuni, (p) => p.title);
-    if (indirizzo)
-      attachAutocomplete(
-        indirizzo,
-        (t) => suggestAddresses(t, comune?.value.trim() ?? ''),
-        (p) => {
-          if (comune && p.comune && !comune.value.trim()) comune.value = p.comune;
-          return p.title;
-        },
-      );
+    // Indirizzo con suggerimenti (Stadia Maps, solo Italia, come nel sito Gromia) e civico a parte
+    const comune = form.querySelector<HTMLInputElement>('input[name="comune"]')!;
+    const indirizzo = form.querySelector<HTMLInputElement>('input[name="indirizzo"]')!;
+    const civico = form.querySelector<HTMLInputElement>('input[name="civico"]')!;
+    attachAutocomplete(indirizzo, (t) => suggestAddresses(t), (pl) => {
+      comune.value = pl.comune ?? '';
+      // Il civico, se arriva dal suggerimento, va nel suo campo
+      const m = pl.title.match(/^(.*?)\s+(\d+[a-z]?(?:\/\w+)?)$/i);
+      if (m && pl.comune) {
+        civico.value ||= m[2];
+        pl = { ...pl, title: m[1] };
+      }
+      setTimeout(() => civico.focus(), 0);
+      return pl.subtitle ? `${pl.title}, ${pl.subtitle}` : pl.title;
+    });
+    // Se l'indirizzo viene riscritto a mano, il comune scelto prima non vale più
+    indirizzo.addEventListener('input', () => (comune.value = ''));
+    // Senza un suggerimento scelto, il comune è la parte dopo la prima virgola ("Via Roma, Viareggio")
+    form.addEventListener('submit', () => {
+      if (!comune.value) comune.value = indirizzo.value.split(',')[1]?.trim() ?? '';
+    }, true);
 
     const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
     const prev = form.querySelector<HTMLButtonElement>('[data-prev]')!;
