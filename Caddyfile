@@ -23,6 +23,9 @@
 	handle {
 		root * /app/dist/client
 		header /_astro/* Cache-Control "public, max-age=31536000, immutable"
+		# Pagine HTML: il browser ricontrolla sempre, così dopo un aggiornamento si vede subito la versione nuova
+		@html path / *.html */
+		header @html Cache-Control "no-cache"
 		# I PDF si scaricano dopo il modulo contatti: niente indicizzazione
 		header /pdf/* X-Robots-Tag "noindex"
 		header /area-riservata/* X-Robots-Tag "noindex"
