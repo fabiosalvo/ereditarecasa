@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="2 8 58 51" role="img" aria-label="EreditareCasa">
   <defs><mask id="m"><rect width="64" height="64" fill="#fff"/><path d="M30 41 44 28.5 58 41V57H30z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/></mask></defs>
   <path d="M5 28.5 23.5 11 42 28.5V57H5z" fill="#fff5ec" stroke="#fff5ec" stroke-width="3" stroke-linejoin="round" mask="url(#m)"/>
-  <path d="M30 41 44 28.5 58 41V57H30z" fill="#d9a877" stroke="#d9a877" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M30 41 44 28.5 58 41V57H30z" fill="#e3cba9" stroke="#e3cba9" stroke-width="3" stroke-linejoin="round"/>
 </svg>
