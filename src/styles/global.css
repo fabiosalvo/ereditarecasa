@@ -773,3 +773,9 @@ input[type='password'] { width: 100%; min-height: 50px; padding: 12px 14px; bord
 .link-list li { padding: 12px 0; border-bottom: 1px solid var(--line, #e7dccf); }
 .link-list li a { font-weight: 600; }
 .link-list .post-meta { display: block; font-size: 13px; color: #555; margin-top: 2px; }
+
+/* Campi dei moduli: altezza fissa, niente stiramento quando il campo accanto ha un suggerimento */
+.field { align-content: start; }
+select { height: 50px; padding-left: 11px; padding-right: 40px; text-overflow: ellipsis; }
+input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
+input[type='number']::-webkit-outer-spin-button, input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }

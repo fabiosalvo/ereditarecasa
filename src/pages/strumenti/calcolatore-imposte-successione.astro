@@ -22,10 +22,11 @@ import CtaBox from '../../components/CtaBox.astro';
             <div class="field">
               <label for="categoria">Categoria catastale</label>
               <select id="categoria" name="categoria">
-                <option value="120">Abitazione o pertinenza (A, escluso A/10; C/2, C/6, C/7)</option>
+                <option value="120">Abitazione, box o cantina</option>
                 <option value="60">Ufficio (A/10)</option>
                 <option value="40.8">Negozio (C/1)</option>
               </select>
+              <p class="hint">Abitazione: categorie A (escluso A/10), C/2, C/6, C/7.</p>
             </div>
           </div>
           <div class="row">
@@ -36,11 +37,12 @@ import CtaBox from '../../components/CtaBox.astro';
             <div class="field">
               <label for="parentela">Il tuo rapporto con il defunto</label>
               <select id="parentela" name="parentela">
-                <option value="retta">Coniuge, figlio, genitore, nipote in linea retta</option>
+                <option value="retta">Coniuge, figlio o genitore</option>
                 <option value="fratelli">Fratello o sorella</option>
-                <option value="parenti">Altro parente fino al 4° grado o affine</option>
+                <option value="parenti">Altro parente o affine</option>
                 <option value="altri">Nessuna parentela</option>
               </select>
+              <p class="hint">Il nipote figlio di un figlio vale come figlio.</p>
             </div>
           </div>
           <div class="field">
