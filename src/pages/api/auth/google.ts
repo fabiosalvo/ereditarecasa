@@ -16,18 +16,20 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
   const t = await res.json();
   if (t.aud !== clientId || !(t.email_verified === true || t.email_verified === 'true')) return json({ ok: false, error: 'Accesso con Google non valido' }, 401);
   const email = normEmail(t.email);
+  const nome = t.given_name ?? t.name ?? null;
+  const cognome = t.family_name ?? null;
   const found = await q('select id from utenti where google_sub = $1 or email = $2 order by (google_sub = $1) desc limit 1', [t.sub, email]);
   let id: number;
   if (found.rows[0]) {
     id = found.rows[0].id;
-    await q('update utenti set google_sub = $1, nome = coalesce(nome, $2) where id = $3', [t.sub, t.name ?? null, id]);
+    await q('update utenti set google_sub = $1, nome = coalesce(nome, $2), cognome = coalesce(cognome, $3) where id = $4', [t.sub, nome, cognome, id]);
   } else {
     const ins = await q(
-      'insert into utenti (email, nome, google_sub, consenso_marketing, versione_consensi) values ($1, $2, $3, $4, $5) returning id',
-      [email, t.name ?? null, t.sub, b.marketing === true, String(b.versione ?? '')],
+      'insert into utenti (email, nome, cognome, google_sub, consenso_marketing, versione_consensi) values ($1, $2, $3, $4, $5, $6) returning id',
+      [email, nome, cognome, t.sub, b.marketing === true, String(b.versione ?? '')],
     );
     id = ins.rows[0].id;
   }
   await createSession(cookies, id, isSecure(request));
-  return json({ ok: true, utente: { email, nome: t.name ?? null } });
+  return json({ ok: true, utente: { email, nome, cognome } });
 };

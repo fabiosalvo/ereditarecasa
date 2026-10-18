@@ -12,7 +12,7 @@ const GOOGLE_CLIENT_ID = '';
 
 const COLUMNS = {
   valutazione: [
-    'ricevuto', 'nome', 'telefono', 'email', 'comune', 'indirizzo', 'civico', 'tipologia', 'mq', 'occupazione',
+    'ricevuto', 'nome', 'cognome', 'telefono', 'email', 'comune', 'indirizzo', 'civico', 'tipologia', 'mq', 'occupazione',
     'successione', 'eredi', 'accordo', 'obiettivo', 'tempi', 'note', 'priorita',
     'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm', 'stato',
   ],
@@ -26,11 +26,11 @@ const COLUMNS = {
     'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm',
   ],
   registrazione: [
-    'ricevuto', 'email', 'nome', 'metodo', 'verificato', 'guida', 'consenso_privacy', 'consenso_marketing',
+    'ricevuto', 'email', 'nome', 'cognome', 'metodo', 'verificato', 'guida', 'consenso_privacy', 'consenso_marketing',
     'versione_consensi', 'pagina', 'referrer', 'utm',
   ],
   guida: [
-    'ricevuto', 'nome', 'email', 'telefono', 'comune', 'intenzione', 'guida', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
+    'ricevuto', 'nome', 'cognome', 'email', 'telefono', 'comune', 'intenzione', 'guida', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
     'pagina', 'referrer', 'utm',
   ],
 };
@@ -47,7 +47,7 @@ function doPost(e) {
       f.verificato = 'no';
       if (f.metodo === 'google' && f.google_token) {
         const g = verifyGoogle(f.google_token);
-        if (g) { f.email = g.email; f.nome = g.name || f.nome; f.verificato = 'sì'; }
+        if (g) { f.email = g.email; f.nome = g.given_name || g.name || f.nome; f.cognome = g.family_name || f.cognome; f.verificato = 'sì'; }
       }
       delete f.google_token;
     }
@@ -84,10 +84,10 @@ function priority(f) {
 }
 
 function notify(row) {
-  const subject = `[EreditareCasa] ${row.priorita}: ${row.nome || 'nuova valutazione'} – ${row.comune || ''}`;
+  const subject = `[EreditareCasa] ${row.priorita}: ${[row.nome, row.cognome].filter(Boolean).join(' ') || 'nuova valutazione'} – ${row.comune || ''}`;
   const body = [
     `Priorità: ${row.priorita}`,
-    `Nome: ${row.nome}`,
+    `Nome: ${row.nome} ${row.cognome || ''}`,
     `Telefono: ${row.telefono}`,
     `Email: ${row.email}`,
     `Immobile: ${row.tipologia}, ${row.mq} m², ${row.indirizzo || row.comune} ${row.civico || ''}`,

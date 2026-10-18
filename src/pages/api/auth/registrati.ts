@@ -18,10 +18,11 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
   if (exists.rows.length) return json({ ok: false, error: 'Esiste già un account con questa email: accedi', code: 'esiste' }, 409);
 
   const nome = String(b.nome ?? '').trim().slice(0, 80) || null;
+  const cognome = String(b.cognome ?? '').trim().slice(0, 80) || null;
   const { rows } = await q(
-    'insert into utenti (email, nome, password_hash, consenso_marketing, versione_consensi) values ($1, $2, $3, $4, $5) returning id',
-    [email, nome, await hashPassword(b.password), b.marketing === true, String(b.versione ?? '')],
+    'insert into utenti (email, nome, cognome, password_hash, consenso_marketing, versione_consensi) values ($1, $2, $3, $4, $5, $6) returning id',
+    [email, nome, cognome, await hashPassword(b.password), b.marketing === true, String(b.versione ?? '')],
   );
   await createSession(cookies, rows[0].id, isSecure(request));
-  return json({ ok: true, utente: { email, nome } });
+  return json({ ok: true, utente: { email, nome, cognome } });
 };

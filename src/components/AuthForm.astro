@@ -26,9 +26,15 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID ?? '';
 
   <form data-auth-form novalidate>
     <div class="hp" aria-hidden="true"><label>Lascia vuoto <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
-    <div class="field" data-only="registrati">
-      <label for={`${id}-nome`}>Nome</label>
-      <input id={`${id}-nome`} name="nome" type="text" autocomplete="given-name" />
+    <div class="row" data-only="registrati">
+      <div class="field">
+        <label for={`${id}-nome`}>Nome</label>
+        <input id={`${id}-nome`} name="nome" type="text" autocomplete="given-name" />
+      </div>
+      <div class="field">
+        <label for={`${id}-cognome`}>Cognome</label>
+        <input id={`${id}-cognome`} name="cognome" type="text" autocomplete="family-name" />
+      </div>
     </div>
     <div class="row">
       <div class="field">
@@ -63,7 +69,7 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID ?? '';
 
   const done = (u: Utente, nuovo: boolean) => {
     markLoggedIn(u);
-    if (nuovo) submitLead('registrazione', { email: u.email, nome: u.nome, metodo: 'account', guida: location.pathname }).catch(() => {});
+    if (nuovo) submitLead('registrazione', { email: u.email, nome: u.nome, cognome: u.cognome, metodo: 'account', guida: location.pathname }).catch(() => {});
     document.dispatchEvent(new CustomEvent('ec:login', { detail: u }));
   };
 
@@ -104,6 +110,7 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID ?? '';
               email,
               password,
               nome: fd.get('nome'),
+              cognome: fd.get('cognome'),
               privacy: true,
               marketing: !!fd.get('marketing'),
               versione: CONSENT_VERSION,

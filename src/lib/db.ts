@@ -30,6 +30,7 @@ create table if not exists reset_password (
   scade_il timestamptz not null
 );
 create index if not exists sessioni_utente on sessioni(utente_id);
+alter table utenti add column if not exists cognome text;
 `;
 
 /** Per i test: usa un'altra implementazione (es. PGlite) al posto di pg. */
@@ -49,7 +50,11 @@ export async function q(text: string, params: unknown[] = []) {
     const fn = queryFn;
     ready = (async () => {
       for (const stmt of SCHEMA.split(';').map((s) => s.trim()).filter(Boolean)) await fn(stmt);
-    })();
+    })().catch((err) => {
+      // Database non raggiungibile: si riprova alla richiesta successiva invece di restare bloccati
+      ready = null;
+      throw err;
+    });
   }
   await ready;
   return queryFn(text, params);

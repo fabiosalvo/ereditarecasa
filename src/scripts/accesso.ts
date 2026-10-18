@@ -5,6 +5,7 @@ const KEY = 'ec-accesso';
 export type Utente = {
   email: string;
   nome: string | null;
+  cognome?: string | null;
   consenso_marketing?: boolean;
   ha_password?: boolean;
   google?: boolean;
@@ -31,7 +32,7 @@ export async function me(): Promise<Utente | null> {
 
 export function markLoggedIn(u: Utente) {
   try {
-    localStorage.setItem(KEY, JSON.stringify({ email: u.email, nome: u.nome }));
+    localStorage.setItem(KEY, JSON.stringify({ email: u.email, nome: u.nome, cognome: u.cognome ?? null }));
   } catch {}
   document.documentElement.classList.remove('ec-locked');
   document.documentElement.classList.add('ec-logged');

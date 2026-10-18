@@ -33,7 +33,10 @@ import { AREAS, PDF_COMPLETO } from '../../data/site';
     <section class="split split--top">
       <form class="form" id="pref-form">
         <h2 class="h-m" style="margin-top:0">I tuoi dati</h2>
-        <div class="field"><label for="pref-nome">Nome</label><input id="pref-nome" name="nome" type="text" autocomplete="given-name" /></div>
+        <div class="row">
+          <div class="field"><label for="pref-nome">Nome</label><input id="pref-nome" name="nome" type="text" autocomplete="given-name" /></div>
+          <div class="field"><label for="pref-cognome">Cognome</label><input id="pref-cognome" name="cognome" type="text" autocomplete="family-name" /></div>
+        </div>
         <label class="check"><input type="checkbox" name="marketing" /><span>Voglio ricevere via email guide, promemoria sulle scadenze e proposte relative alla vendita della casa.</span></label>
         <p class="hint" data-pref-msg></p>
         <button class="btn" type="submit">Salva</button>
@@ -68,6 +71,7 @@ import { AREAS, PDF_COMPLETO } from '../../data/site';
     document.querySelector('[data-email]')!.textContent = `Hai fatto l'accesso come ${u.email}${u.google ? ' (con Google)' : ''}.`;
     const pref = document.getElementById('pref-form') as HTMLFormElement;
     (pref.elements.namedItem('nome') as HTMLInputElement).value = u.nome ?? '';
+    (pref.elements.namedItem('cognome') as HTMLInputElement).value = u.cognome ?? '';
     (pref.elements.namedItem('marketing') as HTMLInputElement).checked = !!u.consenso_marketing;
     if (!u.ha_password) {
       document.querySelector<HTMLElement>('[data-has-pw]')!.hidden = true;
@@ -80,6 +84,7 @@ import { AREAS, PDF_COMPLETO } from '../../data/site';
     const f = e.target as HTMLFormElement;
     const res = await api('preferenze', {
       nome: (f.elements.namedItem('nome') as HTMLInputElement).value,
+      cognome: (f.elements.namedItem('cognome') as HTMLInputElement).value,
       marketing: (f.elements.namedItem('marketing') as HTMLInputElement).checked,
     });
     document.querySelector('[data-pref-msg]')!.textContent = res.ok ? 'Salvato.' : 'Non salvato, riprova.';

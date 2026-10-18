@@ -11,7 +11,7 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
   if (rateLimited('login:' + clientIp(request, clientAddress), 20) || rateLimited('login:' + email, 8)) {
     return json({ ok: false, error: 'Troppi tentativi, riprova tra qualche minuto' }, 429);
   }
-  const { rows } = await q('select id, nome, password_hash from utenti where email = $1', [email]);
+  const { rows } = await q('select id, nome, cognome, password_hash from utenti where email = $1', [email]);
   const u = rows[0];
   const ok = await verifyPassword(String(b.password ?? ''), u?.password_hash ?? null);
   if (!u || !ok) {
@@ -19,5 +19,5 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
     return json({ ok: false, error: msg }, 401);
   }
   await createSession(cookies, u.id, isSecure(request));
-  return json({ ok: true, utente: { email, nome: u.nome } });
+  return json({ ok: true, utente: { email, nome: u.nome, cognome: u.cognome } });
 };

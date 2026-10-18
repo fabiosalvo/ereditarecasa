@@ -109,9 +109,15 @@ const p = Astro.props.idPrefix ?? 'val';
 
   <div class="step" data-step="3" hidden>
     <h2>Come ricontattarti</h2>
-    <div class="field">
-      <label for={`${p}-nome`}>Nome e cognome</label>
-      <input id={`${p}-nome`} name="nome" type="text" autocomplete="name" required />
+    <div class="row">
+      <div class="field">
+        <label for={`${p}-nome`}>Nome</label>
+        <input id={`${p}-nome`} name="nome" type="text" autocomplete="given-name" required />
+      </div>
+      <div class="field">
+        <label for={`${p}-cognome`}>Cognome</label>
+        <input id={`${p}-cognome`} name="cognome" type="text" autocomplete="family-name" required />
+      </div>
     </div>
     <div class="row">
       <div class="field">

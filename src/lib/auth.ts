@@ -36,13 +36,13 @@ export async function createSession(cookies: AstroCookies, userId: number, secur
   cookies.set(COOKIE, token, { httpOnly: true, secure, sameSite: 'lax', path: '/', expires });
 }
 
-export type Utente = { id: number; email: string; nome: string | null; consenso_marketing: boolean; ha_password: boolean; google: boolean; creato_il: string };
+export type Utente = { id: number; email: string; nome: string | null; cognome: string | null; consenso_marketing: boolean; ha_password: boolean; google: boolean; creato_il: string };
 
 export async function currentUser(cookies: AstroCookies): Promise<Utente | null> {
   const token = cookies.get(COOKIE)?.value;
   if (!token) return null;
   const { rows } = await q(
-    `select u.id, u.email, u.nome, u.consenso_marketing, u.password_hash is not null as ha_password,
+    `select u.id, u.email, u.nome, u.cognome, u.consenso_marketing, u.password_hash is not null as ha_password,
             u.google_sub is not null as google, u.creato_il
        from sessioni s join utenti u on u.id = s.utente_id
       where s.token_hash = $1 and s.scade_il > now()`,

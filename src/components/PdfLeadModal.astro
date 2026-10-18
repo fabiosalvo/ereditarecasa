@@ -10,11 +10,14 @@ import ConsentFields from './ConsentFields.astro';
   <p class="modal-intro">La versione stampabile, da conservare o condividere con gli altri eredi. Il download parte subito dopo l'invio.</p>
   <form class="form" data-pdf-form novalidate>
     <div class="row">
-      <div class="field"><label for="pdf-nome">Nome</label><input id="pdf-nome" name="nome" type="text" autocomplete="name" required /></div>
-      <div class="field"><label for="pdf-email">Email</label><input id="pdf-email" name="email" type="email" autocomplete="email" required /></div>
+      <div class="field"><label for="pdf-nome">Nome</label><input id="pdf-nome" name="nome" type="text" autocomplete="given-name" required /></div>
+      <div class="field"><label for="pdf-cognome">Cognome</label><input id="pdf-cognome" name="cognome" type="text" autocomplete="family-name" required /></div>
     </div>
     <div class="row">
+      <div class="field"><label for="pdf-email">Email</label><input id="pdf-email" name="email" type="email" autocomplete="email" required /></div>
       <div class="field"><label for="pdf-tel">Telefono</label><input id="pdf-tel" name="telefono" type="tel" autocomplete="tel" /></div>
+    </div>
+    <div class="row">
       <div class="field"><label for="pdf-comune">Comune della casa</label><input id="pdf-comune" name="comune" type="text" /></div>
     </div>
     <div class="field">
@@ -58,6 +61,7 @@ import ConsentFields from './ConsentFields.astro';
       const u = JSON.parse(localStorage.getItem('ec-accesso') || 'null');
       if (u?.email) form.querySelector<HTMLInputElement>('input[name="email"]')!.value ||= u.email;
       if (u?.nome) form.querySelector<HTMLInputElement>('input[name="nome"]')!.value ||= u.nome;
+      if (u?.cognome) form.querySelector<HTMLInputElement>('input[name="cognome"]')!.value ||= u.cognome;
     } catch {}
     dlg.showModal();
   };
