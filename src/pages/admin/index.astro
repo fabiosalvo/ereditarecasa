@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PROFESSIONI } from '../../lib/professionisti';
 ---
 <Base title="Admin" description="Pannello di amministrazione: utenti registrati e contatti raccolti." noindex>
   <section class="page-head">
@@ -16,12 +17,49 @@ import Base from '../../layouts/Base.astro';
         <button type="button" data-admin-tab="utenti"><b data-tot="utenti">–</b><span>Registrati</span></button>
         <button type="button" data-admin-tab="guida"><b data-tot="guida">–</b><span>Download PDF</span></button>
         <button type="button" data-admin-tab="valutazione"><b data-tot="valutazione">–</b><span>Valutazioni</span></button>
+        <button type="button" data-admin-tab="professionista"><b data-tot="professionista">–</b><span>Richieste ai professionisti</span></button>
+        <button type="button" data-admin-tab="professionisti"><b data-tot="professionisti">–</b><span>Professionisti pubblicati <em data-attesa></em></span></button>
         <button type="button" data-admin-tab="altri"><b data-tot="altri">–</b><span>Scadenzario e percorso</span></button>
         <div class="admin-kpi__static"><b data-tot="settimana">–</b><span>Nuovi negli ultimi 7 giorni</span></div>
       </div>
     </section>
 
-    <section>
+    <section data-pro-panel hidden>
+      <div class="admin-bar">
+        <h2 class="h-m" style="margin:0">Directory professionisti</h2>
+        <button class="btn btn-small" type="button" data-pro-new>Aggiungi professionista</button>
+      </div>
+      <p class="hint">Solo i professionisti pubblicati compaiono nella ricerca del sito, senza telefono ed email. Le candidature arrivano qui da approvare.</p>
+      <form class="form admin-pro-form" data-pro-edit hidden novalidate>
+        <input type="hidden" name="id" />
+        <div class="row">
+          <div class="field"><label for="ap-nome">Nome</label><input id="ap-nome" name="nome" required /></div>
+          <div class="field"><label for="ap-cognome">Cognome</label><input id="ap-cognome" name="cognome" required /></div>
+          <div class="field"><label for="ap-prof">Professione</label><select id="ap-prof" name="professione" required>{Object.entries(PROFESSIONI).map(([v, l]) => <option value={v}>{l}</option>)}</select></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="ap-studio">Studio</label><input id="ap-studio" name="studio" /></div>
+          <div class="field"><label for="ap-citta">Città</label><input id="ap-citta" name="citta" required /></div>
+          <div class="field"><label for="ap-prov">Provincia (per esteso)</label><input id="ap-prov" name="provincia" placeholder="Es. Lucca" /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="ap-email">Email</label><input id="ap-email" name="email" type="email" /></div>
+          <div class="field"><label for="ap-tel">Telefono</label><input id="ap-tel" name="telefono" /></div>
+          <div class="field"><label for="ap-sito">Sito</label><input id="ap-sito" name="sito" /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="ap-albo">Albo e iscrizione</label><input id="ap-albo" name="albo" /></div>
+          <div class="field"><label for="ap-ind">Indirizzo dello studio</label><input id="ap-ind" name="indirizzo" /></div>
+        </div>
+        <div class="field"><label for="ap-spec">Di cosa si occupa (visibile)</label><textarea id="ap-spec" name="specializzazioni" rows="2"></textarea></div>
+        <label class="check"><input type="checkbox" name="attivo" /><span>Pubblicato nella ricerca del sito</span></label>
+        <p class="form-error" role="alert" data-error></p>
+        <div class="actions"><button class="btn" type="submit">Salva</button><button class="btn btn-ghost" type="button" data-pro-cancel>Annulla</button></div>
+      </form>
+      <div class="admin-table"><table><thead><tr><th>Stato</th><th></th><th>Nome</th><th>Professione</th><th>Città</th><th>Email</th><th>Telefono</th><th>Albo</th><th>Richieste</th></tr></thead><tbody data-pro-body></tbody></table></div>
+    </section>
+
+    <section data-generic>
       <div class="admin-bar">
         <h2 class="h-m" data-title style="margin:0">Registrati</h2>
         <form class="admin-search" data-search role="search">
@@ -39,7 +77,7 @@ import Base from '../../layouts/Base.astro';
 <script>
   import { me } from '../../scripts/accesso';
 
-  const TITLES: Record<string, string> = { utenti: 'Registrati', guida: 'Download PDF', valutazione: 'Richieste di valutazione', altri: 'Scadenzario e percorso' };
+  const TITLES: Record<string, string> = { utenti: 'Registrati', guida: 'Download PDF', valutazione: 'Richieste di valutazione', professionista: 'Richieste ai professionisti', altri: 'Scadenzario e percorso' };
   const msg = document.querySelector<HTMLElement>('[data-admin-msg]')!;
   const box = document.querySelector<HTMLElement>('[data-admin]')!;
   const head = document.querySelector<HTMLElement>('[data-head]')!;
@@ -52,8 +90,14 @@ import Base from '../../layouts/Base.astro';
 
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 
+  const generic = document.querySelector<HTMLElement>('[data-generic]')!;
+  const proPanel = document.querySelector<HTMLElement>('[data-pro-panel]')!;
+
   async function load() {
-    const params = new URLSearchParams({ tipo, q: input.value.trim() });
+    const isPro = tipo === 'professionisti';
+    generic.hidden = isPro;
+    proPanel.hidden = !isPro;
+    const params = new URLSearchParams({ tipo: isPro ? 'utenti' : tipo, q: isPro ? '' : input.value.trim() });
     csv.href = `/api/admin/dati/?${params}&formato=csv`;
     const r = await fetch(`/api/admin/dati/?${params}`, { credentials: 'same-origin', cache: 'no-store' }).catch(() => null);
     const j = r ? await r.json().catch(() => null) : null;
@@ -73,6 +117,9 @@ import Base from '../../layouts/Base.astro';
       if (el) el.textContent = Number(v).toLocaleString('it-IT');
     }
     document.querySelectorAll<HTMLButtonElement>('[data-admin-tab]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.adminTab === tipo)));
+    const att = Number(j.totali.pro_attesa);
+    document.querySelector('[data-attesa]')!.textContent = att ? `· ${att} da approvare` : '';
+    if (isPro) return loadPro();
     document.querySelector('[data-title]')!.textContent = TITLES[tipo];
     head.innerHTML = `<tr>${j.colonne.map((c: string) => `<th>${esc(c)}</th>`).join('')}</tr>`;
     body.innerHTML = j.righe.length
@@ -92,6 +139,73 @@ import Base from '../../layouts/Base.astro';
   input.addEventListener('input', () => {
     clearTimeout(timer);
     timer = window.setTimeout(load, 300);
+  });
+
+  // Directory professionisti
+  const proBody = document.querySelector<HTMLElement>('[data-pro-body]')!;
+  const edit = document.querySelector<HTMLFormElement>('[data-pro-edit]')!;
+  let pros: any[] = [];
+  const LABEL: Record<string, string> = {};
+  edit.querySelectorAll<HTMLOptionElement>('select[name="professione"] option').forEach((o) => (LABEL[o.value] = o.textContent!));
+
+  async function loadPro() {
+    const j = await fetch('/api/admin/professionisti/', { cache: 'no-store' }).then((r) => r.json()).catch(() => null);
+    pros = j?.professionisti ?? [];
+    proBody.innerHTML = pros.length
+      ? pros
+          .map((p) => {
+            const stato = p.attivo ? 'Pubblicato' : p.candidatura ? 'Da approvare' : 'Nascosto';
+            return `<tr>
+              <td><span class="admin-stato admin-stato--${p.attivo ? 'on' : p.candidatura ? 'new' : 'off'}">${stato}</span></td>
+              <td><div class="admin-actions">
+                <button type="button" class="admin-link" data-pro-act="edit" data-id="${p.id}">Modifica</button>
+                <button type="button" class="admin-link" data-pro-act="${p.attivo ? 'off' : 'on'}" data-id="${p.id}">${p.attivo ? 'Nascondi' : 'Pubblica'}</button>
+                <button type="button" class="admin-link" data-pro-act="del" data-id="${p.id}">Elimina</button>
+              </div></td>
+              <td>${esc(`${p.nome} ${p.cognome}`)}${p.studio ? `<br><small>${esc(p.studio)}</small>` : ''}</td>
+              <td>${esc(LABEL[p.professione] ?? p.professione)}</td>
+              <td>${esc(p.citta)}${p.provincia ? ` (${esc(p.provincia)})` : ''}</td>
+              <td>${esc(p.email ?? '')}</td><td>${esc(p.telefono ?? '')}</td><td>${esc(p.albo ?? '')}</td><td>${p.richieste}</td>
+              </tr>`;
+          })
+          .join('')
+      : '<tr><td colspan="9">Nessun professionista: aggiungine uno o aspetta le candidature dalla pagina Professionisti.</td></tr>';
+  }
+
+  const send = (body: unknown) =>
+    fetch('/api/admin/professionisti/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then((r) => r.json()).catch(() => ({ ok: false }));
+
+  const openEdit = (p: any = {}) => {
+    edit.reset();
+    for (const el of Array.from(edit.elements) as HTMLInputElement[]) {
+      if (!el.name) continue;
+      if (el.type === 'checkbox') el.checked = !!p[el.name];
+      else el.value = p[el.name] ?? (el.tagName === 'SELECT' ? el.value : '');
+    }
+    edit.querySelector<HTMLElement>('[data-error]')!.textContent = '';
+    edit.hidden = false;
+    edit.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  document.querySelector('[data-pro-new]')!.addEventListener('click', () => openEdit({ attivo: true }));
+  document.querySelector('[data-pro-cancel]')!.addEventListener('click', () => (edit.hidden = true));
+  edit.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data: Record<string, unknown> = {};
+    for (const el of Array.from(edit.elements) as HTMLInputElement[]) if (el.name) data[el.name] = el.type === 'checkbox' ? el.checked : el.value;
+    const r = await send(data);
+    if (!r.ok) return void (edit.querySelector<HTMLElement>('[data-error]')!.textContent = r.error ?? 'Non salvato');
+    edit.hidden = true;
+    load();
+  });
+  proBody.addEventListener('click', async (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-pro-act]');
+    if (!b) return;
+    const id = Number(b.dataset.id);
+    const act = b.dataset.proAct;
+    if (act === 'edit') return openEdit(pros.find((p) => p.id == id));
+    if (act === 'del' && !confirm('Eliminare questo professionista dalla directory?')) return;
+    await send(act === 'del' ? { id, elimina: true } : { id, solo_attivo: true, attivo: act === 'on' });
+    load();
   });
 
   me().then(() => load());

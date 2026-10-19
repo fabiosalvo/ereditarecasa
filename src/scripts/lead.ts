@@ -37,7 +37,7 @@ export async function submitLead(type: LeadType, fields: Record<string, unknown>
   };
   // Copia nel database del sito (pannello admin); le registrazioni sono già nella tabella utenti
   const saved: Promise<boolean> =
-    type === 'registrazione' || type === 'professionista'
+    type === 'registrazione'
       ? Promise.resolve(false)
       : fetch('/api/contatti/', {
           method: 'POST',

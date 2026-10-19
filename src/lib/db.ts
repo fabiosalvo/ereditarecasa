@@ -43,6 +43,26 @@ create table if not exists contatti (
   creato_il timestamptz not null default now()
 );
 create index if not exists contatti_tipo on contatti(tipo, creato_il desc);
+create table if not exists professionisti (
+  id bigserial primary key,
+  nome text not null,
+  cognome text not null,
+  professione text not null,
+  studio text,
+  citta text not null,
+  provincia text,
+  indirizzo text,
+  telefono text,
+  email text,
+  sito text,
+  albo text,
+  specializzazioni text,
+  bio text,
+  attivo boolean not null default false,
+  candidatura boolean not null default false,
+  creato_il timestamptz not null default now()
+);
+create index if not exists professionisti_attivi on professionisti(attivo, citta)
 `;
 
 /** Per i test: usa un'altra implementazione (es. PGlite) al posto di pg. */

@@ -9,6 +9,7 @@ const COLS: Record<string, Col[]> = {
   utenti: [['creato_il', 'Registrato il'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['metodo', 'Accesso'], ['marketing', 'Consenso marketing'], ['ultimo_accesso', 'Ultimo accesso']],
   guida: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['comune', 'Comune'], ['intenzione', 'Intenzione'], ['guida', 'Guida'], ['marketing', 'Consenso marketing']],
   valutazione: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['indirizzo', 'Indirizzo'], ['civico', 'Civico'], ['comune', 'Comune'], ['tipologia', 'Tipo'], ['mq', 'm²'], ['obiettivo', 'Obiettivo'], ['tempi', 'Tempi'], ['marketing', 'Consenso marketing']],
+  professionista: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['comune', 'Comune'], ['professione', 'Cerca'], ['professionista', 'Professionista scelto'], ['messaggio', 'Messaggio']],
   altri: [['creato_il', 'Data'], ['tipo', 'Modulo'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['marketing', 'Consenso marketing']],
 };
 
@@ -27,7 +28,7 @@ async function rows(tipo: string, cerca: string, limit: number) {
     );
     return rows;
   }
-  const filtro = tipo === 'altri' ? `tipo in ('scadenzario', 'percorso')` : `tipo = '${tipo === 'guida' ? 'guida' : 'valutazione'}'`;
+  const filtro = tipo === 'altri' ? `tipo in ('scadenzario', 'percorso')` : `tipo = '${tipo === 'guida' ? 'guida' : tipo === 'professionista' ? 'professionista' : 'valutazione'}'`;
   const { rows } = await q(
     `select creato_il, tipo, nome, cognome, email, telefono, comune, dati from contatti
       where ${filtro}
@@ -73,6 +74,9 @@ export const GET: APIRoute = async ({ cookies, url }) => {
     utenti: await conta('select count(*) as n from utenti'),
     guida: await conta(`select count(*) as n from contatti where tipo = 'guida'`),
     valutazione: await conta(`select count(*) as n from contatti where tipo = 'valutazione'`),
+    professionista: await conta(`select count(*) as n from contatti where tipo = 'professionista'`),
+    professionisti: await conta('select count(*) as n from professionisti where attivo'),
+    pro_attesa: await conta('select count(*) as n from professionisti where candidatura and not attivo'),
     altri: await conta(`select count(*) as n from contatti where tipo in ('scadenzario', 'percorso')`),
     settimana: await conta(`select (select count(*) from utenti where creato_il > now() - interval '7 days') + (select count(*) from contatti where creato_il > now() - interval '7 days') as n`),
   };

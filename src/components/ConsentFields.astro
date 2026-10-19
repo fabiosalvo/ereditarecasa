@@ -4,8 +4,10 @@ import { TITOLARE } from '../data/site';
 
 interface Props {
   marketingRequired?: boolean;
+  /** Testo al posto di "I dati non vengono ceduti a terzi", quando la richiesta va inoltrata a qualcuno */
+  inoltro?: string;
 }
-const { marketingRequired = false } = Astro.props;
+const { marketingRequired = false, inoltro } = Astro.props;
 ---
 <div class="field">
   <div class="hp" aria-hidden="true">
@@ -20,5 +22,5 @@ const { marketingRequired = false } = Astro.props;
     <input type="checkbox" name="consent_marketing" required={marketingRequired} />
     <span>{CONSENT_TEXT.marketing}{marketingRequired ? ' (necessario per ricevere i promemoria)' : ' (facoltativo)'}</span>
   </label>
-  <p class="hint">Titolare del trattamento: {TITOLARE.ragioneSociale}, società attiva nell'intermediazione immobiliare. I dati non vengono ceduti a terzi.</p>
+  <p class="hint">Titolare del trattamento: {TITOLARE.ragioneSociale}, società attiva nell'intermediazione immobiliare. {inoltro ?? 'I dati non vengono ceduti a terzi.'}</p>
 </div>

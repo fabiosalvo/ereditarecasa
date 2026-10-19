@@ -20,7 +20,10 @@ const COLUMNS = {
     'ricevuto', 'email', 'decesso', 'consenso_privacy', 'consenso_marketing', 'versione_consensi',
     'pagina', 'referrer', 'utm',
   ],
-  professionista: ['ricevuto', 'nome', 'email', 'telefono', 'citta', 'professione', 'note', 'pagina'],
+  professionista: [
+    'ricevuto', 'nome', 'cognome', 'email', 'telefono', 'comune', 'professione', 'professionista', 'messaggio',
+    'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm',
+  ],
   percorso: [
     'ricevuto', 'email', 'decesso', 'rapporto', 'testamento', 'eredi', 'possesso', 'debiti', 'mutuo', 'obiettivo',
     'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm',
