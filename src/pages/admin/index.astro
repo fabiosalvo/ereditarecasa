@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Admin" description="Pannello di amministrazione: utenti registrati e contatti raccolti." noindex>
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow" style="margin:0">Amministrazione</span>
+      <h1>Contatti e registrazioni</h1>
+      <p class="lede" data-admin-msg>Caricamento…</p>
+    </div>
+  </section>
+
+  <div class="wrap admin" data-admin hidden>
+    <section>
+      <div class="admin-kpi">
+        <button type="button" data-admin-tab="utenti"><b data-tot="utenti">–</b><span>Registrati</span></button>
+        <button type="button" data-admin-tab="guida"><b data-tot="guida">–</b><span>Download PDF</span></button>
+        <button type="button" data-admin-tab="valutazione"><b data-tot="valutazione">–</b><span>Valutazioni</span></button>
+        <button type="button" data-admin-tab="altri"><b data-tot="altri">–</b><span>Scadenzario e percorso</span></button>
+        <div class="admin-kpi__static"><b data-tot="settimana">–</b><span>Nuovi negli ultimi 7 giorni</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="admin-bar">
+        <h2 class="h-m" data-title style="margin:0">Registrati</h2>
+        <form class="admin-search" data-search role="search">
+          <label class="sr-only" for="admin-q">Cerca</label>
+          <input id="admin-q" type="search" placeholder="Cerca nome, email, telefono, comune" />
+          <a class="btn btn-ghost btn-small" data-csv href="#">Scarica CSV</a>
+        </form>
+      </div>
+      <p class="hint" data-count></p>
+      <div class="admin-table"><table><thead data-head></thead><tbody data-body></tbody></table></div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { me } from '../../scripts/accesso';
+
+  const TITLES: Record<string, string> = { utenti: 'Registrati', guida: 'Download PDF', valutazione: 'Richieste di valutazione', altri: 'Scadenzario e percorso' };
+  const msg = document.querySelector<HTMLElement>('[data-admin-msg]')!;
+  const box = document.querySelector<HTMLElement>('[data-admin]')!;
+  const head = document.querySelector<HTMLElement>('[data-head]')!;
+  const body = document.querySelector<HTMLElement>('[data-body]')!;
+  const count = document.querySelector<HTMLElement>('[data-count]')!;
+  const csv = document.querySelector<HTMLAnchorElement>('[data-csv]')!;
+  const input = document.getElementById('admin-q') as HTMLInputElement;
+  let tipo = new URLSearchParams(location.search).get('tipo') || 'utenti';
+  let timer = 0;
+
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+  async function load() {
+    const params = new URLSearchParams({ tipo, q: input.value.trim() });
+    csv.href = `/api/admin/dati/?${params}&formato=csv`;
+    const r = await fetch(`/api/admin/dati/?${params}`, { credentials: 'same-origin', cache: 'no-store' }).catch(() => null);
+    const j = r ? await r.json().catch(() => null) : null;
+    if (!j?.ok) {
+      box.hidden = true;
+      if (j?.code === 'login') {
+        msg.textContent = 'Accedi con il tuo account amministratore per vedere i dati.';
+        (window as any).ecOpenAuth?.('accedi', load);
+      } else if (j?.code === 'vietato') msg.textContent = 'Questo account non è abilitato al pannello di amministrazione.';
+      else msg.textContent = 'Dati non disponibili, riprova tra poco.';
+      return;
+    }
+    msg.textContent = 'Utenti registrati e contatti lasciati nei moduli del sito. I dati sono personali: non condividerli fuori dall’azienda.';
+    box.hidden = false;
+    for (const [k, v] of Object.entries(j.totali)) {
+      const el = document.querySelector(`[data-tot="${k}"]`);
+      if (el) el.textContent = Number(v).toLocaleString('it-IT');
+    }
+    document.querySelectorAll<HTMLButtonElement>('[data-admin-tab]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.adminTab === tipo)));
+    document.querySelector('[data-title]')!.textContent = TITLES[tipo];
+    head.innerHTML = `<tr>${j.colonne.map((c: string) => `<th>${esc(c)}</th>`).join('')}</tr>`;
+    body.innerHTML = j.righe.length
+      ? j.righe.map((r: string[]) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')
+      : `<tr><td colspan="${j.colonne.length}">Nessun dato${input.value ? ' per questa ricerca' : ' per ora'}.</td></tr>`;
+    count.textContent = `${j.righe.length.toLocaleString('it-IT')} ${j.righe.length === 1 ? 'riga' : 'righe'}${j.righe.length >= 5000 ? ' (le più recenti; per tutto usa il CSV)' : ''}`;
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-admin-tab]').forEach((b) =>
+    b.addEventListener('click', () => {
+      tipo = b.dataset.adminTab!;
+      history.replaceState(null, '', `?tipo=${tipo}`);
+      load();
+    }),
+  );
+  document.querySelector('[data-search]')!.addEventListener('submit', (e) => (e.preventDefault(), load()));
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = window.setTimeout(load, 300);
+  });
+
+  me().then(() => load());
+</script>

@@ -8,5 +8,5 @@ export default defineConfig({
   // Pagine statiche; solo le API di /api/ girano sul server Node
   output: 'static',
   adapter: node({ mode: 'standalone' }),
-  integrations: [sitemap({ filter: (page) => !['/grazie/', '/stampa/', '/api/', '/area-riservata/', '/reimposta-password/', '/accedi/', '/password-dimenticata/'].some((p) => page.includes(p)) })],
+  integrations: [sitemap({ filter: (page) => !['/grazie/', '/stampa/', '/api/', '/area-riservata/', '/reimposta-password/', '/accedi/', '/password-dimenticata/', '/admin/'].some((p) => page.includes(p)) })],
 });

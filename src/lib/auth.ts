@@ -118,3 +118,10 @@ export async function readBody(request: Request): Promise<Record<string, any>> {
     return {};
   }
 }
+
+/** Amministratori: indirizzi in ADMIN_EMAILS (separati da virgola), con accesso fatto al sito. */
+export function isAdmin(u: { email: string } | null): boolean {
+  if (!u) return false;
+  const list = String(process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase()).filter(Boolean);
+  return list.includes(u.email.toLowerCase());
+}

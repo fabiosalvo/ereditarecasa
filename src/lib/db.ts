@@ -31,6 +31,18 @@ create table if not exists reset_password (
 );
 create index if not exists sessioni_utente on sessioni(utente_id);
 alter table utenti add column if not exists cognome text;
+create table if not exists contatti (
+  id bigserial primary key,
+  tipo text not null,
+  email text,
+  nome text,
+  cognome text,
+  telefono text,
+  comune text,
+  dati jsonb not null default '{}',
+  creato_il timestamptz not null default now()
+);
+create index if not exists contatti_tipo on contatti(tipo, creato_il desc);
 `;
 
 /** Per i test: usa un'altra implementazione (es. PGlite) al posto di pg. */

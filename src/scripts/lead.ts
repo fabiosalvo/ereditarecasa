@@ -19,9 +19,6 @@ export async function submitLead(type: LeadType, fields: Record<string, unknown>
   if (fields.website) return;
   delete fields.website;
   const endpoint = import.meta.env.PUBLIC_LEAD_ENDPOINT;
-  if (!endpoint) {
-    throw new Error('PUBLIC_LEAD_ENDPOINT non configurato');
-  }
   const params = new URLSearchParams(location.search);
   const payload = {
     type,
@@ -38,6 +35,32 @@ export async function submitLead(type: LeadType, fields: Record<string, unknown>
       utm: Object.fromEntries([...params].filter(([k]) => k.startsWith('utm_'))),
     },
   };
+  // Copia nel database del sito (pannello admin); le registrazioni sono già nella tabella utenti
+  const saved: Promise<boolean> =
+    type === 'registrazione' || type === 'professionista'
+      ? Promise.resolve(false)
+      : fetch('/api/contatti/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+          .then((r) => r.ok)
+          .catch(() => false);
+  if (!endpoint) {
+    if (await saved) return;
+    throw new Error('PUBLIC_LEAD_ENDPOINT non configurato');
+  }
+  try {
+    await sendToSheet(endpoint, payload);
+  } catch (err) {
+    // Basta che il contatto sia arrivato in una delle due destinazioni
+    if (await saved) return;
+    throw err;
+  }
+  await saved;
+}
+
+async function sendToSheet(endpoint: string, payload: unknown): Promise<void> {
   // text/plain evita la richiesta preliminare CORS, che Google Apps Script non gestisce;
   // il corpo resta JSON e lo script lo legge da e.postData.contents.
   const res = await fetch(endpoint, {

@@ -29,6 +29,7 @@
 		# I PDF si scaricano dopo il modulo contatti: niente indicizzazione
 		header /pdf/* X-Robots-Tag "noindex"
 		header /area-riservata/* X-Robots-Tag "noindex"
+		header /admin/* X-Robots-Tag "noindex"
 		file_server
 	}
 
