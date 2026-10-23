@@ -14,7 +14,8 @@ export async function getStaticPaths() {
 }
 
 const { entry, posts } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
 const d = entry.data;
 const fmt = (x: Date) => x.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
 const minuti = Math.max(1, Math.round((entry.body ?? '').split(/\s+/).length / 220));
@@ -46,16 +47,19 @@ const ld = {
   headline: d.title,
   description: d.description,
   datePublished: d.date.toISOString(),
+  articleSection: d.categoria,
+  wordCount: (entry.body ?? '').split(/\s+/).length,
+  isPartOf: { '@type': 'Blog', '@id': `${SITE.url}/blog/#blog`, name: `Blog di ${SITE.name}` },
   dateModified: (d.updated ?? d.date).toISOString(),
   image: [new URL(ogImg.src, SITE.url).toString()],
   inLanguage: 'it-IT',
   mainEntityOfPage: new URL(url, SITE.url).toString(),
   author: { '@type': 'Organization', name: d.autore, url: `${SITE.url}/chi-siamo/` },
-  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url, logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/logo.png` } },
+  publisher: { '@id': `${SITE.url}/#organization` },
   ...(d.fonti.length ? { citation: d.fonti.map((f) => f.url) } : {}),
 };
 ---
-<Base title={d.title} description={d.description} jsonLd={[ld]} ogType="article">
+<Base title={d.title} description={d.description} jsonLd={[ld]} ogType="article" image={new URL(ogImg.src, SITE.url).toString()} published={d.date} modified={d.updated ?? d.date}>
   <PageHead title={d.title} crumbs={[{ name: 'Blog', href: '/blog/' }, { name: d.title, href: url }]} eyebrow={d.categoria}>
     {d.description}
     <p class="meta" slot="after">
@@ -68,8 +72,14 @@ const ld = {
     <div class="layout-article">
       <article class="prose">
         <figure class="article-photo">
-          <Image src={FOTO_AREA[d.foto].src} alt={FOTO_AREA[d.foto].alt} widths={[480, 720, 1000]} sizes="(max-width: 760px) 100vw, 720px" loading="eager" />
+          <Image src={FOTO_AREA[d.foto].src} alt={FOTO_AREA[d.foto].alt} widths={[480, 720, 1000]} sizes="(max-width: 760px) 100vw, 720px" loading="eager" fetchpriority="high" />
         </figure>
+        {toc.length >= 4 && (
+          <nav class="toc no-print" aria-label="In questo articolo">
+            <p class="toc__title">In questo articolo</p>
+            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        )}
         <Content />
 
         {collegate.length > 0 && (

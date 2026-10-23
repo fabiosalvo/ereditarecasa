@@ -3,8 +3,9 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import PageHead from '../../components/PageHead.astro';
 import ConsentFields from '../../components/ConsentFields.astro';
+import { webApp } from '../../lib/schema';
 ---
-<Base title="Scadenzario della successione: tutte le date" description="Inserisci la data del decesso e scopri tutte le scadenze della successione con una casa: inventario, dichiarazione, imposte, IMU. Gratis, con promemoria via email.">
+<Base jsonLd={[webApp('Scadenzario della successione', '/strumenti/scadenzario-successione/', 'Dalla data del decesso calcola tutte le scadenze della successione con una casa: inventario, dichiarazione, imposte, IMU.')]} title="Scadenzario della successione: tutte le date" description="Inserisci la data del decesso e scopri tutte le scadenze della successione con una casa: inventario, dichiarazione, imposte, IMU. Gratis, con promemoria via email.">
   <PageHead title="Scadenzario della successione" crumbs={[{ name: 'Strumenti', href: '/strumenti/' }, { name: 'Scadenzario', href: '/strumenti/scadenzario-successione/' }]}>
     Inserisci la data del decesso: calcoliamo le scadenze principali quando nell'eredità c'è una casa.
   </PageHead>

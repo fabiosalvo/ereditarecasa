@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { SITE } from '../../data/site';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
@@ -11,8 +12,23 @@ const [first, ...rest] = posts;
 const fmt = (d: Date) => d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
 const minuti = (body = '') => Math.max(1, Math.round(body.split(/\s+/).length / 220));
 const categorie = [...new Set(posts.map((p) => p.data.categoria))];
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${SITE.url}/blog/#blog`,
+  name: `Blog di ${SITE.name}`,
+  url: `${SITE.url}/blog/`,
+  inLanguage: 'it-IT',
+  publisher: { '@id': `${SITE.url}/#organization` },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: `${SITE.url}/blog/${p.id}/`,
+    datePublished: p.data.date.toISOString(),
+  })),
+};
 ---
-<Base title="Blog: novità, tasse e mercato della casa ereditata" description="Novità normative, tasse, mercato immobiliare e consigli pratici per chi ha ereditato una casa. Articoli verificati sulle fonti ufficiali.">
+<Base jsonLd={[ld]} title="Blog: novità, tasse e mercato della casa ereditata" description="Novità normative, tasse, mercato immobiliare e consigli pratici per chi ha ereditato una casa. Articoli verificati sulle fonti ufficiali.">
   <PageHead title="Il blog della casa ereditata" crumbs={[{ name: 'Blog', href: '/blog/' }]} eyebrow="Novità e analisi">
     Riforme in arrivo, tasse, mercato e casi di famiglia: quello che cambia per chi eredita una casa, spiegato con i numeri e con le fonti.
   </PageHead>

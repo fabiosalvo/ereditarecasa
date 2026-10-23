@@ -3,8 +3,9 @@ import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageHead from '../components/PageHead.astro';
 import ValutazioneForm from '../components/ValutazioneForm.astro';
+import { service } from '../lib/schema';
 ---
-<Base noModal title="Valutazione gratuita della casa ereditata" description="Scopri quanto vale la casa che hai ereditato: valutazione gratuita e senza impegno, anche se la successione non è conclusa o gli eredi non hanno ancora deciso.">
+<Base jsonLd={[service('Valutazione gratuita della casa ereditata', '/valuta-casa-ereditata/', 'Stima del valore di mercato della casa ereditata, gratuita e senza impegno, anche prima della fine della successione.', 'Valutazione immobiliare')]} noModal title="Valutazione gratuita della casa ereditata" description="Scopri quanto vale la casa che hai ereditato: valutazione gratuita e senza impegno, anche se la successione non è conclusa o gli eredi non hanno ancora deciso.">
   <PageHead title="Quanto vale la casa che hai ereditato?" crumbs={[{ name: 'Valutazione', href: '/valuta-casa-ereditata/' }]}>
     Rispondi a poche domande: un consulente esperto di immobili ereditati ti ricontatta con una stima gratuita e senza impegno. Va bene anche se la successione non è ancora conclusa o gli eredi non hanno deciso.
   </PageHead>

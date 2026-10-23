@@ -32,8 +32,9 @@ const ESIGENZE = [
   'Catasto, difformità o sanatoria',
   'Debiti o eredità a rischio',
 ];
+import { service } from '../../lib/schema';
 ---
-<Base title="Notaio, avvocato, commercialista o CAF per la successione" description="Ti serve un notaio, un avvocato, un commercialista o un CAF per la successione o la casa ereditata? Raccontaci il tuo caso: ti mettiamo in contatto con il professionista giusto nella tua zona.">
+<Base jsonLd={[service('Contatto con notaio, avvocato, commercialista o CAF per la successione', '/professionisti/', 'Raccogliamo la tua richiesta e ti mettiamo in contatto con un professionista esperto di successioni e case ereditate nella tua zona.', 'Messa in contatto con professionisti')]} title="Notaio, avvocato, commercialista o CAF per la successione" description="Ti serve un notaio, un avvocato, un commercialista o un CAF per la successione o la casa ereditata? Raccontaci il tuo caso: ti mettiamo in contatto con il professionista giusto nella tua zona.">
   <PageHead title="Il professionista giusto per la tua eredità" crumbs={[{ name: 'Professionisti', href: '/professionisti/' }]} eyebrow="Notaio, avvocato, commercialista, CAF">
     Dicci di chi hai bisogno e qual è la situazione: ti mettiamo in contatto noi con il miglior professionista della zona, esperto di successioni e case ereditate. Gratis e senza impegno.
   </PageHead>

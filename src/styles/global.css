@@ -809,3 +809,12 @@ fieldset.field legend { margin-bottom: 10px; }
 /* Opzioni a scelta: testo normale anche dentro un campo, angoli come i pulsanti */
 .field .choices label, .choices label { text-transform: none; letter-spacing: 0; font: 500 15px/1.3 var(--sans); border-radius: var(--r); }
 fieldset.field legend { padding: 0; }
+
+/* Indice dei contenuti nelle guide e negli articoli */
+.toc { margin: 0 0 32px; padding: 20px 24px; border-radius: 16px; background: var(--sand-50); border: 1px solid var(--hairline); }
+.toc__title { margin: 0 0 8px; font: 600 12.5px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--outline); }
+.prose .toc ol { margin: 0; padding-left: 1.2em; columns: 2 280px; column-gap: 32px; }
+.prose .toc li { margin: 0 0 6px; break-inside: avoid; font-size: 15.5px; }
+.prose .toc a { color: var(--black); text-decoration: none; }
+.prose .toc a:hover { text-decoration: underline; }
+.prose h2[id] { scroll-margin-top: 90px; }

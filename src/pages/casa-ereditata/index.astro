@@ -3,11 +3,23 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import PageHead from '../../components/PageHead.astro';
-import { AREAS, guideUrl } from '../../data/site';
+import { AREAS, SITE, guideUrl } from '../../data/site';
 
 const guides = await getCollection('guide');
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Casa ereditata: tutte le guide',
+  url: `${SITE.url}/casa-ereditata/`,
+  inLanguage: 'it-IT',
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: AREAS.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.title, url: new URL(a.path, SITE.url).toString() })),
+  },
+};
 ---
-<Base title="Casa ereditata: tutte le guide" description="Tutte le guide sulla casa ereditata: successione, tasse, accettazione, eredi in disaccordo, vendita e situazioni particolari.">
+<Base jsonLd={[ld]} title="Casa ereditata: tutte le guide" description="Tutte le guide sulla casa ereditata: successione, tasse, accettazione, eredi in disaccordo, vendita e situazioni particolari.">
   <PageHead title="Casa ereditata: tutte le guide" crumbs={[{ name: 'Guide', href: '/casa-ereditata/' }]}>
     Le guide sono organizzate per argomento. Se non sai da dove partire, usa il <a href="/#percorso">percorso guidato</a> in home.
   </PageHead>

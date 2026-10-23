@@ -1,5 +1,5 @@
 ---
-title: "Tasse di successione in Europa: quanto si paga in Italia e altrove"
+title: "Imposta di successione in Europa: l'Italia a confronto"
 description: "In Italia coniuge e figli pagano il 4% solo oltre 1 milione a testa: tra le tasse di successione più leggere d'Europa. Confronto paese per paese ed esempio."
 area: tasse
 slug: europa

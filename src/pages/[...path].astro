@@ -19,7 +19,9 @@ export async function getStaticPaths() {
 const { entry, siblings } = Astro.props;
 // Articoli del blog che rimandano a questa guida (o alla sua area)
 const posts = await getCollection('blog');
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+// Indice dei contenuti: i titoli di secondo livello, se sono abbastanza da servire
+const toc = headings.filter((h) => h.depth === 2);
 const d = entry.data;
 const area = areaById(d.area);
 const url = guideUrl(d.area, d.slug);
@@ -27,6 +29,9 @@ const fmtDate = (x: Date) => x.toLocaleDateString('it-IT', { day: 'numeric', mon
 const updated = fmtDate(d.updated);
 const children = siblings.filter((g) => !g.data.pillar).sort((a, b) => a.data.order - b.data.order);
 const pillar = siblings.find((g) => g.data.pillar);
+// Altre guide della stessa sezione, per chi legge un approfondimento
+const correlate = d.pillar ? [] : children.filter((c) => c.id !== entry.id).slice(0, 6);
+const words = (entry.body ?? '').split(/\s+/).length;
 
 const areaPrefix = area.path;
 const dalBlog = posts
@@ -46,11 +51,16 @@ const articleLd: Record<string, unknown> = {
   '@type': 'Article',
   headline: d.title,
   description: d.description,
+  datePublished: (d.verified ?? d.updated).toISOString(),
   dateModified: d.updated.toISOString(),
+  articleSection: area.title,
+  about: { '@type': 'Thing', name: area.title },
+  wordCount: words,
+  isPartOf: { '@type': 'WebSite', '@id': `${SITE.url}/#website`, name: SITE.name, url: `${SITE.url}/` },
   image: [new URL(ogImg.src, SITE.url).toString()],
   mainEntityOfPage: new URL(url, SITE.url).toString(),
   inLanguage: 'it-IT',
-  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url, logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/logo.png` } },
+  publisher: { '@id': `${SITE.url}/#organization` },
   author: { '@type': 'Organization', name: `Redazione ${SITE.name}`, url: `${SITE.url}/chi-siamo/` },
 };
 articleLd.isAccessibleForFree = true;
@@ -67,7 +77,7 @@ if (d.faq.length) {
   });
 }
 ---
-<Base title={d.title} description={d.description} jsonLd={jsonLd} ogType="article">
+<Base title={d.title} description={d.description} jsonLd={jsonLd} ogType="article" image={new URL(ogImg.src, SITE.url).toString()} published={d.verified ?? d.updated} modified={d.updated}>
   <section class="page-head">
     <div class="wrap">
       <Breadcrumbs items={crumbs} />
@@ -90,8 +100,14 @@ if (d.faq.length) {
     <div class="layout-article">
       <article class="prose">
         <figure class="article-photo">
-          <Image src={FOTO_AREA[d.area].src} alt={FOTO_AREA[d.area].alt} widths={[480, 720, 1000]} sizes="(max-width: 760px) 100vw, 720px" loading="eager" />
+          <Image src={FOTO_AREA[d.area].src} alt={FOTO_AREA[d.area].alt} widths={[480, 720, 1000]} sizes="(max-width: 760px) 100vw, 720px" loading="eager" fetchpriority="high" />
         </figure>
+        {toc.length >= 4 && (
+          <nav class="toc no-print" aria-label="In questa guida">
+            <p class="toc__title">In questa guida</p>
+            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        )}
         <Content />
 
         <div class="no-print pdf-box" id="scarica">
@@ -134,7 +150,17 @@ if (d.faq.length) {
         )}
 
         {!d.pillar && pillar && (
-          <p>Fa parte della guida <a href={area.path}>{pillar.data.title}</a>.</p>
+          <section class="no-print">
+            <h2>Altre guide: {area.title.toLowerCase()}</h2>
+            <p>Questa pagina fa parte della guida <a href={area.path}>{pillar.data.title}</a>.</p>
+            {correlate.length > 0 && (
+              <ul class="link-list">
+                {correlate.map((c) => (
+                  <li><a href={guideUrl(c.data.area, c.data.slug)}>{c.data.title}</a></li>
+                ))}
+              </ul>
+            )}
+          </section>
         )}
 
         {dalBlog.length > 0 && (
