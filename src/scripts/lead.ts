@@ -1,13 +1,13 @@
 // Invio dei lead all'endpoint configurato (webhook del CRM, Make, Zapier...).
 // Ogni invio porta con sé il testo esatto dei consensi mostrati, per poterli dimostrare (GDPR art. 7.1).
 
-export const CONSENT_VERSION = '2026-10-16';
+export const CONSENT_VERSION = '2026-10-23';
 
 export const CONSENT_TEXT = {
   privacy:
     "Ho letto l'informativa privacy e chiedo di essere ricontattato per la richiesta inviata.",
   registrazione:
-    "Registrandomi dichiaro di aver letto l'informativa privacy (registrazione per leggere le guide complete).",
+    "Registrandomi dichiaro di aver letto l'informativa privacy (registrazione dell'account).",
   marketing:
     'Acconsento a ricevere via email guide, promemoria sulle scadenze e proposte relative alla vendita della casa. Posso revocare il consenso in ogni momento.',
 };

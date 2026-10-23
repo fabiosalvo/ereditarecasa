@@ -437,16 +437,6 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--i
 .wrap.read { padding-bottom: clamp(48px, 6vw, 88px); }
 
 /* guide: prima parte libera, il resto dopo l'email */
-.gate { display: none; }
-html.ec-locked .gated-rest { display: none; }
-html.ec-locked .gate { display: block; position: relative; margin: 0 0 40px; }
-.gate__fade { position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(rgba(252, 250, 246, 0), var(--paper)); pointer-events: none; }
-.gate__box { background: var(--sand); border-radius: var(--r-l); padding: clamp(24px, 4vw, 40px); display: grid; gap: 14px; }
-.gate__box h2 { margin: 0; }
-.gate__box p { margin: 0; }
-.gate__box form { margin-top: 6px; }
-.gate__box input[type='email'] { background: #fff; }
-@media print { html.ec-locked .gated-rest { display: block !important; } .gate { display: none !important; } }
 .field label.check { display: grid; font-weight: 400; color: var(--text); }
 
 /* ============================================================
@@ -585,8 +575,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary); box-sh
 .foot__legal { border-top-color: rgba(180, 205, 184, .2); }
 
 /* blocchi specifici */
-.gate__box { background: #fff; border: 1px solid var(--hairline); box-shadow: var(--shadow-lg); }
-.gate__fade { background: linear-gradient(rgba(245, 251, 245, 0), var(--surface)); }
 .kpi { background: #fff; border: 1px solid var(--hairline); box-shadow: var(--shadow-sm); }
 .kpi-src { color: var(--outline); }
 .bar-fill { background: var(--outline-variant); }
@@ -692,7 +680,6 @@ h1 { font-size: clamp(34px, 4.4vw, 54px); line-height: 1.05; letter-spacing: -.0
 .cta-box { background: var(--brown-900) radial-gradient(120% 120% at 100% 0%, rgba(227, 203, 169, .16), rgba(15, 15, 15, 0) 60%); }
 .hero__bg::before { background: linear-gradient(90deg, rgba(253, 251, 247, .96) 0%, rgba(253, 251, 247, .6) 18%, rgba(253, 251, 247, 0) 45%); }
 @media (max-width: 860px) { .hero__bg::before { background: linear-gradient(0deg, rgba(253, 251, 247, .5) 0%, rgba(253, 251, 247, 0) 40%); } }
-.gate__fade { background: linear-gradient(rgba(253, 251, 247, 0), var(--surface)); }
 .prose thead th { background: var(--brown-900); }
 .badge { background: var(--black); }
 .chip--primary { background: var(--black); color: #fff; }
@@ -725,7 +712,6 @@ h3, .h-s, .card h3, .cta-box h3, .download-box h3 { font-family: var(--headline)
 .gate__row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
 .gate__row .field { margin: 0; }
 .gate__row .btn { min-height: 50px; }
-.gate__box .hint { margin: 0; }
 @media (max-width: 520px) { .gate__row { grid-template-columns: minmax(0, 1fr); } }
 .pdf-box { margin: 32px 0; }
 [data-google-button]:empty { display: none; }

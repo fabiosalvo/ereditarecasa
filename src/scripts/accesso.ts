@@ -34,7 +34,6 @@ export function markLoggedIn(u: Utente) {
   try {
     localStorage.setItem(KEY, JSON.stringify({ email: u.email, nome: u.nome, cognome: u.cognome ?? null }));
   } catch {}
-  document.documentElement.classList.remove('ec-locked');
   document.documentElement.classList.add('ec-logged');
   document.dispatchEvent(new CustomEvent('ec:unlocked', { detail: u }));
 }
@@ -44,7 +43,6 @@ export function markLoggedOut() {
     localStorage.removeItem(KEY);
   } catch {}
   document.documentElement.classList.remove('ec-logged');
-  if (document.querySelector('[data-gate]')) document.documentElement.classList.add('ec-locked');
 }
 
 export async function api(path: string, body: unknown = {}) {
