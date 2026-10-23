@@ -87,6 +87,7 @@ const siteLd = Astro.url.pathname === '/'
       <slot />
     </main>
     <Footer />
+    <script is:inline>/* Checklist delle guide (- [ ] nel testo): ogni casella prende come nome la voce accanto */document.querySelectorAll('.prose li > input[type=checkbox]').forEach(function(i){i.setAttribute('aria-label',(i.parentElement.textContent||'').trim().slice(0,120))})</script>
     {!noModal && <ValutazioneModal />}
     <AuthModal />
     <PdfLeadModal />
