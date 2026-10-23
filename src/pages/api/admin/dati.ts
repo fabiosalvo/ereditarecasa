@@ -9,7 +9,7 @@ const COLS: Record<string, Col[]> = {
   utenti: [['creato_il', 'Registrato il'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['metodo', 'Accesso'], ['marketing', 'Consenso marketing'], ['ultimo_accesso', 'Ultimo accesso']],
   guida: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['comune', 'Comune'], ['intenzione', 'Intenzione'], ['guida', 'Guida'], ['marketing', 'Consenso marketing']],
   valutazione: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['indirizzo', 'Indirizzo'], ['civico', 'Civico'], ['comune', 'Comune'], ['tipologia', 'Tipo'], ['mq', 'm²'], ['obiettivo', 'Obiettivo'], ['tempi', 'Tempi'], ['marketing', 'Consenso marketing']],
-  professionista: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['comune', 'Comune'], ['professione', 'Cerca'], ['professionista', 'Professionista scelto'], ['messaggio', 'Messaggio']],
+  professionista: [['creato_il', 'Data'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['telefono', 'Telefono'], ['email', 'Email'], ['canale', 'Contatto via'], ['orario', 'Orario'], ['comune', 'Comune'], ['professionisti', 'Cerca'], ['esigenze', 'Per'], ['successione', 'Successione'], ['testamento', 'Testamento'], ['eredi', 'Eredi'], ['accordo', 'Accordo'], ['urgenza', 'Urgenza'], ['messaggio', 'Messaggio'], ['marketing', 'Consenso marketing']],
   altri: [['creato_il', 'Data'], ['tipo', 'Modulo'], ['nome', 'Nome'], ['cognome', 'Cognome'], ['email', 'Email'], ['telefono', 'Telefono'], ['marketing', 'Consenso marketing']],
 };
 

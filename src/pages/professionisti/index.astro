@@ -7,40 +7,175 @@ import { PROFESSIONI } from '../../lib/professionisti';
 
 const PRO = [
   { n: '01', t: 'Notaio', q: 'Accettazione, rinuncia, beneficio d’inventario, pubblicazione del testamento, rogito di vendita.', g: '/casa-ereditata/accettare-rinunciare/' },
-  { n: '02', t: 'Commercialista o CAF', q: 'Dichiarazione di successione, calcolo delle imposte, 730 e plusvalenza dopo la vendita.', g: '/casa-ereditata/successione/' },
+  { n: '02', t: 'Commercialista o CAF', q: 'Dichiarazione di successione, calcolo delle imposte, volture, 730 e plusvalenza dopo la vendita.', g: '/casa-ereditata/successione/' },
   { n: '03', t: 'Avvocato', q: 'Eredi in disaccordo, divisione, lesione di legittima, impugnazione del testamento.', g: '/eredi-in-disaccordo/' },
   { n: '04', t: 'Geometra o architetto', q: 'Conformità catastale e urbanistica, sanatorie, APE, stima del valore.', g: '/casa-ereditata/casi/immobile-irregolare/' },
 ];
+
+// Chi cerca (più scelte possibili)
+const CHI = [
+  ['notaio', 'Notaio'],
+  ['avvocato', 'Avvocato'],
+  ['commercialista', 'Commercialista'],
+  ['caf', 'CAF'],
+  ['geometra', 'Geometra o architetto'],
+  ['non-so', 'Non lo so, consigliatemi voi'],
+];
+// Per cosa (più scelte possibili)
+const ESIGENZE = [
+  'Dichiarazione di successione',
+  'Accettare o rinunciare all’eredità',
+  'Testamento: pubblicazione o contestazione',
+  'Eredi in disaccordo o divisione',
+  'Vendere la casa ereditata',
+  'Tasse, IMU, 730 o plusvalenza',
+  'Catasto, difformità o sanatoria',
+  'Debiti o eredità a rischio',
+];
 ---
-<Base title="Professionisti per successioni e case ereditate" description="Cerca notai, avvocati, commercialisti e geometri esperti di successioni e case ereditate nella tua zona e chiedi di essere ricontattato.">
-  <PageHead title="Professionisti per la casa ereditata" crumbs={[{ name: 'Professionisti', href: '/professionisti/' }]} eyebrow="Cerca professionista">
-    Notai, avvocati, commercialisti e geometri che si occupano ogni giorno di successioni e immobili ereditati. Cerca nella tua zona e chiedi di essere ricontattato: è gratuito.
+<Base title="Notaio, avvocato, commercialista o CAF per la successione" description="Ti serve un notaio, un avvocato, un commercialista o un CAF per la successione o la casa ereditata? Raccontaci il tuo caso: ti mettiamo in contatto con il professionista giusto nella tua zona.">
+  <PageHead title="Il professionista giusto per la tua eredità" crumbs={[{ name: 'Professionisti', href: '/professionisti/' }]} eyebrow="Notaio, avvocato, commercialista, CAF">
+    Dicci di chi hai bisogno e qual è la situazione: ti mettiamo in contatto noi con il miglior professionista della zona, esperto di successioni e case ereditate. Gratis e senza impegno.
   </PageHead>
 
-  <section class="sec" id="cerca">
-    <div class="wrap">
-      <form class="pro-search" data-pro-search role="search">
-        <div class="field">
-          <label for="pro-citta">Comune della casa</label>
-          <input id="pro-citta" name="citta" type="text" placeholder="Es. Lucca" autocomplete="off" />
+  <section class="sec" id="richiesta">
+    <div class="wrap split split--top">
+      <div>
+        <span class="eyebrow" style="margin:0">Come funziona</span>
+        <h2 class="h-l">Raccontaci di cosa hai bisogno, al resto pensiamo noi</h2>
+        <ol class="pro-steps">
+          <li><b>Ci dici chi ti serve</b> e qual è la situazione: bastano due minuti.</li>
+          <li><b>Selezioniamo noi</b> il professionista più adatto nella zona della casa, esperto di successioni e immobili ereditati.</li>
+          <li><b>Vieni ricontattato</b>, di solito entro due giorni lavorativi. La richiesta è gratuita e senza impegno.</li>
+        </ol>
+      </div>
+
+      <form class="form" data-pro-form novalidate>
+        <p class="steps-indicator" aria-live="polite">Passo <span data-current>1</span> di 3</p>
+
+        <div class="step" data-step="1">
+          <h2>Di chi hai bisogno?</h2>
+          <fieldset class="field">
+            <legend class="label">Professionista (anche più di uno)</legend>
+            <div class="choices">
+              {CHI.map(([v, l]) => <label><input type="checkbox" name="professionisti" value={v} /><span>{l}</span></label>)}
+            </div>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="label">Per cosa</legend>
+            <div class="choices">
+              {ESIGENZE.map((l) => <label><input type="checkbox" name="esigenze" value={l} /><span>{l}</span></label>)}
+            </div>
+          </fieldset>
         </div>
-        <div class="field">
-          <label for="pro-prof">Professionista</label>
-          <select id="pro-prof" name="professione">
-            <option value="">Tutti</option>
-            {Object.entries(PROFESSIONI).map(([v, l]) => <option value={v}>{l}</option>)}
-          </select>
+
+        <div class="step" data-step="2" hidden>
+          <h2>La situazione</h2>
+          <div class="field">
+            <label for="r-comune">Comune della casa o dove vuoi incontrare il professionista</label>
+            <input id="r-comune" name="comune" type="text" autocomplete="off" required />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="r-succ">La successione</label>
+              <select id="r-succ" name="successione" required>
+                <option value="">Seleziona</option>
+                <option>Non ancora iniziata</option>
+                <option>In corso</option>
+                <option>Già presentata</option>
+                <option>Non so</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="r-test">C'è un testamento?</label>
+              <select id="r-test" name="testamento" required>
+                <option value="">Seleziona</option>
+                <option>Sì</option>
+                <option>No</option>
+                <option>Non so</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="r-eredi">Quanti eredi siete?</label>
+              <select id="r-eredi" name="eredi" required>
+                <option value="">Seleziona</option>
+                <option>Solo io</option>
+                <option>2 o 3</option>
+                <option>4 o più</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="r-accordo">Siete d'accordo tra eredi?</label>
+              <select id="r-accordo" name="accordo" required>
+                <option value="">Seleziona</option>
+                <option>Sì</option>
+                <option>In parte</option>
+                <option>No</option>
+                <option>Sono l'unico erede</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-urg">Quando ti serve?</label>
+            <select id="r-urg" name="urgenza" required>
+              <option value="">Seleziona</option>
+              <option>Il prima possibile</option>
+              <option>Entro un mese</option>
+              <option>Entro tre mesi</option>
+              <option>Mi sto informando</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="r-msg">Raccontaci in breve</label>
+            <textarea id="r-msg" name="messaggio" rows="4" placeholder="Es. mio padre è mancato a marzo, siamo tre fratelli, c'è la casa a Lucca e un conto in banca. Vorremmo vendere."></textarea>
+          </div>
         </div>
-        <button class="btn" type="submit">Cerca</button>
+
+        <div class="step" data-step="3" hidden>
+          <h2>Come ricontattarti</h2>
+          <div class="row">
+            <div class="field"><label for="r-nome">Nome</label><input id="r-nome" name="nome" type="text" autocomplete="given-name" required /></div>
+            <div class="field"><label for="r-cognome">Cognome</label><input id="r-cognome" name="cognome" type="text" autocomplete="family-name" required /></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="r-tel">Telefono</label><input id="r-tel" name="telefono" type="tel" autocomplete="tel" required /></div>
+            <div class="field"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" required /></div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="r-canale">Preferisci essere contattato via</label>
+              <select id="r-canale" name="canale">
+                <option>Telefono</option>
+                <option>WhatsApp</option>
+                <option>Email</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="r-orario">Orario preferito</label>
+              <select id="r-orario" name="orario">
+                <option>Indifferente</option>
+                <option>Mattina</option>
+                <option>Pausa pranzo</option>
+                <option>Pomeriggio</option>
+                <option>Sera</option>
+              </select>
+            </div>
+          </div>
+          <ConsentFields inoltro="Per metterti in contatto, i dati della richiesta vengono inviati al professionista che selezioniamo per te." />
+        </div>
+
+        <p class="form-error" role="alert" data-error></p>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" data-prev hidden>Indietro</button>
+          <button type="button" class="btn" data-next>Avanti</button>
+          <button type="submit" class="btn" data-submit hidden>Invia la richiesta</button>
+        </div>
       </form>
-
-      <p class="hint" data-pro-count aria-live="polite"></p>
-      <div class="grid grid--3" data-pro-list></div>
-
-      <div class="pro-empty" data-pro-empty hidden>
-        <h2 class="h-m">La rete in questa zona è in costruzione</h2>
-        <p>Stiamo selezionando professionisti esperti di successioni città per città. Lasciaci i tuoi dati: ti mettiamo in contatto noi con un professionista adatto al tuo caso.</p>
-        <button class="btn" type="button" data-pro-contact="">Chiedi di essere ricontattato</button>
+      <div class="notice pro-ok" data-ok hidden tabindex="-1">
+        <h2 class="h-m">Richiesta ricevuta</h2>
+        <p>Grazie. Selezioniamo il professionista più adatto nella tua zona e ti ricontattiamo, di solito entro due giorni lavorativi. Intanto puoi leggere le <a href="/casa-ereditata/">guide</a> o segnare le scadenze con lo <a href="/strumenti/scadenzario-successione/">scadenzario</a>.</p>
       </div>
     </div>
   </section>
@@ -71,8 +206,8 @@ const PRO = [
     <div class="wrap split split--top">
       <div>
         <span class="eyebrow" style="margin:0">Sei un professionista?</span>
-        <h2 class="h-l">Entra nella directory</h2>
-        <p class="lede">L’inserimento è gratuito e riservato a professionisti iscritti all’albo con esperienza in successioni e immobili ereditati. Verifichiamo ogni candidatura prima di pubblicarla.</p>
+        <h2 class="h-l">Entra nella nostra rete</h2>
+        <p class="lede">Selezioniamo professionisti iscritti all’albo con esperienza in successioni e immobili ereditati, a cui affidare le richieste delle famiglie della loro zona. Verifichiamo ogni candidatura.</p>
       </div>
       <form class="form" data-pro-cand novalidate>
         <div class="hp" aria-hidden="true"><label>Lascia vuoto <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
@@ -100,39 +235,14 @@ const PRO = [
         </div>
         <div class="field"><label for="c-albo">Albo e numero di iscrizione</label><input id="c-albo" name="albo" type="text" placeholder="Es. Ordine degli Avvocati di Lucca n. 1234" required /></div>
         <div class="field"><label for="c-spec">Di cosa ti occupi</label><textarea id="c-spec" name="specializzazioni" rows="3" placeholder="Es. successioni, divisioni ereditarie, mediazione tra coeredi"></textarea></div>
-        <label class="check"><input type="checkbox" name="privacy" required /><span>Ho letto l'<a href="/privacy/" target="_blank">informativa privacy</a> e accetto che, se approvata, la mia scheda (senza telefono ed email) sia pubblicata nella directory.</span></label>
+        <label class="check"><input type="checkbox" name="privacy" required /><span>Ho letto l'<a href="/privacy/" target="_blank">informativa privacy</a> e accetto di essere ricontattato per entrare nella rete di professionisti.</span></label>
         <p class="form-error" role="alert" data-error></p>
-        <p class="notice" data-ok hidden>Grazie! Abbiamo ricevuto la candidatura: la verifichiamo e ti scriviamo appena è pubblicata.</p>
+        <p class="notice" data-ok hidden>Grazie! Abbiamo ricevuto la candidatura: la verifichiamo e ti ricontattiamo.</p>
         <button class="btn" type="submit">Invia la candidatura</button>
       </form>
     </div>
   </section>
 
-  <dialog class="modal" id="modal-pro" aria-labelledby="modal-pro-title">
-    <div class="modal-head">
-      <h2 id="modal-pro-title">Chiedi di essere ricontattato</h2>
-      <button class="modal-close" type="button" aria-label="Chiudi" data-close>×</button>
-    </div>
-    <p class="modal-intro" data-pro-who>Ti mettiamo in contatto con un professionista esperto di successioni nella tua zona.</p>
-    <form class="form" data-pro-form novalidate>
-      <div class="row">
-        <div class="field"><label for="r-nome">Nome</label><input id="r-nome" name="nome" type="text" autocomplete="given-name" required /></div>
-        <div class="field"><label for="r-cognome">Cognome</label><input id="r-cognome" name="cognome" type="text" autocomplete="family-name" required /></div>
-      </div>
-      <div class="row">
-        <div class="field"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" required /></div>
-        <div class="field"><label for="r-tel">Telefono</label><input id="r-tel" name="telefono" type="tel" autocomplete="tel" required /></div>
-      </div>
-      <div class="field"><label for="r-comune">Comune della casa</label><input id="r-comune" name="comune" type="text" required /></div>
-      <div class="field"><label for="r-msg">Di cosa hai bisogno</label><textarea id="r-msg" name="messaggio" rows="3" placeholder="Es. dobbiamo fare la successione e vendere la casa, siamo tre fratelli"></textarea></div>
-      <ConsentFields inoltro="I dati della richiesta vengono inviati al professionista scelto (o a uno da noi selezionato) solo per ricontattarti." />
-      <p class="form-error" role="alert" data-error></p>
-      <button class="btn" type="submit">Invia la richiesta</button>
-    </form>
-    <div data-ok hidden>
-      <p class="notice">Richiesta inviata. Verrai ricontattato al più presto, di solito entro due giorni lavorativi.</p>
-    </div>
-  </dialog>
 
   <CtaBand />
 </Base>
@@ -142,99 +252,75 @@ const PRO = [
   import { suggestComuni } from '../../scripts/geocoding';
   import { formToObject, submitLead } from '../../scripts/lead';
 
-  type Pro = { id: number; nome: string; cognome: string; professione: string; professione_label: string; studio: string | null; citta: string; provincia: string | null; specializzazioni: string | null; bio: string | null; sito: string | null };
-
-  const search = document.querySelector<HTMLFormElement>('[data-pro-search]')!;
-  const citta = search.querySelector<HTMLInputElement>('[name="citta"]')!;
-  const list = document.querySelector<HTMLElement>('[data-pro-list]')!;
-  const empty = document.querySelector<HTMLElement>('[data-pro-empty]')!;
-  const count = document.querySelector<HTMLElement>('[data-pro-count]')!;
-  let provincia = '';
-  let ultimi: Pro[] = [];
-
-  attachAutocomplete(citta, suggestComuni, (p) => {
-    provincia = p.subtitle.split(',')[0]?.trim() ?? '';
-    setTimeout(() => search.requestSubmit(), 0);
-    return p.title;
-  });
-  citta.addEventListener('input', () => (provincia = ''));
-
-  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
-
-  async function cerca() {
-    const fd = new FormData(search);
-    const params = new URLSearchParams({ citta: String(fd.get('citta') ?? '').trim(), provincia, professione: String(fd.get('professione') ?? '') });
-    const j = await fetch(`/api/professionisti/?${params}`).then((r) => r.json()).catch(() => null);
-    ultimi = j?.professionisti ?? [];
-    const dove = params.get('citta') ? ` per ${params.get('citta')}` : '';
-    count.textContent = ultimi.length ? `${ultimi.length} ${ultimi.length === 1 ? 'professionista' : 'professionisti'}${dove}` : '';
-    empty.hidden = ultimi.length > 0;
-    list.innerHTML = ultimi
-      .map(
-        (p) => `<article class="card pro-card">
-          <span class="badge">${esc(p.professione_label)}</span>
-          <h3>${esc(p.nome)} ${esc(p.cognome)}</h3>
-          ${p.studio ? `<p class="pro-card__studio">${esc(p.studio)}</p>` : ''}
-          <p class="pro-card__where">${esc(p.citta)}${p.provincia && p.provincia.toLowerCase() !== p.citta.toLowerCase() ? ` (${esc(p.provincia)})` : ''}</p>
-          ${p.specializzazioni ? `<p>${esc(p.specializzazioni)}</p>` : ''}
-          <button class="btn btn-small" type="button" data-pro-contact="${p.id}">Chiedi di essere ricontattato</button>
-        </article>`,
-      )
-      .join('');
-  }
-  search.addEventListener('submit', (e) => (e.preventDefault(), cerca()));
-  search.querySelector('select')!.addEventListener('change', cerca);
-  cerca();
-
-  // Richiesta di contatto
-  const dlg = document.getElementById('modal-pro') as HTMLDialogElement;
-  const form = dlg.querySelector<HTMLFormElement>('[data-pro-form]')!;
-  const okBox = dlg.querySelector<HTMLElement>('[data-ok]')!;
-  const err = form.querySelector<HTMLElement>('[data-error]')!;
-  const who = dlg.querySelector<HTMLElement>('[data-pro-who]')!;
-  let scelto: Pro | null = null;
+  // Richiesta: 3 passi, poi la raccogliamo noi e la affidiamo al professionista della zona
+  const form = document.querySelector<HTMLFormElement>('[data-pro-form]')!;
+  const okBox = document.querySelector<HTMLElement>('[data-ok]')!;
+  const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
+  const prev = form.querySelector<HTMLButtonElement>('[data-prev]')!;
+  const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
+  const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+  const current = form.querySelector<HTMLElement>('[data-current]')!;
+  const error = form.querySelector<HTMLElement>('[data-error]')!;
+  let i = 0;
   attachAutocomplete(form.querySelector<HTMLInputElement>('[name="comune"]')!, suggestComuni, (p) => p.title);
 
-  document.addEventListener('click', (e) => {
-    const b = (e.target as HTMLElement).closest<HTMLElement>('[data-pro-contact]');
-    if (!b) return;
-    scelto = ultimi.find((p) => String(p.id) === b.dataset.proContact) ?? null;
-    who.textContent = scelto
-      ? `Lascia i tuoi recapiti: ${scelto.nome} ${scelto.cognome} (${scelto.professione_label.toLowerCase()}, ${scelto.citta}) riceverà la richiesta e ti ricontatterà.`
-      : 'Ti mettiamo in contatto con un professionista esperto di successioni nella tua zona.';
-    form.hidden = false;
-    okBox.hidden = true;
-    err.textContent = '';
-    const c = form.querySelector<HTMLInputElement>('[name="comune"]')!;
-    c.value ||= citta.value;
-    try {
-      const u = JSON.parse(localStorage.getItem('ec-accesso') || 'null');
-      for (const k of ['email', 'nome', 'cognome']) if (u?.[k]) form.querySelector<HTMLInputElement>(`[name="${k}"]`)!.value ||= u[k];
-    } catch {}
-    dlg.showModal();
-  });
-  dlg.querySelector('[data-close]')!.addEventListener('click', () => dlg.close());
-  dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
+  // Nel contatto vanno le etichette leggibili ("Notaio"), non i valori tecnici
+  const scelte = (name: string) =>
+    Array.from(form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]:checked`)).map((x) => x.closest('label')?.textContent?.trim() || x.value);
+
+  const show = (n: number) => {
+    i = n;
+    steps.forEach((s, idx) => (s.hidden = idx !== n));
+    prev.hidden = n === 0;
+    next.hidden = n === steps.length - 1;
+    submit.hidden = n !== steps.length - 1;
+    current.textContent = String(n + 1);
+    error.textContent = '';
+  };
+
+  const valid = (step: HTMLElement) => {
+    if (step.dataset.step === '1' && !scelte('professionisti').length) {
+      error.textContent = 'Scegli almeno un professionista, oppure «Non lo so, consigliatemi voi».';
+      return false;
+    }
+    const bad = Array.from(step.querySelectorAll<HTMLInputElement>('input, select, textarea')).find((f) => !f.checkValidity());
+    if (bad) {
+      error.textContent = 'Completa i campi richiesti per continuare.';
+      bad.focus();
+      return false;
+    }
+    return true;
+  };
+
+  // Precompila i dati di chi ha già un account
+  try {
+    const u = JSON.parse(localStorage.getItem('ec-accesso') || 'null');
+    for (const k of ['email', 'nome', 'cognome']) if (u?.[k]) form.querySelector<HTMLInputElement>(`[name="${k}"]`)!.value ||= u[k];
+  } catch {}
+  // Arrivo da un link "?chi=notaio": preseleziona
+  const chi = new URLSearchParams(location.search).get('chi');
+  if (chi) form.querySelector<HTMLInputElement>(`input[name="professionisti"][value="${CSS.escape(chi)}"]`)?.click();
+
+  next.addEventListener('click', () => valid(steps[i]) && show(i + 1));
+  prev.addEventListener('click', () => show(i - 1));
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!form.checkValidity()) return void (err.textContent = "Compila nome, cognome, email, telefono e comune, e accetta l'informativa privacy.");
-    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-    btn.disabled = true;
-    const prof = String(new FormData(search).get('professione') ?? '');
+    if (!valid(steps[i])) return;
+    if (i < steps.length - 1) return show(i + 1);
+    submit.disabled = true;
+    submit.textContent = 'Invio in corso…';
     try {
-      await submitLead('professionista', {
-        ...formToObject(form),
-        professione: scelto?.professione ?? prof,
-        professionista_id: scelto?.id ?? null,
-        professionista: scelto ? `${scelto.nome} ${scelto.cognome}, ${scelto.professione_label}, ${scelto.citta}` : '',
-      });
+      const dati = formToObject(form);
+      await submitLead('professionista', { ...dati, professionisti: scelte('professionisti').join(', '), esigenze: scelte('esigenze').join(', ') });
       form.hidden = true;
       okBox.hidden = false;
+      okBox.focus();
     } catch {
-      err.textContent = 'Invio non riuscito, riprova tra poco.';
+      error.textContent = 'Invio non riuscito. Riprova tra poco o scrivici a info@ereditarecasa.it.';
     }
-    btn.disabled = false;
+    submit.disabled = false;
+    submit.textContent = 'Invia la richiesta';
   });
 
   // Candidatura dei professionisti

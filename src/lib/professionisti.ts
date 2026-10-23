@@ -3,6 +3,7 @@ export const PROFESSIONI: Record<string, string> = {
   notaio: 'Notaio',
   avvocato: 'Avvocato',
   commercialista: 'Commercialista',
+  caf: 'CAF',
   geometra: 'Geometra o architetto',
 };
 

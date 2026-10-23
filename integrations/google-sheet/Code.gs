@@ -21,7 +21,8 @@ const COLUMNS = {
     'pagina', 'referrer', 'utm',
   ],
   professionista: [
-    'ricevuto', 'nome', 'cognome', 'email', 'telefono', 'comune', 'professione', 'professionista', 'messaggio',
+    'ricevuto', 'nome', 'cognome', 'telefono', 'email', 'canale', 'orario', 'comune', 'professionisti', 'esigenze',
+    'successione', 'testamento', 'eredi', 'accordo', 'urgenza', 'messaggio',
     'consenso_privacy', 'consenso_marketing', 'versione_consensi', 'pagina', 'referrer', 'utm',
   ],
   percorso: [
